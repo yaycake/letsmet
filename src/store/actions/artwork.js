@@ -22,8 +22,8 @@ export const startFetchArt = () => {
     const artworkArray = localStorage.getItem("objectIdArray")
 
     const objectId = [Math.floor(Math.random()*artworkArray.length)];
-
-    axios.get(`/objects/${objectId}`)
+    return dispatch => {
+        axios.get(`/objects/${objectId}`)
         .then (response => {
             dispatch(setArt(response.data)
         )
@@ -31,6 +31,8 @@ export const startFetchArt = () => {
             dispatch(fetchArtFail())
         })
     })
+    }
+    
 }
 
 // const set art state, artwork is an art object

@@ -12,9 +12,6 @@ import authReducer from './store/reducers/auth'
 import App from './App';
 import * as serviceWorker from './serviceWorker';
 
-ReactDOM.render(
-    <App />, document.getElementById('root')
-);
 
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 
