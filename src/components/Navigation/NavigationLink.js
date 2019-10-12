@@ -1,12 +1,12 @@
 import React from 'react';
 import styles from './NavigationLink.module.css';
-
-const navigationLink = ( props ) => (
+import { NavLink } from 'react-router-dom'
+const NavigationLink = ( props ) => (
     <div className={ styles.NavigationLink }>
-        <NavLink to= { props.link } exact activeClassName = {styles.activeNavigationLink}>
-            { props.children }
+        <NavLink to= "/about" exact activeClassName = {styles.activeNavigationLink}>
+            { props.children } ABOUT
         </NavLink> 
     </div>
 );
 
-export default navigationLink;
+export default NavigationLink;
