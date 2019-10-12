@@ -12,9 +12,9 @@ const Layout = props => {
         <React.Fragment>
             <Logo/>
             <PageTitle pageTitle="LETS MET"/>
-            <NavigationLink>
+            <NavigationLink/>
+            { props.children }
             
-            </NavigationLink>
         </React.Fragment>
     )
 }

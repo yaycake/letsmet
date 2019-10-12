@@ -5,6 +5,7 @@ import axios from '../../axios-art';
 // API call to get all the object codes & store them in local storage
 
 export const initArtObjects = () => {
+    console.log(`[Artwork Actions] INIT artobjects`)
     axios.get('/objects')
     .then(response => {
         localStorage.setItem('objectIdArray', response.data.objectIDs);
@@ -19,28 +20,39 @@ export const initArtObjects = () => {
 export const startFetchArt = () => {
     // select random object from OBJECT ID array
 
-    const artworkArray = localStorage.getItem("objectIdArray")
+    console.log(["[ArtworkActions] startFetchArt"])
 
-    const objectId = [Math.floor(Math.random()*artworkArray.length)];
+    const artworkArray = localStorage.getItem("objectIdArray").split(',')
+
+    console.log(`[ArtworkActions] ${artworkArray}`)
+
+    const objectId = artworkArray[[Math.floor(Math.random()*artworkArray.length)]];
+
+    // console.log(`[objectId] ${objectId}`)
+
     return dispatch => {
-        axios.get(`/objects/${objectId}`)
-        .then (response => {
-            dispatch(setArt(response.data)
-        )
-        .catch(error => {
-            dispatch(fetchArtFail())
+        axios.get(`/objects/${objectId}`).then(
+            response => {dispatch(setArt(response.data))
+            }
+        ).catch(error => {dispatch(fetchArtFail())
         })
-    })
     }
-    
 }
 
 // const set art state, artwork is an art object
 
 export const setArt = (artwork) => {
+    console.log(`[ARTWORK ACTIONS] setArt`)
     return { 
         type: actionTypes.SET_ART, 
-        artwork: artwork
+        artwork: {
+            title: artwork.title, 
+            artistDisplayName: artwork.artistDisplayName, 
+            medium: artwork.medium, 
+            objectId: artwork.objectID, 
+            primaryImage: artwork.primaryImage, 
+            primaryImageSmall: artwork.primaryImageSmall
+        }
     }
 }
 

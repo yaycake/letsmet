@@ -3,8 +3,9 @@ import './App.css';
 import Layout from './hoc/Layout/Layout'
 import * as actions from './store/actions/index'
 import { Route, Switch, withRouter, Redirect } from 'react-router-dom'
-import Artwork from './components/Artwork/Artwork';
+import BrowseArt from './containers/BrowseArt/BrowseArt';
 import About from './components/About/About'
+import { useDispatch, useSelector } from 'react-redux';
 
 // const Artwork = React.lazy(()=> {
 //   return import('./containers/Artwork')
@@ -13,21 +14,31 @@ import About from './components/About/About'
 
 const App = props => {
 
-  let routes = (
-    <Switch>
-      <Route path="/" component = { Artwork }/>
-      <Route path = "/about" render= {()=> <About {...props} />}/>
-    </Switch>
-  )
+  const dispatch = useDispatch();
+
+  // const fetchArtObjects = () => {
+  //   dispatch(actions.initArtObjects())
+  // }
+
+  // useEffect(()=>{
+  //   fetchArtObjects();
+  // }, [])
+
+
+  // let routes = (
+  //   <Switch>
+      
+     
+  //   </Switch>
+  // )
 
   return (
     <Layout>
       <div className="App">
-        <p>YO DIS THE APP</p>
-        {routes}
+        <Route path="/" component = { BrowseArt }/>
       </div>
     </Layout>
   );
 }
 
-export default App
+export default App;

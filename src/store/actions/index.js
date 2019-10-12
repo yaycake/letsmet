@@ -1,7 +1,8 @@
 export {
     startFetchArt, 
     setArt,
-    fetchArtFail
+    fetchArtFail, 
+    initArtObjects
 
 } from './artwork';
 

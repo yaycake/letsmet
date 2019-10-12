@@ -3,6 +3,9 @@
 }
 
 .primaryImage {
+    border: 1px solid blue; 
+    height: 500px; 
+    width: 500px;
     background-position: center; 
     background-size: cover;
 }
