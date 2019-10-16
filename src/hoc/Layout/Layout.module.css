@@ -1,0 +1,4 @@
+.Layout {
+    grid-template-columns: repeat(1fr, 3); 
+    grid-template-rows: 1fr; 
+}

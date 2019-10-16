@@ -1,11 +1,14 @@
 .Artwork {
-
+    width: 60%;
+    margin: 0 auto;
 }
 
 .primaryImage {
-    border: 1px solid blue; 
-    height: 500px; 
-    width: 500px;
+    /* border: 1px solid blue;  */
+    height: 450px; 
+    width: 450px;
     background-position: center; 
     background-size: cover;
+    border-radius: 2px; 
+    margin: 0 auto; 
 }

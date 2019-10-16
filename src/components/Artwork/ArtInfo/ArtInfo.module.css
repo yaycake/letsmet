@@ -1,0 +1,8 @@
+.ArtInfo {
+    font-size: 12px;
+    text-align: left; 
+}
+
+.ArtInfo > p {
+    margin: 5px; 
+}

@@ -1,0 +1,23 @@
+.PageTitle {
+    position: fixed; 
+    top: 1rem; 
+    left: 1rem; 
+    /* border: 1px dashed orange; */
+    width: 100px; 
+    height: 100px;
+    font-size: 28px; 
+    font-weight: bolder; 
+}
+
+.title1 {
+    position: fixed; 
+    top: 5rem; 
+    transform: rotate(-90deg)
+}
+
+.title2 {
+    position: fixed;
+   
+    top: 2rem; 
+    left: 5rem;
+}

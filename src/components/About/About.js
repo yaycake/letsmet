@@ -3,7 +3,7 @@ import styles from './About.module.css';
 
 const About = props => {
     return (
-        <div>
+        <div className = {styles.About}>
             THis is About
         </div>)
 }

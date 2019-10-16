@@ -1,0 +1,45 @@
+.BrowseArt {
+
+}
+
+.ArtControls {
+    display: flex;
+    flex-direction: row; 
+    width: 400px; 
+    margin: 0 auto;
+    height: 4rem;
+    border: 1px dashed pink;
+    position: relative
+}
+
+.infoBox {
+    display: flex;
+    flex-direction: row;
+    width: 90%;
+    border: 1px dashed black;
+}
+
+.infoButton {
+    width: 20%;
+
+}
+
+.artInfo > p {
+    text-align: left; 
+}
+
+.likeButton {
+   
+}
+.nextButton {
+    position: absolute; 
+    right: 0;
+    font-size: 18px; 
+    font-weight: bolder; 
+    width: 200px;
+}
+
+.nextButton:hover {
+    color: orange;
+    cursor: pointer
+}
