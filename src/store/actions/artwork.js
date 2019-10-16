@@ -38,20 +38,14 @@ export const startFetchArt = () => dispatch =>{
     .then(response => {
             console.log(`in response of ObjectAPIcall`)
             dispatch(setArt(response.data))
-            // if (response.data.primaryImage) {
-            //     console.log(`${randomId} HAS IMAGE, start dispatch`)
-            //     dispatch(setArt(response.data))
-            // } else {
-            //     console.log(`${randomId} HAS NO IMAGE, startFETCHART again`)
-            //     startFetchArt()
-            // }
         }
     ).catch(error => {
         dispatch(fetchArtFail())
         console.log(error)
-    })
-    
+    })    
 }
+
+
 
 // const set art state, artwork is an art object
 

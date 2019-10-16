@@ -60,7 +60,7 @@ const BrowseArt = props => {
             </Artwork>   
             <div className={styles.ArtControls}>
                 <div className = {styles.infoBox}>
-                    <InfoButton className={styles.infoButton} infoClicked={showInfoToggle}></InfoButton>
+                    <InfoButton showInfo = {showArtInfo} className={styles.infoButton} infoClicked={showInfoToggle}></InfoButton>
                     <ArtInfo className={styles.artInfo}
                         title={title}
                         medium = {medium}
@@ -79,8 +79,4 @@ const BrowseArt = props => {
     )
 }
 
-
-
-
-
-export default BrowseArt
+export default BrowseArt;

@@ -1,0 +1,8 @@
+.AboutLink {
+    text-decoration: none; 
+    color: black;
+}
+
+.AboutLink:hover{
+    color: orange; 
+}

@@ -8,8 +8,11 @@ const artInfo = (props ) => {
                 opacity: props.showInfo ? 1 : 0
             }}
         >
-            <p><strong>{props.title} </strong></p>
-            <p> {props.medium} | {props.artistDisplayName}</p>
+            <p className={styles.title}><strong>{props.title} </strong></p>
+            <p className={styles.text}> 
+                {props.medium} 
+                {props.artistDisplayName && "| " +  props.artistDisplayName }
+            </p>
         </div>
     )
 }

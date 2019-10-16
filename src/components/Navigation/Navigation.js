@@ -11,7 +11,7 @@ const Navigation = props => {
             <PageTitle pageTitle = "LETS MET"></PageTitle>
             <Logo></Logo>
             <div className = {styles.mainNavLink}>
-                <NavigationLink></NavigationLink>
+                <NavigationLink>ABOUT</NavigationLink>
             </div>
             
         </div>
