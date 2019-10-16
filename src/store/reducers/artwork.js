@@ -15,10 +15,6 @@ const initialState = {
     error: null
 };
 
-const fetchArt = (state, action) => {
- 
-}
-
 const fetchArtFail = (state,action)=> {
     return updateObject(state, {
         error: true

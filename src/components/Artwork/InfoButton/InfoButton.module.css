@@ -1,0 +1,26 @@
+.InfoButton {
+    border-radius: 50%; 
+    background-color: white;
+    border: 2px solid black;
+    width: 30px;
+    height: 30px; 
+    font-weight: bolder; 
+    font-size: 14px;
+    color: black;
+    cursor: pointer;
+    margin-top: .5rem;
+}
+
+.InfoButton:focus {
+    outline: none; 
+}
+
+.ActiveInfo {
+    background-color: black; 
+    color: white;
+    font-weight: bolder;
+}
+
+.InfoButton:hover {
+    transform: scale(120%);
+}

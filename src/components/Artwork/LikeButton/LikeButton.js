@@ -2,7 +2,9 @@ import React from 'react';
 import styles from './LikeButton.module.css';
 
 const likeButton = ( props ) => {
-    return (<div>Like button</div>)
+    return (
+        <div className={styles.LikeButton}>
+        </div>)
 };
 
 export default likeButton; 

@@ -6,8 +6,10 @@ const pageTitle = ( props ) => {
 
    return (
     <div className={ styles.PageTitle }>
-        <div className={ styles.title1 }>{ title[0] }</div>
-        <div className={ styles.title2 }>{ title[1] }</div>
+        <div style = {{position: "relative"}}>
+            <div className={ styles.title1 }>{ title[0] }</div>
+            <div className={ styles.title2 }>{ title[1] }</div>
+        </div>
     </div>
    )
 };

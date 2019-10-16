@@ -10,9 +10,10 @@ import artworkReducer from './store/reducers/artwork';
 
 import App from './App';
 import * as serviceWorker from './serviceWorker';
+import { composeWithDevTools } from 'redux-devtools-extension';
 
 
-const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
+const composeEnhancers = composeWithDevTools({trace: true})
 
 const rootReducer = combineReducers({
     artwork: artworkReducer
