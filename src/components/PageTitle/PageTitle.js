@@ -1,16 +1,20 @@
 import React from 'react';
 import styles from './PageTitle.module.css';
+import { NavLink } from 'react-router-dom';
 
 const pageTitle = ( props ) => {
     const title = props.pageTitle.split(" ");
 
    return (
-    <div className={ styles.PageTitle }>
-        <div style = {{position: "relative"}}>
-            <div className={ styles.title1 }>{ title[0] }</div>
-            <div className={ styles.title2 }>{ title[1] }</div>
+    <NavLink className={ styles.PageTitle } to="/">
+        <div>
+            <div style = {{position: "relative"}}>
+                <div className={ styles.title1 }>{ title[0] }</div>
+                <div className={ styles.title2 }>{ title[1] }</div>
+            </div>
         </div>
-    </div>
+    </NavLink>
+   
    )
 };
 

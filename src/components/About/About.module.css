@@ -57,6 +57,7 @@
 }
 
 .LeftStrip {
+    z-index: -1;
     position: absolute; 
     top: 0; 
     left: 2rem;
@@ -91,6 +92,7 @@
 }
 
 .RightStrip {
+    z-index: -1;
     width: 10rem; 
     position: absolute; 
     top: 0; 
