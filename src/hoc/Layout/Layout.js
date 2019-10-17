@@ -8,7 +8,6 @@ const Layout = props => {
         <React.Fragment>
             <Navigation> </Navigation>
             { props.children }
-            
         </React.Fragment>
     )
 }

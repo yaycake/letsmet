@@ -7,6 +7,12 @@
     height: 100px;
     font-size: 28px; 
     font-weight: bolder; 
+    cursor: pointer;
+    color: black; 
+}
+
+.PageTitle:hover {
+    color: orange; 
 }
 
 .title1 {
