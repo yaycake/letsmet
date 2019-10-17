@@ -6,3 +6,12 @@
 .AboutLink:hover{
     color: rgb(170, 136, 72); 
 }
+
+.NavLink {
+    text-decoration: none; 
+    color: black;
+}
+
+.NavLink:hover {
+    color: orange;  
+}
