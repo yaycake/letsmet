@@ -1,6 +1,7 @@
 .Artwork {
     width: 60%;
-    margin: 0 auto;
+    margin: 0 auto; 
+    position: relative;
 }
 
 .primaryImage {
@@ -10,5 +11,127 @@
     background-position: center; 
     background-size: cover;
     border-radius: 2px; 
-    margin: 0 auto; 
+    margin: 0 auto;
+}
+
+.imageCover {
+    /* border:1px solid blue;  */
+    z-index: 5;
+    position: absolute; 
+    top: 0; 
+    left: 0; 
+    width: 100%;
+    height: 100%;
+    border:2px solid purple;
+    background-color: red; 
+    opacity: 1;
+    transition: opacity 800ms ease-out ;
+    /* animation-name: fadeWhiteOut;
+    animation-duration: 5s; 
+    animation-delay: 2s; 
+    animation-fill-mode: forwards;
+    animation-iteration-count: 1;  */
+}
+
+
+@keyframes fadeWhiteOut {
+
+    0% {
+        background-color: rgba(255,255,255, 1)
+    }
+
+    15% {
+        background-color: rgba(255,255,255, 1)
+    }
+
+    25% {
+        background-color: rgba(255,255,255, 1)
+    }
+    45%{
+        background-color: rgba(255,255,255, 1)
+    }
+    60% {
+        background-color: rgba(255,255,255, .8)
+    }
+    65% {
+        background-color: rgba(255,255,255, .5)
+    }
+    70% {
+        background-color: rgba(255,255,255, .2)
+    }
+    100% {
+
+        background-color: rgba(255,255,255, 0) 
+    }
+}
+
+.fade-in-enter{
+    opacity: 0
+}
+
+.fade-in-enter-active {
+    opacity: 1;
+    animation: fadeInArt .8s ease-out forwards;
+    /* transition: opacity 10s ease-out forwards; */
+}
+
+.fade-in-exit {
+    /* transition: opacity 10s ease-out forwards; */
+    opacity: 1
+}
+
+.fade-in-exit-active {
+    animation: fadeOutArt .8s ease-out forwards;
+    opacity: 0;
+    /* transition: opacity .4s ease-out forwards; */
+}
+
+
+@keyframes fadeInArt {
+    
+
+    0% {
+        border: 1px solid pink;
+        opacity: 0; 
+    }
+
+    15% {
+        opacity: 0;
+    }
+
+    25% {
+        opacity: 0;
+    }
+    45%{
+        opacity: 0;
+    }
+    60% {
+   
+        opacity: .1; 
+    }
+    65% {
+        opacity: .15;
+    }
+    70% {
+        opacity: .2;
+    }
+    100% {
+
+        opacity: 1; 
+    }
+}
+
+@keyframes fadeOutArt {
+    0% {
+        border:1px solid black;
+        opacity: 1; 
+    }
+    50% {
+        border:1px solid black;
+        opacity: .6; 
+    }
+    100% {
+        border:1px solid black;
+        opacity: 0; 
+    }
 }

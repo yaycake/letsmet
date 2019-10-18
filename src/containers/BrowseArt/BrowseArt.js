@@ -1,15 +1,12 @@
 import React, { useState, useEffect, useCallback } from 'react';
-
+import { NavLink } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux';
 
 import Artwork from '../../components/Artwork/Artwork';
 import * as actions from '../../store/actions/index'
-
-import LikeButton from '../../components/Artwork/LikeButton/LikeButton';
-import InfoButton from '../../components/Artwork/InfoButton/InfoButton';
-import ArtInfo from '../../components/Artwork/ArtInfo/ArtInfo';
-
 import styles from './BrowseArt.module.css';
+import { Transition } from 'react-transition-group';
+import ArtControls from '../ArtControls/ArtControls';
 
 const BrowseArt = props => {
     
@@ -21,21 +18,8 @@ const BrowseArt = props => {
     const primaryImageSmall = useSelector(state => state.artwork.artwork.primaryImageSmall);
     // const error = useSelector(state => state.artwork.error)
 
-
-    const [showArtInfo, setShowArtInfo] = useState(false);
-
-    // const hideInfoHandler = () => {
-    //     setShowArtInfo(false)
-    // };
-
-    // const showInfoHandler = () => {
-    //     setShowArtInfo(true)
-    // };
-
-    const showInfoToggle = () => {
-        setShowArtInfo(!showArtInfo)
-    }
-
+    const [fadeArt, setFadeArt] = useState(true);
+  
     const dispatch = useDispatch();
 
     const onFetchArt = useCallback(
@@ -43,39 +27,61 @@ const BrowseArt = props => {
         [dispatch]
     )
 
+    // const letsNext = () => {
+    //     console.log(`LETS NEXT`)
+    //     onFetchArt();
+    //     setFadeArt(true)
+    // }
 
-   useEffect( ()=> {
-       onFetchArt();
-   }, [onFetchArt, objectId])
 
-//    useEffect ( () => {
-//     hideInfoHandler();
-//    }, [title])
-    
-    
+    useEffect ( () => {
+        onFetchArt();
+    }, [onFetchArt, objectId])
+    // useEffect ( () => {
+    //     setFadeArt(false)
+    //    console.log(`In Use Effect Set Fade Art: ${fadeArt}`)
+    // }, [fadeArt, primaryImage])
+
+    // const transitionStyles = {
+    //     entering: { opacity: 1},
+    //     entered:  { opacity: 1},
+    //     exiting:  { opacity: 1},
+    //     exited:  { opacity: 1 }
+    //   };
+
     return (
         <React.Fragment>
-            
-            <Artwork image = {primaryImageSmall}>
-            </Artwork>   
-            <div className={styles.ArtControls}>
-                <div className = {styles.infoBox}>
-                    <InfoButton showInfo = {showArtInfo} className={styles.infoButton} infoClicked={showInfoToggle}></InfoButton>
-                    <ArtInfo className={styles.artInfo}
-                        title={title}
-                        medium = {medium}
-                        artistDisplayName = {artistDisplayName}
-                        showInfo = {showArtInfo}
-                    ></ArtInfo>
-                    
-                </div>
-                <LikeButton></LikeButton>
-            </div>
-            
-            <div className={styles.nextButton}onClick = {onFetchArt}>LETS NEXT</div>
-            
+
+            {/* <Transition
+                    in= {fadeArt}
+                    timeout = {{ 
+                        appear: 1000,
+                        enter: 700,
+                        exit: 700,} }>
+                    { state => (
+                        <div
+                            style = {
+                                { border: '1px solid blue'},
+                                {transition: 'opacity 800ms ease-out forwards'},
+                            
+                                transitionStyles[state]
+                            }> */}
+                        <Artwork 
+                            fadeArt = {fadeArt}
+                            image = {primaryImageSmall}
+                            altText = {`Title: ${ title } by ${ artistDisplayName}. Medium: ${ medium }`} />  
+                        {/* </div>
+                    )}
+            </Transition>  */}
+
+            <ArtControls
+                 title={title}
+                 medium = {medium}
+                 artistDisplayName = {artistDisplayName}
+            />
+            <div className={styles.nextButton} onClick = {onFetchArt}>LETS NEXT</div>
+
         </React.Fragment>
-        
     )
 }
 
