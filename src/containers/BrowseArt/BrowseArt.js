@@ -1,15 +1,10 @@
 import React, { useState, useEffect, useCallback } from 'react';
-
 import { useDispatch, useSelector } from 'react-redux';
 
 import Artwork from '../../components/Artwork/Artwork';
 import * as actions from '../../store/actions/index'
-
-import LikeButton from '../../components/Artwork/LikeButton/LikeButton';
-import InfoButton from '../../components/Artwork/InfoButton/InfoButton';
-import ArtInfo from '../../components/Artwork/ArtInfo/ArtInfo';
-
 import styles from './BrowseArt.module.css';
+import ArtControls from '../ArtControls/ArtControls';
 
 const BrowseArt = props => {
     
@@ -20,62 +15,30 @@ const BrowseArt = props => {
     const primaryImage = useSelector(state => state.artwork.artwork.primaryImageSmall);
     const primaryImageSmall = useSelector(state => state.artwork.artwork.primaryImageSmall);
     // const error = useSelector(state => state.artwork.error)
-
-
-    const [showArtInfo, setShowArtInfo] = useState(false);
-
-    // const hideInfoHandler = () => {
-    //     setShowArtInfo(false)
-    // };
-
-    // const showInfoHandler = () => {
-    //     setShowArtInfo(true)
-    // };
-
-    const showInfoToggle = () => {
-        setShowArtInfo(!showArtInfo)
-    }
-
+  
     const dispatch = useDispatch();
 
     const onFetchArt = useCallback(
         () => {dispatch(actions.startFetchArt())}, 
-        [dispatch]
-    )
+        [dispatch])
 
+    useEffect ( () => {
+        onFetchArt();
+    }, [onFetchArt, objectId])
+   
 
-   useEffect( ()=> {
-       onFetchArt();
-   }, [onFetchArt, objectId])
-
-//    useEffect ( () => {
-//     hideInfoHandler();
-//    }, [title])
-    
-    
     return (
         <React.Fragment>
-            
-            <Artwork image = {primaryImageSmall}>
-            </Artwork>   
-            <div className={styles.ArtControls}>
-                <div className = {styles.infoBox}>
-                    <InfoButton showInfo = {showArtInfo} className={styles.infoButton} infoClicked={showInfoToggle}></InfoButton>
-                    <ArtInfo className={styles.artInfo}
-                        title={title}
-                        medium = {medium}
-                        artistDisplayName = {artistDisplayName}
-                        showInfo = {showArtInfo}
-                    ></ArtInfo>
-                    
-                </div>
-                <LikeButton></LikeButton>
-            </div>
-            
-            <div className={styles.nextButton}onClick = {onFetchArt}>LETS NEXT</div>
-            
+            <Artwork 
+                fadeArt = {fadeArt}
+                image = {primaryImageSmall}
+                altText = {`Title: ${ title } by ${ artistDisplayName}. Medium: ${ medium }`} />  
+            <ArtControls
+                 title={title}
+                 medium = {medium}
+                 artistDisplayName = {artistDisplayName}/>
+            <div className={styles.nextButton} onClick = {onFetchArt}>LETS NEXT</div>
         </React.Fragment>
-        
     )
 }
 
