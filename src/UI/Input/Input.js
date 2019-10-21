@@ -1,7 +1,7 @@
 import React from 'react'
 import styles from './Input.module.css'
 
-const input = ( props ) => {
+const Input = ( props ) => {
     let inputElement = null; 
 
     const inputStyles = [styles.InputElement];
@@ -18,15 +18,18 @@ const input = ( props ) => {
     }
 
     return (
-        <React.fragment>
+        <div>
             <label>{ props.label }</label>
             <input 
-                onChange={props.changed}
+                // onChange={props.changed}
                 className={inputStyles.join(' ')} {...props.elementConfig} 
                 value={props.value}
             />
-        </React.fragment>
+
+        </div>
+           
+        
     )
 }
 
-export default input;
+export default Input;

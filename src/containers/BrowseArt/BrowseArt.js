@@ -30,7 +30,7 @@ const BrowseArt = props => {
     return (
         <React.Fragment>
             <Artwork 
-                fadeArt = {fadeArt}
+                // fadeArt = {fadeArt}
                 image = {primaryImageSmall}
                 altText = {`Title: ${ title } by ${ artistDisplayName}. Medium: ${ medium }`} />  
             <ArtControls
