@@ -1,15 +1,18 @@
 import React, { useState } from 'react';
 import styles from './Auth.module.css';
-import { useDispatch } from 'react-redux';
-import Input from '../../UI/Input/Input';
-import Button from '../../UI/Button/Button';
+import { useDispatch, useSelector } from 'react-redux';
+import Input from '../../components/UI/Input/Input';
+import Button from '../../components/UI/Button/Button';
 import { updateObject, checkValidity } from '../../shared/utility';
 import * as actions from '../../store/actions/index';
+import Spinner from '../../components/UI/Spinner/Spinner'
+
 
 const Auth = ( props ) => {
 
     const [authForm, setAuthForm] = useState(
-        { email: {
+        { 
+            email: {
             elementType: 'input',
             elementConfig: {
                 type: 'email',
@@ -22,8 +25,8 @@ const Auth = ( props ) => {
             }, 
             valid: false, 
             touched: false
-        }, 
-        password: {
+            }, 
+            password: {
             elementType: 'input',
             elementConfig: {
                 type: 'password',
@@ -36,22 +39,33 @@ const Auth = ( props ) => {
             }, 
             valid: false, 
             touched: false
-        }}
+            }
+        }
     );
 
-    const dispatch = useDispatch();
+    // Redux Store Props
 
-    const onAuth = (email, password) => {
-        dispatch(actions.auth(email, password))
+    const error = useSelector (state => state.auth.error);
+
+    const loading =  useSelector( state=> state.auth.loading );
+
+
+    // Redux Store Methods
+    const dispatch = useDispatch();
+    const onAuth = (email, password, isSignup) => {
+        dispatch(actions.auth(email, password, isSignup))
     };
-        
+
     const [isSignup, setIsSignup] = useState(true);
     
     const submitHandler = (event) => {
         event.preventDefault();
-        props.onAuth(authForm.email.value, authForm.password.value, isSignup)
+        onAuth(authForm.email.value, authForm.password.value, isSignup)
     }
 
+    const switchAuthHandler = () => {
+        setIsSignup(!isSignup);
+    }
 
     const inputChangedHandler = (event, controlName) => {
 
@@ -97,7 +111,11 @@ const Auth = ( props ) => {
         ))
     )
 
+    let errorMessage = null;
 
+    if (error) {
+        errorMessage = error.message.split( '_').join(' ')
+    }
 
     return (
         <div className = {styles.Auth}>
@@ -110,31 +128,32 @@ const Auth = ( props ) => {
                 </div>
             </div>
             <form onSubmit = {submitHandler} className = { styles.AuthForm }>
-                { form }
+                { error ? <p className = {styles.errorMessage}>{errorMessage}! Try Again</p> : null }
+
+                { loading ? <Spinner/> : form }
+
+                <div className = {styles.formControls}>
+                    <div className={styles.btnSignUp}>
+                        <Button 
+                            btnType = "success"
+                            >
+                                { isSignup ? 'Sign Up' : 'Sign In'}
+                        </Button>
+                    </div>
+                    <div className ={styles.or}>or</div>
+
+                    <div className = {styles.btnSignIn}>
+                        <Button 
+                            clicked = { switchAuthHandler }
+                            btnType = "success"
+                            >
+                                { isSignup ? 'Sign In' : 'Sign Up'}
+                        </Button>
+                    </div>
+                </div>
             </form>
 
-            <div className = {styles.formControls}>
-            <div className={styles.btnSignUp}>
-                    <Button 
-                        // clicked =
-                        btnType = "success"
-                        >
-                            Sign Up
-                    </Button>
-                </div>
-                
-
-                <div className ={styles.or}>or</div>
-
-                <div className = {styles.btnSignIn}>
-                    <Button 
-                        // clicked =
-                        btnType = "success"
-                        >
-                            Sign In
-                    </Button>
-                </div>
-            </div>
+            
             <div className = { styles.goBack}>
                     Go Back
             </div>

@@ -8,7 +8,6 @@ const Input = ( props ) => {
     const inputStyles = [styles.InputElement];
 
     if (props.invalid && props.shouldValidate && props.touched && props.value.length >= 4 ) {
-        console.log("INVALID!!!!!!!!!!")
         inputStyles.push(styles.Invalid)
     }
 
