@@ -6,7 +6,7 @@ import Button from '../../components/UI/Button/Button';
 import { updateObject, checkValidity } from '../../shared/utility';
 import * as actions from '../../store/actions/index';
 import Spinner from '../../components/UI/Spinner/Spinner'
-
+import NavigationLink from '../../components/Navigation/NavigationLink/NavigationLink'
 
 const Auth = ( props ) => {
 
@@ -135,8 +135,7 @@ const Auth = ( props ) => {
                 <div className = {styles.formControls}>
                     <div className={styles.btnSignUp}>
                         <Button 
-                            btnType = "success"
-                            >
+                            btnType = "success" >
                                 { isSignup ? 'Sign Up' : 'Sign In'}
                         </Button>
                     </div>
@@ -155,7 +154,7 @@ const Auth = ( props ) => {
 
             
             <div className = { styles.goBack}>
-                    Go Back
+                    <NavigationLink path="/">Go Back</NavigationLink>
             </div>
                 
                 
