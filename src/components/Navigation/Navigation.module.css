@@ -17,6 +17,14 @@
     text-decoration: none; 
 }
 
+.signinNavLink {
+    position: absolute;
+    left: 7rem;
+    top: 0;
+    width: 100px;
+    text-transform: uppercase;
+}
+
 .AboutLink {
     text-decoration: none; 
     color: black;

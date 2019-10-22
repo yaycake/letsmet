@@ -8,12 +8,16 @@ import About from './components/About/About'
 import { useDispatch, useSelector } from 'react-redux';
 import Auth from './containers/Auth/Auth';
 
+import Gallery from './containers/Gallery/Gallery'
+
 // const Artwork = React.lazy(()=> {
 //   return import('./containers/Artwork')
 // })
 
 
 const App = props => {
+
+  const isAuthenticated = useSelector(state => state.auth.token != null)
 
   const dispatch = useDispatch();
 
@@ -22,25 +26,33 @@ const App = props => {
     dispatch(actions.initArtObjects())
   }, [dispatch])
 
-  // useEffect(()=>{
-  //   fetchArtObjects();
-  // }, [])
+  console.log(`IS AUTH??? ${isAuthenticated}`)
 
+  let routes = (
+    <Switch>
+       <Route path="/about" component = { About }/>
+        <Route path="/auth" component = { Auth }/>
+        <Route path="/" exact component = { BrowseArt }/>
+        <Redirect to="/" />
+    </Switch>
+  )
 
-  // let routes = (
-  //   <Switch>
-      
-     
-  //   </Switch>
-  // )
+  if (isAuthenticated) {
+    routes = (
+      <Switch>
+        <Route path="/gallery" exact component = { Gallery }/>
+        <Route path="/about" component = { About }/>
+        <Route path="/auth" component = { Auth }/>
+        <Route path="/" exact component = { BrowseArt }/>
+        <Redirect to="/" />
+      </Switch>
+    )
+  }
 
   return (
     <Layout>
       <div className="App">
-        
-        <Route path="/about" component = { About }/>
-        <Route path="/auth" component = { Auth }/>
-        <Route path="/" exact component = { BrowseArt }/>
+       { routes }
       </div>
     </Layout>
   );
