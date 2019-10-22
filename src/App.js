@@ -6,6 +6,7 @@ import { Route, Switch, withRouter, Redirect } from 'react-router-dom'
 import BrowseArt from './containers/BrowseArt/BrowseArt';
 import About from './components/About/About'
 import { useDispatch, useSelector } from 'react-redux';
+import Auth from './containers/Auth/Auth';
 
 // const Artwork = React.lazy(()=> {
 //   return import('./containers/Artwork')
@@ -38,6 +39,7 @@ const App = props => {
       <div className="App">
         
         <Route path="/about" component = { About }/>
+        <Route path="/auth" component = { Auth }/>
         <Route path="/" exact component = { BrowseArt }/>
       </div>
     </Layout>

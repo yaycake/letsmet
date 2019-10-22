@@ -1,4 +1,55 @@
 .Input {
-    border-radius: 2px; 
-    border-color: #9B9B9B;
+    width: 100%;
+    padding: 10px;
+    flex-direction: column;
+}
+
+
+.Label {
+    letter-spacing: 6.5px; 
+    color: gray;
+    font-size: 12px; 
+    margin-bottom: 1rem;
+    text-transform: capitalize;
+    margin: 0 auto;
+}
+
+
+.InputElement {
+    outline: none; 
+    border: 1px solid #ccc;
+    background-color: white; 
+    font: inherit; 
+    margin: 0 auto;
+    padding: 6px 10px; 
+    display: block;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+.InputElement:focus {
+    outline: none; 
+    background-color: #ccc;
+}
+
+.Valid {
+    background-color: lightgreen
+}
+
+.Invalid {
+    border: 1px solid #f56642;
+    background-color: white;
+}
+
+.ValidationError {
+    color: #f56642;
+    font-size: 12px;
+    margin: 5px 0;
+}
+
+input::placeholder {
+    font-size: 12px; 
+    letter-spacing: 4.5px;
+    color: lightgray;
+    font-style: oblique;
 }

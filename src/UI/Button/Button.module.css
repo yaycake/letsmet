@@ -1,0 +1,21 @@
+.Button {
+    font-size: 18px; 
+    font-weight: bolder;
+    height: 2.5rem;
+    padding: .5rem 1rem;
+    border-radius: 3px; 
+    border: none;
+    letter-spacing: 4.5px; 
+}
+
+.ButtonSuccess {
+    
+    background-color: white;
+    color: gray;
+
+}
+
+.ButtonSecondary {
+    background-color: gray; 
+    color: black;
+}
