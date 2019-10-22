@@ -1,10 +1,12 @@
 import React, { useState } from 'react';
 import styles from './Auth.module.css';
-import { useDispatch } from 'react-redux';
-import Input from '../../UI/Input/Input';
-import Button from '../../UI/Button/Button';
+import { useDispatch, useSelector } from 'react-redux';
+import Input from '../../components/UI/Input/Input';
+import Button from '../../components/UI/Button/Button';
 import { updateObject, checkValidity } from '../../shared/utility';
 import * as actions from '../../store/actions/index';
+import Spinner from '../../components/UI/Spinner/Spinner'
+
 
 const Auth = ( props ) => {
 
@@ -40,6 +42,13 @@ const Auth = ( props ) => {
             }
         }
     );
+
+    // Redux Store Props
+
+    const error = useSelector (state => state.auth.error);
+
+    const loading =  useSelector( state=> state.auth.loading );
+
 
     // Redux Store Methods
     const dispatch = useDispatch();
@@ -102,6 +111,12 @@ const Auth = ( props ) => {
         ))
     )
 
+    let errorMessage = null;
+
+    if (error) {
+        errorMessage = error.message.split( '_').join(' ')
+    }
+
     return (
         <div className = {styles.Auth}>
             <div className = {styles.AuthTitle}>
@@ -113,7 +128,9 @@ const Auth = ( props ) => {
                 </div>
             </div>
             <form onSubmit = {submitHandler} className = { styles.AuthForm }>
-                { form }
+                { error ? <p className = {styles.errorMessage}>{errorMessage}! Try Again</p> : null }
+
+                { loading ? <Spinner/> : form }
 
                 <div className = {styles.formControls}>
                     <div className={styles.btnSignUp}>
