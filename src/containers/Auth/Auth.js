@@ -9,7 +9,8 @@ import * as actions from '../../store/actions/index';
 const Auth = ( props ) => {
 
     const [authForm, setAuthForm] = useState(
-        { email: {
+        { 
+            email: {
             elementType: 'input',
             elementConfig: {
                 type: 'email',
@@ -22,8 +23,8 @@ const Auth = ( props ) => {
             }, 
             valid: false, 
             touched: false
-        }, 
-        password: {
+            }, 
+            password: {
             elementType: 'input',
             elementConfig: {
                 type: 'password',
@@ -36,22 +37,26 @@ const Auth = ( props ) => {
             }, 
             valid: false, 
             touched: false
-        }}
+            }
+        }
     );
 
+    // Redux Store Methods
     const dispatch = useDispatch();
-
-    const onAuth = (email, password) => {
-        dispatch(actions.auth(email, password))
+    const onAuth = (email, password, isSignup) => {
+        dispatch(actions.auth(email, password, isSignup))
     };
-        
+
     const [isSignup, setIsSignup] = useState(true);
     
     const submitHandler = (event) => {
         event.preventDefault();
-        props.onAuth(authForm.email.value, authForm.password.value, isSignup)
+        onAuth(authForm.email.value, authForm.password.value, isSignup)
     }
 
+    const switchAuthHandler = () => {
+        setIsSignup(!isSignup);
+    }
 
     const inputChangedHandler = (event, controlName) => {
 
@@ -97,8 +102,6 @@ const Auth = ( props ) => {
         ))
     )
 
-
-
     return (
         <div className = {styles.Auth}>
             <div className = {styles.AuthTitle}>
@@ -111,30 +114,29 @@ const Auth = ( props ) => {
             </div>
             <form onSubmit = {submitHandler} className = { styles.AuthForm }>
                 { form }
+
+                <div className = {styles.formControls}>
+                    <div className={styles.btnSignUp}>
+                        <Button 
+                            btnType = "success"
+                            >
+                                { isSignup ? 'Sign Up' : 'Sign In'}
+                        </Button>
+                    </div>
+                    <div className ={styles.or}>or</div>
+
+                    <div className = {styles.btnSignIn}>
+                        <Button 
+                            clicked = { switchAuthHandler }
+                            btnType = "success"
+                            >
+                                { isSignup ? 'Sign In' : 'Sign Up'}
+                        </Button>
+                    </div>
+                </div>
             </form>
 
-            <div className = {styles.formControls}>
-            <div className={styles.btnSignUp}>
-                    <Button 
-                        // clicked =
-                        btnType = "success"
-                        >
-                            Sign Up
-                    </Button>
-                </div>
-                
-
-                <div className ={styles.or}>or</div>
-
-                <div className = {styles.btnSignIn}>
-                    <Button 
-                        // clicked =
-                        btnType = "success"
-                        >
-                            Sign In
-                    </Button>
-                </div>
-            </div>
+            
             <div className = { styles.goBack}>
                     Go Back
             </div>

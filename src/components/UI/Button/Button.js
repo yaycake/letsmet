@@ -5,10 +5,10 @@ const button = ( props ) => {
 
     let buttonStyles = [];
 
-    if (props.btnType == 'success'){
+    if (props.btnType === 'success'){
         buttonStyles = [styles.ButtonSuccess, styles.Button];
     }
-    if (props.btnType == 'secondary'){
+    if (props.btnType === 'secondary'){
         buttonStyles = [styles.ButtonSecondary, styles.Button];
     }
 
