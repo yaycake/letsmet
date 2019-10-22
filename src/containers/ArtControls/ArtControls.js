@@ -22,7 +22,8 @@ const ArtControls = (props) => {
                         showInfo = {showArtInfo}
                     ></ArtInfo>
                 </div>
-                <LikeButton></LikeButton>
+                <LikeButton click = { props.fave }>
+                </LikeButton>
             </div>
     )
 }

@@ -7,6 +7,11 @@ export {
 } from './artwork';
 
 export {
+    addGallery, 
+    removeGallery,
+    fetchGallery,
+    fetchGalleryFail, 
+    fetchGallerySuccess
 
 } from './gallery';
 

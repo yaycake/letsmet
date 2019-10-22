@@ -9,3 +9,12 @@
     border-radius: 50%;
 
 }
+
+.LikeButton :hover {
+    background-color: white;
+    border:1px solid black;
+}
+
+.LikeButton:focus {
+    background-color: black;
+}

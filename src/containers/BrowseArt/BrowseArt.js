@@ -7,6 +7,8 @@ import styles from './BrowseArt.module.css';
 import ArtControls from '../ArtControls/ArtControls';
 
 const BrowseArt = props => {
+
+    // const [curArtwork, setCurArtwork] = setState
     
     const title = useSelector( state => state.artwork.artwork.title);
     const artistDisplayName = useSelector( state => state.artwork.artwork.artistDisplayName);
@@ -15,12 +17,26 @@ const BrowseArt = props => {
     const primaryImage = useSelector(state => state.artwork.artwork.primaryImageSmall);
     const primaryImageSmall = useSelector(state => state.artwork.artwork.primaryImageSmall);
     // const error = useSelector(state => state.artwork.error)
+
   
     const dispatch = useDispatch();
 
     const onFetchArt = useCallback(
         () => {dispatch(actions.startFetchArt())}, 
         [dispatch])
+
+    const addGallery = (dispatch => {
+        dispatch(actions.addGallery(
+            {
+                title: title, 
+                artistDisplayName: artistDisplayName, 
+                medium: medium, 
+                objectId: objectId, 
+                primaryImage: primaryImage, 
+                primaryImageSmall: primaryImageSmall
+            }
+        ))
+    })
 
     useEffect ( () => {
         onFetchArt();
@@ -34,9 +50,10 @@ const BrowseArt = props => {
                 image = {primaryImageSmall}
                 altText = {`Title: ${ title } by ${ artistDisplayName}. Medium: ${ medium }`} />  
             <ArtControls
-                 title={title}
-                 medium = {medium}
-                 artistDisplayName = {artistDisplayName}/>
+                fave = { addGallery }
+                title={title}
+                medium = {medium}
+                artistDisplayName = {artistDisplayName}/>
             <div className={styles.nextButton} onClick = {onFetchArt}>LETS NEXT</div>
         </React.Fragment>
     )
