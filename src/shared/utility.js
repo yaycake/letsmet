@@ -5,18 +5,34 @@ export const updateObject = ( oldObject, objectUpdates ) => {
     }
 }
 
+const validateEmail = (email) => {
+    var re = /\S+@\S+\.\S+/;
+    return re.test(email);
+}
+
 export const checkValidity = (value, rules) => {
     let isValid = true; 
-    if (rules.required) {
+
+    console.log(`VALUE$$:${value}`)
+    console.log(`rules.required$$:${rules.validation.required}`)
+    console.log(`rules.minLength$$:${rules.validation.minLength}`)
+  
+
+    if (rules.validation.required) {
         isValid = value.trim() !== '' && isValid;
     }
 
-    if (rules.minLength) {
-        isValid = value.length >= rules.minLength && isValid
+    if (rules.validation.isEmail) {
+        isValid = validateEmail(value);
     }
 
-    if (rules.maxLength) {
-        isValid = value.length <= rules.maxLength && isValid
+    if (rules.validation.minLength) {
+        isValid = value.length >= rules.validation.minLength && isValid
+        console.log('in minlength vlaid')
+        console.log(rules.minLength)
     }
+
+    console.log(`IS DIS VALID? ${isValid}`)
     return isValid;
+    
 }

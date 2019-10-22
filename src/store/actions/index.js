@@ -11,5 +11,6 @@ export {
 } from './gallery';
 
 export {
+    auth
 
 } from './auth';

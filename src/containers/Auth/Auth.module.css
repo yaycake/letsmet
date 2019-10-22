@@ -37,28 +37,9 @@
 
 .AuthForm {
     grid-column: 3/ span 3; 
-    grid-row: 2/span 2;
+    grid-row: 2/span 3;
 }
 
-.AuthInput {
-    margin: 1rem;
-    display: flex;
-    flex-direction: column;
-    
-}
-
-.AuthInput > label {
-    letter-spacing: 6.5px; 
-    color: gray;
-    font-size: 12px; 
-    margin-bottom: 1rem;
-    text-transform: capitalize;
-}
-
-.AuthInput > input {
-    height: 1.5rem;
-
-}
 
 .formControls {
     grid-column: 3/span 3;
