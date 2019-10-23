@@ -16,5 +16,6 @@ export {
 } from './gallery';
 
 export {
-    auth
+    auth, 
+    logout
 } from './auth';

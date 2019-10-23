@@ -19,17 +19,19 @@ const Gallery = (props) => {
     const error = useSelector(state => state.myGallery.error)
     const loading = useSelector(state => state.myGallery.loading)
 
+    const token = useSelector( state => state.auth.token)
+
     //Redux Actions
     const dispatch = useDispatch();
 
-    const setGallery = ( dispatch => 
+    const onSetGallery = ( token  => 
         dispatch(actions.fetchGallery()))
 
     // const removeArt = ( dispatch => 
     //     dispatch(actions.removeGallery(curArtwork)))
 
     useEffect(() => {
-        setGallery()
+        onSetGallery(token)
     }, [])
 
 

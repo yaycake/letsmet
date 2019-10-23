@@ -6,6 +6,8 @@ import * as actions from '../../store/actions/index'
 import styles from './BrowseArt.module.css';
 import ArtControls from '../ArtControls/ArtControls';
 
+import {Redirect } from 'react-router-dom'
+
 const BrowseArt = props => {
 
     // const [curArtwork, setCurArtwork] = setState
@@ -38,6 +40,20 @@ const BrowseArt = props => {
             }, token
         ))
     })
+
+    const signInToFave = () => {
+        
+        return <Redirect to="/auth" />
+    }
+
+    const faveArtHandler = () => {
+        if (token) {
+            addGallery();
+        } else {
+            signInToFave()
+        }
+    }
+
 
     useEffect ( () => {
         onFetchArt();
