@@ -21,7 +21,7 @@ export const addGallery = ( artwork, token) => {
     console.log(`IN GALLERY AXNS: ADD GALLERY`)
     return dispatch => {
         startAddGallery();
-        
+
         axios.post(`https://letsmet-43e41.firebaseio.com/gallery.json?auth=${token}`, artwork)
         .then(response => {
             dispatch(addGallerySuccess( response.data.gallery))
@@ -58,9 +58,12 @@ export const fetchGallery = (token, userId) => {
     return dispatch => {
         dispatch(startFetchGallery());
 
-        const queryParams = '?auth=' + token + 'galleryBy="userId&equalTo"' + userId+'"';
+        console.log(`[inFETCHGALL] TOKEN: ${token}`)
+        console.log(`[inFETCHGALL] userID: ${userId}`)
 
-        axios.get('https://letsmet-43e41.firebaseio.com/' + queryParams )
+        const queryParams = '?auth=' + token + '&galleryBy="userId"&equalTo"' + userId + '"';
+
+        axios.get('https://letsmet-43e41.firebaseio.com/gallery.json' + queryParams )
         .then( response => {
             const fetchedGallery = [];
 
@@ -75,8 +78,8 @@ export const fetchGallery = (token, userId) => {
 
         })
         .catch(err => {
-            console.log('error fetching gallery')
-            dispatch(fetchGalleryFail(err.response.data.error))
+            console.log('Error Fetching Gallery:')
+            dispatch(fetchGalleryFail(err.response))
         })
     }
 }
