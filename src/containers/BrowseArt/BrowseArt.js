@@ -18,6 +18,7 @@ const BrowseArt = props => {
     const primaryImageSmall = useSelector(state => state.artwork.artwork.primaryImageSmall);
     // const error = useSelector(state => state.artwork.error)
 
+    const token = useSelector(state => state.auth.token)
   
     const dispatch = useDispatch();
 
@@ -25,7 +26,7 @@ const BrowseArt = props => {
         () => {dispatch(actions.startFetchArt())}, 
         [dispatch])
 
-    const addGallery = (dispatch => {
+    const addGallery = (artwork => {
         dispatch(actions.addGallery(
             {
                 title: title, 
@@ -34,7 +35,7 @@ const BrowseArt = props => {
                 objectId: objectId, 
                 primaryImage: primaryImage, 
                 primaryImageSmall: primaryImageSmall
-            }
+            }, token
         ))
     })
 

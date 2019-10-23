@@ -8,11 +8,11 @@ export {
 
 export {
     addGallery, 
-    removeGallery,
+    addGalleryFailed, 
+    addGallerySuccess,
     fetchGallery,
     fetchGalleryFail, 
     fetchGallerySuccess
-
 } from './gallery';
 
 export {

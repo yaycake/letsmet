@@ -4,7 +4,7 @@ import { updateObject } from '../../shared/utility'
 const initialState = {
     gallery: [], 
     error: null, 
-    loading: false
+    loading: false, 
 }
 
 const startFetchGallery = ( state, action ) => {
@@ -15,6 +15,8 @@ const startFetchGallery = ( state, action ) => {
 }
 
 const addGallery = (state, action ) => {
+    //currently only for add Artwork
+
     const newArtwork = action.artwork;
 
     return updateObject(state, {

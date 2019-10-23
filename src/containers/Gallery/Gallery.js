@@ -25,8 +25,8 @@ const Gallery = (props) => {
     const setGallery = ( dispatch => 
         dispatch(actions.fetchGallery()))
 
-    const removeArt = ( dispatch => 
-        dispatch(actions.removeGallery(curArtwork)))
+    // const removeArt = ( dispatch => 
+    //     dispatch(actions.removeGallery(curArtwork)))
 
     useEffect(() => {
         setGallery()
