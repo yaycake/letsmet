@@ -5,6 +5,7 @@ const initialState = {
     gallery: [], 
     error: null, 
     loading: false, 
+    lastArtwork: {}
 }
 
 const startFetchGallery = ( state, action ) => {
@@ -42,8 +43,10 @@ const fetchGalleryFail = (state, action) => {
 }
 
 const fetchGallerySuccess = (state, action) => {
+
     return updateObject( state, {
-        gallery: action.gallery, 
+        gallery: action.gallery,
+        lastArtwork: action.lastArtwork,
         error: null, 
         loading: false
     })

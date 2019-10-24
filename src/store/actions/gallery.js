@@ -58,23 +58,36 @@ export const fetchGallery = (token, userId) => {
     return dispatch => {
         dispatch(startFetchGallery());
 
-        console.log(`[inFETCHGALL] TOKEN: ${token}`)
-        console.log(`[inFETCHGALL] userID: ${userId}`)
-
         const queryParams = '?auth=' + token + '&galleryBy="userId"&equalTo"' + userId + '"';
 
         axios.get('https://letsmet-43e41.firebaseio.com/gallery.json' + queryParams )
         .then( response => {
             const fetchedGallery = [];
 
-            for (let key in response.data ) {
-                fetchedGallery.push({
-                    ...response.data[key],
-                    id: key
-                })
+            Object.values(response.data).map (
+                art => 
+                    fetchedGallery.push(art)
+            )
+
+            console.log(`in GALL ACTIONS: fetchedGallery ${fetchedGallery}`)
+            console.log(`in GALL ACTIONS: typeof fetchedGallery ${typeof fetchedGallery}`)
+            console.log(`in GALL ACTIONS: fetchedGallery[0] ${fetchedGallery[0]}`)
+            console.log(`in GALL ACTIONS: fetchedGallery[0].title ${fetchedGallery[0].title}`)
+
+            const lastArtwork = {
+                title: fetchedGallery[fetchedGallery.length - 1].title,
+                artistDisplayName: fetchedGallery[fetchedGallery.length - 1].artistDisplayName,  
+                medium: fetchedGallery[fetchedGallery.length - 1].medium,  
+                objectId: fetchedGallery[fetchedGallery.length - 1].objectId,  
+                primaryImage: fetchedGallery[fetchedGallery.length - 1].primaryImage,  
+                primaryImageSmall: fetchedGallery[fetchedGallery.length - 1].primaryImageSmall
             }
 
-            dispatch(fetchGallerySuccess(fetchedGallery))
+            console.log(`In GallActions: Last artworK.title: ${lastArtwork.title}`)
+
+            // Object.keys(response.data).map(i => fetchedGallery[i])
+
+            dispatch(fetchGallerySuccess(fetchedGallery, lastArtwork))
 
         })
         .catch(err => {
@@ -85,10 +98,11 @@ export const fetchGallery = (token, userId) => {
 }
 
 
-export const fetchGallerySuccess = ( myGallery ) => {
+export const fetchGallerySuccess = ( gallery, lastArtwork ) => {
     return {
         type: actionTypes.FETCH_GALLERY_SUCCESS,
-        gallery: myGallery
+        gallery: gallery, 
+        lastArtwork: lastArtwork
     }
 }
 
