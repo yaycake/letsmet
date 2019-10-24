@@ -61,18 +61,20 @@ const BrowseArt = props => {
    
 
     return (
-        <React.Fragment>
-            <Artwork 
-                // fadeArt = {fadeArt}
-                image = {primaryImageSmall}
-                altText = {`Title: ${ title } by ${ artistDisplayName}. Medium: ${ medium }`} />  
+        <div className = { styles.BrowseArt }>
+            {/* <div className = {styles.browseArtPreview}> */}
+                <Artwork 
+                    image = {primaryImageSmall}
+                    altText = {`Title: ${ title } by ${ artistDisplayName}. Medium: ${ medium }`} /> 
+            {/* </div> */}
+             
             <ArtControls
                 fave = { addGallery }
                 title={title}
                 medium = {medium}
                 artistDisplayName = {artistDisplayName}/>
             <div className={styles.nextButton} onClick = {onFetchArt}>LETS NEXT</div>
-        </React.Fragment>
+        </div>
     )
 }
 

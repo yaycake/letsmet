@@ -4,11 +4,9 @@ import { useDispatch, useSelector } from 'react-redux';
 import * as actions from '../../store/actions/index';
 import PreviewTile from '../../components/PreviewTile/PreviewTile';
 import Artwork from '../../components/Artwork/Artwork'
+import ArtControls from '../ArtControls/ArtControls'
 
 const Gallery = (props) => {
-
-    
-
     //Redux Props
     const userGallery = useSelector(state => state.myGallery.gallery)
     const lastArtwork = useSelector(state => state.myGallery.lastArtwork)
@@ -22,7 +20,6 @@ const Gallery = (props) => {
     const dispatch = useDispatch();
 
     const onSetGallery =  useCallback((token, userId)  => dispatch(actions.fetchGallery(token,userId)),[token, userId])
-
 
     const selectArtPreviewHandler = ( artId ) => {
         const selectedArt = userGallery.find((art) => art.id === artId)
@@ -47,19 +44,6 @@ const Gallery = (props) => {
     })
 
 
-    // const testGallery = () => {
-    //     // const allGall = JSON.parse(userGallery)
-        
-    //     const allGall = Object.values(userGallery).map(i => allGall[i])
-    //     // const allGall = Object.keys(userGallery).map(i => userGallery[i])
-    //     console.log(allGall["0"])
-    //     // return allGall.splice(-1)[0]
-    // }
-
-    // console.log(`TEST GALLERY? ${testGallery()}`)
-
-    //Set Cur Art Piece
-
     const previewCurrentArtwork = useCallback(() => {
             setCurArtwork({
                 ...lastArtwork
@@ -69,8 +53,6 @@ const Gallery = (props) => {
 
     useEffect(() => {
         onSetGallery(token, userId);
-        
-        
     }, [onSetGallery, token, userId])
 
     useEffect (() => {
@@ -80,7 +62,7 @@ const Gallery = (props) => {
     const galleryStrip = (
         userGallery.map(art => 
             <PreviewTile
-                key = { art.id }
+                key = { art.objectId }
                 altText = { art.title }
                 image = {art.primaryImageSmall}
                 id = { art.id }
@@ -96,11 +78,17 @@ const Gallery = (props) => {
                     {galleryStrip}
                 </div>
             </div>
-            <div className = {styles.selectedArt}>
-                <Artwork 
-                    image = {curArtwork.primaryImageSmall}
-                    altText = {`Title: ${ curArtwork.title } by ${ curArtwork.artistDisplayName}. Medium: ${ curArtwork.medium }`} />  
-            </div>
+          
+            <Artwork 
+                image = {curArtwork.primaryImageSmall}
+                altText = {`Title: ${ curArtwork.title } by ${ curArtwork.artistDisplayName}. Medium: ${ curArtwork.medium }`} />  
+            <ArtControls
+                // fave = {  }
+                title = { curArtwork.title }
+                medium = { curArtwork.medium }
+                artistDisplayName = { curArtwork.artistDisplayName }
+
+                ></ArtControls>
         </div>
     )
 }

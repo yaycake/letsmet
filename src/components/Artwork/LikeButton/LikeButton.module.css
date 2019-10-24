@@ -2,11 +2,15 @@
     text-align: right;
     position: absolute; 
     top: 0;
-    right: 0; 
+    left: 0; 
     width: 30px;
     height: 30px;
     background-color: orange;
     border-radius: 50%;
+    grid-column: 6/span 1;
+    grid-row: 7;
+    margin-left: .5rem; 
+    margin-top: -1.5rem;
 
 }
 
