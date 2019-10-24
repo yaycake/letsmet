@@ -11,17 +11,31 @@ const Navigation = props => {
 
     const dispatch = useDispatch()
 
-
-
     let userOptions = (
-        <NavigationLink path = "/auth">
-            Sign In
-        </NavigationLink>
+        <div className = {styles.mainNavLinks}>
+            <NavigationLink 
+                path = "/about"
+                className = {styles.AboutLink}
+                >ABOUT
+            </NavigationLink>
+            <NavigationLink path = "/auth">
+                Sign In
+            </NavigationLink>
+        </div>
     )
 
     if (isAuthenticated) {
         userOptions = (
-            <div>
+
+            <div className = {styles.mainNavLinks}>
+                <NavigationLink 
+                    path = "/about"
+                    className = {styles.AboutLink}
+                    >ABOUT
+                </NavigationLink>
+                <NavigationLink path = "/auth">
+                    Sign In
+                </NavigationLink>
                 <NavigationLink path = "/logout">
                     Sign Out
                 </NavigationLink>
@@ -37,18 +51,7 @@ const Navigation = props => {
         <div className = {styles.Navigation}>
             <PageTitle pageTitle = "LETS MET"></PageTitle>
             <Logo></Logo>
-            <div className = {styles.mainNavLink}>
-                <NavigationLink 
-                    path = "/about"
-                    className = {styles.AboutLink}
-                    >ABOUT
-                </NavigationLink>
-                <div className = {styles.signinNavLink}>
-                    {userOptions}
-                </div>
-            </div>
-            
-            
+            {userOptions}   
         </div>
     )
 }
