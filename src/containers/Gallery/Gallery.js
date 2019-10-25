@@ -65,30 +65,31 @@ const Gallery = (props) => {
                 key = { art.objectId }
                 altText = { art.title }
                 image = {art.primaryImageSmall}
-                id = { art.id }
+                id = { art.objectId }
                 // clicked = { selectArtPreviewHandler }
             />)
     )
 
 
     return (
-        <div className = { styles.Gallery }>
+        <div>
             <div className = { styles.GalleryFrame }>
                 <div className = {styles.GalleryStrip}>
                     {galleryStrip}
                 </div>
             </div>
-          
-            <Artwork 
-                image = {curArtwork.primaryImageSmall}
-                altText = {`Title: ${ curArtwork.title } by ${ curArtwork.artistDisplayName}. Medium: ${ curArtwork.medium }`} />  
-            <ArtControls
-                // fave = {  }
-                title = { curArtwork.title }
-                medium = { curArtwork.medium }
-                artistDisplayName = { curArtwork.artistDisplayName }
 
-                ></ArtControls>
+            <div className = { styles.Gallery }>
+                <Artwork 
+                    image = {curArtwork.primaryImageSmall}
+                    altText = {`Title: ${ curArtwork.title } by ${ curArtwork.artistDisplayName}. Medium: ${ curArtwork.medium }`} />  
+                <ArtControls
+                    title = { curArtwork.title }
+                    medium = { curArtwork.medium }
+                    artistDisplayName = { curArtwork.artistDisplayName }
+                />
+                {/* <NextButton clicked = { onFetchArt } /> */}
+            </div>
         </div>
     )
 }
