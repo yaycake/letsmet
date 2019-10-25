@@ -4,7 +4,7 @@ import Artwork from '../../components/Artwork/Artwork';
 import * as actions from '../../store/actions/index'
 import styles from './BrowseArt.module.css';
 import ArtControls from '../ArtControls/ArtControls';
-import { Redirect } from 'react-router-dom';
+import { Redirect, withRouter } from 'react-router-dom';
 import NextButton from '../../components/NextButton/NextButton';
 
 const BrowseArt = props => {
@@ -29,9 +29,10 @@ const BrowseArt = props => {
 
     const addGallery = (artwork => {
         console.log(`ADD GALLERY`)
+    
 
         if (!token) {
-            signInToFave()
+            props.history.push("/auth")
         }
         else {
             dispatch(actions.addGallery(
@@ -47,18 +48,7 @@ const BrowseArt = props => {
         }
     })
 
-    const signInToFave = () => {
-        console.log('sign In To fave')
-        return <Redirect to="/auth" />
-    }
-
-    const faveArtHandler = () => {
-        if (token) {
-            addGallery();
-        } else {
-            signInToFave()
-        }
-    }
+    
 
     const toggleLikeButton = () => {
         
@@ -69,6 +59,11 @@ const BrowseArt = props => {
     }, [onFetchArt, objectId])
    
 
+    let authRedirect = null;
+    if (token) {
+        authRedirect = <Redirect to="/auth"/>
+    }
+
     return (
         <div className = { styles.BrowseArt }>
           
@@ -77,6 +72,7 @@ const BrowseArt = props => {
                 altText = {`Title: ${ title } by ${ artistDisplayName}. Medium: ${ medium }`} /> 
              
             <ArtControls
+                isAuth = { token !== null }
                 fave = { addGallery }
                 title={title}
                 medium = {medium}
