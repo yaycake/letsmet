@@ -1,6 +1,9 @@
 import React, { useState } from 'react';
 import styles from './Auth.module.css';
 import { useDispatch, useSelector } from 'react-redux';
+
+import { Redirect } from 'react-router-dom';
+
 import Input from '../../components/UI/Input/Input';
 import Button from '../../components/UI/Button/Button';
 import { updateObject, checkValidity } from '../../shared/utility';
@@ -9,6 +12,8 @@ import Spinner from '../../components/UI/Spinner/Spinner'
 import NavigationLink from '../../components/Navigation/NavigationLink/NavigationLink'
 
 const Auth = ( props ) => {
+
+    const token = useSelector(state => state.auth.token)
 
     const [authForm, setAuthForm] = useState(
         { 
@@ -117,8 +122,16 @@ const Auth = ( props ) => {
         errorMessage = error.message.split( '_').join(' ')
     }
 
+    //Redirect if Authenticated
+
+    let authRedirect = null;
+    if (token) {
+        authRedirect = <Redirect to="/"/>
+    }
+
     return (
         <div className = {styles.Auth}>
+            { authRedirect }
             <div className = {styles.AuthTitle}>
                 <div className = {styles.authTitle1}>
                     {authTitle[0]}
