@@ -1,16 +1,15 @@
 .Gallery {
-    display: grid;
-    grid-template-columns: repeat(7, 1fr);
-    grid-template-rows: repeat(7, 1fr);
+    width: 450px; 
     height: 70vh; 
-    width: 100%;
-    position: relative;
+    margin: 0 auto; 
+    display: flex;
+    flex-direction: column;
 }
 
 .GalleryFrame { 
     position: absolute;
-    height: 100%;
-    width:100px;
+    height: 60%;
+    width: 100px;
     left: 1rem;
     overflow: auto;
 }

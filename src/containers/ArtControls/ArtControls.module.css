@@ -1,15 +1,14 @@
 .ArtControls {
-    grid-column: 3/ span 3;
-    grid-row: 7/span1;
-    margin-left: -2.5rem;
-    margin-top: -2rem;
+  margin-top: 1rem;
+  display: flex; 
+  flex-direction: row; 
+  position: relative;
 }
 
 .infoBox {
     margin-left: 0;
     display: flex;
     flex-direction: row;
-    width: 90%;
 }
 
 .infoButton {

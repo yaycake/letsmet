@@ -1,12 +1,11 @@
 import React, { useState, useEffect, useCallback } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-
 import Artwork from '../../components/Artwork/Artwork';
 import * as actions from '../../store/actions/index'
 import styles from './BrowseArt.module.css';
 import ArtControls from '../ArtControls/ArtControls';
-
-import {Redirect } from 'react-router-dom'
+import { Redirect } from 'react-router-dom';
+import NextButton from '../../components/NextButton/NextButton';
 
 const BrowseArt = props => {
 
@@ -46,7 +45,6 @@ const BrowseArt = props => {
                 }, token
             ))
         }
-        
     })
 
     const signInToFave = () => {
@@ -62,6 +60,9 @@ const BrowseArt = props => {
         }
     }
 
+    const toggleLikeButton = () => {
+        
+    }
 
     useEffect ( () => {
         onFetchArt();
@@ -70,18 +71,18 @@ const BrowseArt = props => {
 
     return (
         <div className = { styles.BrowseArt }>
-            {/* <div className = {styles.browseArtPreview}> */}
-                <Artwork 
-                    image = {primaryImageSmall}
-                    altText = {`Title: ${ title } by ${ artistDisplayName}. Medium: ${ medium }`} /> 
-            {/* </div> */}
+          
+            <Artwork 
+                image = {primaryImageSmall}
+                altText = {`Title: ${ title } by ${ artistDisplayName}. Medium: ${ medium }`} /> 
              
             <ArtControls
                 fave = { addGallery }
                 title={title}
                 medium = {medium}
                 artistDisplayName = {artistDisplayName}/>
-            <div className={styles.nextButton} onClick = {onFetchArt}>LETS NEXT</div>
+
+            <NextButton clicked = { onFetchArt } />
         </div>
     )
 }

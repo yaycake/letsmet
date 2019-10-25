@@ -1,20 +1,14 @@
 .LikeButton {
-    text-align: right;
+    width: 25px;
+    height: 25px;
+    cursor: pointer;
     position: absolute; 
     top: 0;
-    left: 0; 
-    width: 30px;
-    height: 30px;
-    border-radius: 50%;
-    grid-column: 6/span 1;
-    grid-row: 7;
-    margin-left: .5rem; 
-    margin-top: -1.5rem;
-
+    right: 0;
 }
 
 .likeIcon {
-    width: 30px; 
-    height: 30px; 
+    width: 100%; 
+    height: 100%; 
 
 }

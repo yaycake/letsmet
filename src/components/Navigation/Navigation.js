@@ -13,14 +13,20 @@ const Navigation = props => {
 
     let userOptions = (
         <div className = {styles.mainNavLinks}>
-            <NavigationLink 
-                path = "/about"
-                className = {styles.AboutLink}
-                >ABOUT
-            </NavigationLink>
-            <NavigationLink path = "/auth">
-                Sign In
-            </NavigationLink>
+            <div className={styles.rotateLink}> 
+                <NavigationLink 
+                    path = "/about"
+                    className = {styles.AboutLink}
+                    >ABOUT
+                </NavigationLink>
+            </div>
+            <div className={styles.rotateLink}> 
+                <NavigationLink path = "/auth">
+                    Sign In
+                </NavigationLink>
+            </div>
+            
+            
         </div>
     )
 
@@ -28,20 +34,29 @@ const Navigation = props => {
         userOptions = (
 
             <div className = {styles.mainNavLinks}>
-                <NavigationLink 
-                    path = "/about"
-                    className = {styles.AboutLink}
-                    >ABOUT
-                </NavigationLink>
-                <NavigationLink path = "/auth">
-                    Sign In
-                </NavigationLink>
-                <NavigationLink path = "/logout">
-                    Sign Out
-                </NavigationLink>
-                <NavigationLink path ="/gallery">
-                    My Gallery
-                </NavigationLink>
+                <div className={styles.rotateLink}> 
+                    <NavigationLink 
+                        path = "/about"
+                        className = {styles.AboutLink}
+                        >ABOUT
+                    </NavigationLink>
+                </div>
+                <div className={styles.rotateLink}> 
+                    <NavigationLink path = "/auth">
+                        Sign In
+                    </NavigationLink>
+                </div>
+                <div className={styles.rotateLink}> 
+                    <NavigationLink path = "/logout">
+                        Sign Out
+                    </NavigationLink>
+                </div>
+                <div className={styles.rotateLink}> 
+                    <NavigationLink path ="/gallery">
+                        Gallery
+                    </NavigationLink>
+                </div>
+                
             </div>
             
         )

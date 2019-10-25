@@ -13,18 +13,18 @@ const ArtControls = (props) => {
     }
     return (
         <div className={styles.ArtControls}>
-                <div className = {styles.infoBox}>
-                    <InfoButton showInfo = {showArtInfo} className={styles.infoButton} infoClicked={showInfoToggle}></InfoButton>
-                    <ArtInfo className={styles.artInfo}
-                        title={props.title}
-                        medium = {props.medium}
-                        artistDisplayName = {props.artistDisplayName}
-                        showInfo = {showArtInfo}
-                    ></ArtInfo>
-                </div>
-                <LikeButton click = { props.fave }>
-                </LikeButton>
+            <div className = {styles.infoBox}>
+                <InfoButton showInfo = {showArtInfo} className={styles.infoButton} infoClicked={showInfoToggle}></InfoButton>
+                <ArtInfo className={styles.artInfo}
+                    title={props.title}
+                    medium = {props.medium}
+                    artistDisplayName = {props.artistDisplayName}
+                    showInfo = {showArtInfo}
+                ></ArtInfo>
             </div>
+            <LikeButton click = { props.fave }>
+            </LikeButton>
+        </div>
     )
 }
 
