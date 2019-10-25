@@ -5,7 +5,6 @@
     left: 0; 
     width: 30px;
     height: 30px;
-    background-color: orange;
     border-radius: 50%;
     grid-column: 6/span 1;
     grid-row: 7;
@@ -14,11 +13,8 @@
 
 }
 
-.LikeButton :hover {
-    background-color: white;
-    border:1px solid black;
-}
+.likeIcon {
+    width: 30px; 
+    height: 30px; 
 
-.LikeButton:focus {
-    background-color: black;
 }

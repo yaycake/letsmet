@@ -29,20 +29,28 @@ const BrowseArt = props => {
         [dispatch])
 
     const addGallery = (artwork => {
-        dispatch(actions.addGallery(
-            {
-                title: title, 
-                artistDisplayName: artistDisplayName, 
-                medium: medium, 
-                objectId: objectId, 
-                primaryImage: primaryImage, 
-                primaryImageSmall: primaryImageSmall
-            }, token
-        ))
+        console.log(`ADD GALLERY`)
+
+        if (!token) {
+            signInToFave()
+        }
+        else {
+            dispatch(actions.addGallery(
+                {
+                    title: title, 
+                    artistDisplayName: artistDisplayName, 
+                    medium: medium, 
+                    objectId: objectId, 
+                    primaryImage: primaryImage, 
+                    primaryImageSmall: primaryImageSmall
+                }, token
+            ))
+        }
+        
     })
 
     const signInToFave = () => {
-        
+        console.log('sign In To fave')
         return <Redirect to="/auth" />
     }
 
