@@ -12,8 +12,8 @@ const authStart = (state, action) => {
     return updateObject (state, { error: null, loading: true })
 }
 
-
 const authSuccess = (state, action ) => {
+    console.log(`in authreducers: ${ action.userId}`)
     return updateObject ( state, { 
         token: action.idToken,
         userId: action.userId,

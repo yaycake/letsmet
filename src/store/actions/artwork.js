@@ -51,7 +51,7 @@ export const startFetchArt = () => dispatch =>{
 
 export const setArt = (artwork) => dispatch => {
     
-    if (artwork.primaryImage === "" || artwork.primaryImage === null || artwork.primaryImage === '') {
+    if (artwork.primaryImage === "" || artwork.primaryImage === null ) {
         console.log(`[InSetArt] NO IMAGE BRO`)
         console.log(`PrimaryImage: ## ${artwork.primaryImage} ##`)
         dispatch(startFetchArt());

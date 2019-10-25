@@ -6,7 +6,11 @@ import * as actions from '../../store/actions/index'
 import styles from './BrowseArt.module.css';
 import ArtControls from '../ArtControls/ArtControls';
 
+import {Redirect } from 'react-router-dom'
+
 const BrowseArt = props => {
+
+    // const [curArtwork, setCurArtwork] = setState
     
     const title = useSelector( state => state.artwork.artwork.title);
     const artistDisplayName = useSelector( state => state.artwork.artwork.artistDisplayName);
@@ -15,6 +19,8 @@ const BrowseArt = props => {
     const primaryImage = useSelector(state => state.artwork.artwork.primaryImageSmall);
     const primaryImageSmall = useSelector(state => state.artwork.artwork.primaryImageSmall);
     // const error = useSelector(state => state.artwork.error)
+
+    const token = useSelector(state => state.auth.token)
   
     const dispatch = useDispatch();
 
@@ -22,23 +28,53 @@ const BrowseArt = props => {
         () => {dispatch(actions.startFetchArt())}, 
         [dispatch])
 
+    const addGallery = (artwork => {
+        dispatch(actions.addGallery(
+            {
+                title: title, 
+                artistDisplayName: artistDisplayName, 
+                medium: medium, 
+                objectId: objectId, 
+                primaryImage: primaryImage, 
+                primaryImageSmall: primaryImageSmall
+            }, token
+        ))
+    })
+
+    const signInToFave = () => {
+        
+        return <Redirect to="/auth" />
+    }
+
+    const faveArtHandler = () => {
+        if (token) {
+            addGallery();
+        } else {
+            signInToFave()
+        }
+    }
+
+
     useEffect ( () => {
         onFetchArt();
     }, [onFetchArt, objectId])
    
 
     return (
-        <React.Fragment>
-            <Artwork 
-                // fadeArt = {fadeArt}
-                image = {primaryImageSmall}
-                altText = {`Title: ${ title } by ${ artistDisplayName}. Medium: ${ medium }`} />  
+        <div className = { styles.BrowseArt }>
+            {/* <div className = {styles.browseArtPreview}> */}
+                <Artwork 
+                    image = {primaryImageSmall}
+                    altText = {`Title: ${ title } by ${ artistDisplayName}. Medium: ${ medium }`} /> 
+            {/* </div> */}
+             
             <ArtControls
-                 title={title}
-                 medium = {medium}
-                 artistDisplayName = {artistDisplayName}/>
+                fave = { addGallery }
+                title={title}
+                medium = {medium}
+                artistDisplayName = {artistDisplayName}/>
             <div className={styles.nextButton} onClick = {onFetchArt}>LETS NEXT</div>
-        </React.Fragment>
+        </div>
     )
 }
 

@@ -8,7 +8,7 @@ import thunk from 'redux-thunk';
 
 import artworkReducer from './store/reducers/artwork'; 
 import authReducer from './store/reducers/auth';
-
+import galleryReducer from './store/reducers/gallery';
 import App from './App';
 import * as serviceWorker from './serviceWorker';
 import { composeWithDevTools } from 'redux-devtools-extension';
@@ -18,7 +18,8 @@ const composeEnhancers = composeWithDevTools({trace: true})
 
 const rootReducer = combineReducers({
     artwork: artworkReducer, 
-    auth: authReducer
+    auth: authReducer, 
+    myGallery: galleryReducer,
 })
 
 const store = createStore(rootReducer, composeEnhancers(applyMiddleware(thunk)))

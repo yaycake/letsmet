@@ -4,8 +4,12 @@ import styles from './PreviewTile.module.css';
 const previewTile = ( props ) => {
     return (
         <div className = { styles.PreviewTile }
-            styles = {{
-                backgroundImage: props.primaryImage
+            // onClick = { props.clicked (props.id) }
+            style = {{
+                backgroundImage: `url(${props.image})`,
+                backgroundSize: 'cover', 
+                backgroundPosition:'center'
+
             }}
         >
         </div>

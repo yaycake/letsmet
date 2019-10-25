@@ -8,6 +8,8 @@ import About from './components/About/About'
 import { useDispatch, useSelector } from 'react-redux';
 import Auth from './containers/Auth/Auth';
 
+import Logout from './containers/Auth/Logout/Logout'
+
 import Gallery from './containers/Gallery/Gallery'
 
 // const Artwork = React.lazy(()=> {
@@ -43,6 +45,7 @@ const App = props => {
         <Route path="/gallery" exact component = { Gallery }/>
         <Route path="/about" component = { About }/>
         <Route path="/auth" component = { Auth }/>
+        <Route path="/logout" exact component = { Logout }/>
         <Route path="/" exact component = { BrowseArt }/>
         <Redirect to="/" />
       </Switch>

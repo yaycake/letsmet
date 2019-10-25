@@ -3,9 +3,28 @@
     top: 3rem; 
     left: 0; 
     right: 0;
-    width: 70px; 
-    height: 70px;
+    width: 50px; 
+    height: 50px;
     margin: 0 auto;
-    background-color:black;
+    border: .65rem solid black;
+    
+    /* background-color:black; */
     border-radius: 50%;
+}
+
+.LogoCircle {
+    width: 20px;
+    height: 20px;
+    border: .25rem solid white;
+    margin: auto;
+    box-sizing: border-box;
+    border-radius: 50%
+}
+
+.InnerCircle {
+    width: 20px;
+    height: 20px; 
+    border-radius: 50%;
+    background-color:black;
+    margin: auto;
 }

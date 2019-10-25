@@ -7,9 +7,15 @@ export {
 } from './artwork';
 
 export {
-
+    addGallery, 
+    addGalleryFailed, 
+    addGallerySuccess,
+    fetchGallery,
+    fetchGalleryFail, 
+    fetchGallerySuccess
 } from './gallery';
 
 export {
-    auth
+    auth, 
+    logout
 } from './auth';
