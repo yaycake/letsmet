@@ -45,7 +45,6 @@ const BrowseArt = props => {
                 }, token
             ))
         }
-        
     })
 
     const signInToFave = () => {
@@ -61,6 +60,9 @@ const BrowseArt = props => {
         }
     }
 
+    const toggleLikeButton = () => {
+        
+    }
 
     useEffect ( () => {
         onFetchArt();
@@ -81,7 +83,6 @@ const BrowseArt = props => {
                 artistDisplayName = {artistDisplayName}/>
 
             <NextButton clicked = { onFetchArt } />
-
         </div>
     )
 }

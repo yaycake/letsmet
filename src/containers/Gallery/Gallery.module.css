@@ -2,15 +2,14 @@
     width: 450px; 
     height: 70vh; 
     margin: 0 auto; 
-    border: 1px solid blue;
     display: flex;
     flex-direction: column;
 }
 
 .GalleryFrame { 
     position: absolute;
-    height: 100%;
-    width:100px;
+    height: 60%;
+    width: 100px;
     left: 1rem;
     overflow: auto;
 }

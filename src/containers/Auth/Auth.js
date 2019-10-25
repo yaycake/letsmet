@@ -133,15 +133,16 @@ const Auth = ( props ) => {
                 { loading ? <Spinner/> : form }
 
                 <div className = {styles.formControls}>
-                    <div className={styles.btnSignUp}>
+                    <div className={styles.btnSign1}>
                         <Button 
                             btnType = "success" >
                                 { isSignup ? 'Sign Up' : 'Sign In'}
                         </Button>
                     </div>
+                    
                     <div className ={styles.or}>or</div>
 
-                    <div className = {styles.btnSignIn}>
+                    <div className = {styles.btnSign2}>
                         <Button 
                             clicked = { switchAuthHandler }
                             btnType = "success"
