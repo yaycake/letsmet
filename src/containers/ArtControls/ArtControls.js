@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useSelector } from 'react';
 import InfoButton from '../../components/Artwork/InfoButton/InfoButton'; 
 import ArtInfo from '../../components/Artwork/ArtInfo/ArtInfo'; 
 import LikeButton from '../../components/Artwork/LikeButton/LikeButton';
@@ -11,6 +11,7 @@ const ArtControls = (props) => {
     const showInfoToggle = () => {
         setShowArtInfo(!showArtInfo)
     }
+
     return (
         <div className={styles.ArtControls}>
             <div className = {styles.infoBox}>
@@ -22,8 +23,10 @@ const ArtControls = (props) => {
                     showInfo = {showArtInfo}
                 ></ArtInfo>
             </div>
-            <LikeButton click = { props.fave }>
-            </LikeButton>
+
+            <LikeButton 
+                click = { props.fave }
+                />
         </div>
     )
 }

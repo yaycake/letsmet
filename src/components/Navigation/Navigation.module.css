@@ -36,6 +36,10 @@
     text-transform: uppercase;
 }
 
+.signOut {
+    opacity: .5;
+}
+
 .AboutLink {
     text-decoration: none; 
     color: black;
