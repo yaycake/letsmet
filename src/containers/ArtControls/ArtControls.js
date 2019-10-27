@@ -6,22 +6,12 @@ import styles from './ArtControls.module.css';
 
 const ArtControls = (props) => {
 
-
     const [showArtInfo, setShowArtInfo] = useState(false);
 
     const showInfoToggle = () => {
         setShowArtInfo(!showArtInfo)
     }
 
-    let likeBtnClick = props.fave ;
-
-        if (!props.isAuth ) {
-            likeBtnClick = props.signIn
-        }
-
-    
-    
-    
     return (
         <div className={styles.ArtControls}>
             <div className = {styles.infoBox}>
@@ -35,14 +25,8 @@ const ArtControls = (props) => {
             </div>
 
             <LikeButton 
-                // action on click dependent on auth
                 click = { props.fave }
-                
-                >
-
-               
-
-            </LikeButton>
+                />
         </div>
     )
 }
