@@ -29,7 +29,6 @@ const BrowseArt = props => {
 
     const addGallery = (artwork => {
         console.log(`ADD GALLERY`)
-    
 
         if (!token) {
             props.history.push("/auth")
@@ -48,8 +47,6 @@ const BrowseArt = props => {
         }
     })
 
-    
-
     const toggleLikeButton = () => {
         
     }
@@ -60,6 +57,7 @@ const BrowseArt = props => {
    
 
     let authRedirect = null;
+    
     if (token) {
         authRedirect = <Redirect to="/auth"/>
     }
