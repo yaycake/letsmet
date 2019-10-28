@@ -31,27 +31,6 @@ export const addGallery = ( artwork, token) => {
     }
 }
 
-// const checkIfLiked = () => {
-//     const matchedArt = userGallery.find(({art}) => art.objectId === objectId)
-
-//     console.log(`matchedArt: ${matchedArt}`) 
-//     if ( userGallery.find({art} => art.objectId === objectId)){
-//         console.log('art is already in gallery!')
-//         return true
-//     } else {
-//         console.log('New Art!')
-//         return false
-//     }
-// }
-
-// export const addGalleryDuplicate = (artwork, token, error ) => {
-//     console.log('IN GALL AXNS: ADDGALLERYDUPLICATES')
-//     return {
-//         type: actionTypes.ADD_GALLERY_DUPLICATE, 
-        
-//     }
-// }
-
 export const addGalleryFailed = (error) => {
     return {
         type: actionTypes.ADD_GALLERY_FAILED, 

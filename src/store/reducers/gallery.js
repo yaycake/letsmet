@@ -18,6 +18,7 @@ const startFetchGallery = ( state, action ) => {
 const addGallery = (state, action ) => {
     //currently only for add Artwork
 
+    console.log(`in Gallery Reducer: New artwork: ${action.artwork}`)
     const newArtwork = action.artwork;
 
     return updateObject(state, {

@@ -28,8 +28,6 @@ const App = props => {
     dispatch(actions.initArtObjects())
   }, [dispatch])
 
-  console.log(`IS AUTH??? ${isAuthenticated}`)
-
   let routes = (
     <Switch>
        <Route path="/about" component = { About }/>
