@@ -6,15 +6,36 @@ import styles from './ArtControls.module.css';
 
 const ArtControls = (props) => {
 
+    if (props.curBookmarkedStyle){
+        console.log("BOOKMARK IS TRUE")
+    }
+
+
     const [showArtInfo, setShowArtInfo] = useState(false);
 
     const showInfoToggle = () => {
         setShowArtInfo(!showArtInfo)
     }
 
-    // const bookmarkButton = (
-    //     if ()
-    // )
+
+    let bookmarkButton = (
+        <LikeButton 
+            bookmarkStyle = "outline"
+            click = { props.bookmark }
+        />
+    )
+
+    if (props.checkBookmark){
+        
+        let bookmarkButton = (
+            <LikeButton 
+                bookmarkStyle = "solid"
+                click = {props.removeBookmark}
+            />
+        )
+    }
+
+   
 
     return (
         <div className={styles.ArtControls}>
@@ -27,10 +48,10 @@ const ArtControls = (props) => {
                     showInfo = {showArtInfo}
                 ></ArtInfo>
             </div>
-
-            <LikeButton 
+            { bookmarkButton }
+            {/* <LikeButton 
                 click = { props.bookmark }
-                />
+                /> */}
         </div>
     )
 }

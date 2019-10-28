@@ -9,7 +9,6 @@ export const startAddGallery = () => {
 }
 
 export const addGallerySuccess = ( gallery ) => {
-    console.log(`galleryActions: Gallery: ${gallery}`)
     return {
         type: actionTypes.ADD_GALLERY_SUCCESS,
         gallery: gallery, 
@@ -29,12 +28,8 @@ export const addGallery = ( artwork, token) => {
     console.log(`IN GALLERY AXNS: ADD GALLERY`)
     return dispatch => {
         startAddGallery();
-
         axios.post(`https://letsmet-43e41.firebaseio.com/gallery.json?auth=${token}`, artwork)
         .then(response => {
-            console.log(`add gallery response: ${response.data.gallery}!`)
-
-
             dispatch(addGallerySuccess( response.data.gallery))
             dispatch(fetchGallery(token))
         })
@@ -83,8 +78,6 @@ export const removeGallerySuccess = () => {
     }
 }
 
-
-
 // export const removeGallery = ( artworkId ) => {
 //     return {
 //         type: actionTypes.REMOVE_GALLERY, 
@@ -112,17 +105,9 @@ export const fetchGallery = (token, userId) => {
                 art => 
                     fetchedGallery.push(art)
             )
-
             const lastArtwork = {
-                title: fetchedGallery[fetchedGallery.length - 1].title,
-                artistDisplayName: fetchedGallery[fetchedGallery.length - 1].artistDisplayName,  
-                medium: fetchedGallery[fetchedGallery.length - 1].medium,  
-                objectId: fetchedGallery[fetchedGallery.length - 1].objectId,  
-                primaryImage: fetchedGallery[fetchedGallery.length - 1].primaryImage,  
-                primaryImageSmall: fetchedGallery[fetchedGallery.length - 1].primaryImageSmall
+                ...fetchedGallery[fetchedGallery.length - 1]
             }
-
-            // console.log(`In GallActions: Last artworK.title: ${lastArtwork.title}`)
 
             dispatch(fetchGallerySuccess(fetchedGallery, lastArtwork))
 
