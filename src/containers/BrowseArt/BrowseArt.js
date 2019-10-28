@@ -35,9 +35,10 @@ const BrowseArt = props => {
     useEffect(() => {
         onSetGallery(token, userId)
     }, [onSetGallery, token, userId])
+    
 
 
-    const bookmarkArtHandler = () => {
+    const addBookmarkHandler = () => {
         console.log('Gallery.js: bookmarkArtHandler')
         
         if (!token) {
@@ -60,7 +61,6 @@ const BrowseArt = props => {
 
     const checkIfBookmarked = () => {
         console.log(`Gallery.js: check if Bookmarked!`)
-        
         return checkTest(userGallery, curObjectId)
     }
 
@@ -98,7 +98,9 @@ const BrowseArt = props => {
             <ArtControls
                 isAuth = { token !== null }
                 fave = { addGallery }
-                bookmark = {bookmarkArtHandler}
+                bookmark = { addBookmarkHandler }
+                
+               
                 title={title}
                 medium = {medium}
                 artistDisplayName = {artistDisplayName}/>

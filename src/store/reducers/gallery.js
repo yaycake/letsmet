@@ -1,5 +1,7 @@
 import * as actionTypes from '../actions/actionTypes'; 
 import { updateObject } from '../../shared/utility'
+import { addGalleryFailed } from '../actions';
+import { startRemoveGallery, removeGalleryFailed, removeGallerySuccess } from '../actions/gallery';
 
 const initialState = {
     gallery: [], 
@@ -12,6 +14,28 @@ const startFetchGallery = ( state, action ) => {
     return updateObject(state, {
         error: null, 
         loading: true
+    })
+}
+
+const startAddGallery = ( state, action ) => {
+    return updateObject(state, {
+        error: null, 
+        loading: true
+    })
+}
+
+const addGallerySuccess = (state, action) => {
+    return updateObject(state, {
+        gallery: action.gallery,
+        error: null, 
+        loading: false
+    })
+}
+
+const addGalleryFail =  (state, action ) => {
+    return updateObject(state, {
+        error: action.error, 
+        loading: false
     })
 }
 
@@ -57,8 +81,21 @@ const reducer = ( state = initialState, action ) => {
     switch (action.type) {
         case actionTypes.START_FETCH_GALLERY: 
             return startFetchGallery(state,action)
+        case actionTypes.START_ADD_GALLERY:
+            return startAddGallery(state,action)
         case actionTypes.ADD_GALLERY: 
             return addGallery(state,action)
+        case actionTypes.ADD_GALLERY_SUCCESS: 
+            return addGallerySuccess(state, action)
+        case actionTypes.ADD_GALLERY_FAILED: 
+            return addGalleryFailed(state, action)
+            
+        case actionTypes.START_REMOVE_GALLERY:
+            return startRemoveGallery(state, action)
+        case actionTypes.REMOVE_GALLERY_FAILED: 
+            return removeGalleryFailed(state, action)
+        case actionTypes.REMOVE_GALLERY_SUCCESS:
+            return removeGallerySuccess(state, action)
         case actionTypes.REMOVE_GALLERY:
             return removeGallery(state,action)
         case actionTypes.FETCH_GALLERY_SUCCESS:

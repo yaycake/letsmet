@@ -12,6 +12,10 @@ const ArtControls = (props) => {
         setShowArtInfo(!showArtInfo)
     }
 
+    // const bookmarkButton = (
+    //     if ()
+    // )
+
     return (
         <div className={styles.ArtControls}>
             <div className = {styles.infoBox}>
