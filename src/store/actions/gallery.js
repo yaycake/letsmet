@@ -15,8 +15,6 @@ export const addGallerySuccess = ( gallery ) => {
     }
 }
 
-
-
 export const addGallery = ( artwork, token) => {
     console.log(`IN GALLERY AXNS: ADD GALLERY`)
     return dispatch => {
@@ -39,7 +37,6 @@ export const addGalleryFailed = (error) => {
         error: error
     }
 }
-
 
 // export const removeGallery = ( artworkId ) => {
 //     return {
@@ -69,11 +66,6 @@ export const fetchGallery = (token, userId) => {
                     fetchedGallery.push(art)
             )
 
-            console.log(`in GALL ACTIONS: fetchedGallery ${fetchedGallery}`)
-            console.log(`in GALL ACTIONS: typeof fetchedGallery ${typeof fetchedGallery}`)
-            console.log(`in GALL ACTIONS: fetchedGallery[0] ${fetchedGallery[0]}`)
-            console.log(`in GALL ACTIONS: fetchedGallery[0].title ${fetchedGallery[0].title}`)
-
             const lastArtwork = {
                 title: fetchedGallery[fetchedGallery.length - 1].title,
                 artistDisplayName: fetchedGallery[fetchedGallery.length - 1].artistDisplayName,  
@@ -83,9 +75,7 @@ export const fetchGallery = (token, userId) => {
                 primaryImageSmall: fetchedGallery[fetchedGallery.length - 1].primaryImageSmall
             }
 
-            console.log(`In GallActions: Last artworK.title: ${lastArtwork.title}`)
-
-            // Object.keys(response.data).map(i => fetchedGallery[i])
+            // console.log(`In GallActions: Last artworK.title: ${lastArtwork.title}`)
 
             dispatch(fetchGallerySuccess(fetchedGallery, lastArtwork))
 

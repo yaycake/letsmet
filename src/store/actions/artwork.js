@@ -40,7 +40,7 @@ export const startFetchArt = () => dispatch =>{
             dispatch(setArt(response.data))
         }
     ).catch(error => {
-        dispatch(fetchArtFail())
+        dispatch(fetchArtFail(error))
         console.log(error)
     })    
 }
@@ -52,8 +52,7 @@ export const startFetchArt = () => dispatch =>{
 export const setArt = (artwork) => dispatch => {
     
     if (artwork.primaryImage === "" || artwork.primaryImage === null ) {
-        console.log(`[InSetArt] NO IMAGE BRO`)
-        console.log(`PrimaryImage: ## ${artwork.primaryImage} ##`)
+        console.log(`[InSetArt] NO IMAGE`)
         dispatch(startFetchArt());
     } else {
         console.log(`[ARTWORK ACTIONS] setArt`)
@@ -74,8 +73,9 @@ export const setArt = (artwork) => dispatch => {
 
 // if any APIfetch fails
 
-export const fetchArtFail = () => {
+export const fetchArtFail = (error) => {
     return {
-        type: actionTypes.FETCH_ART_FAIL
+        type: actionTypes.FETCH_ART_FAIL, 
+        error: error
     }
 }

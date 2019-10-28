@@ -6,7 +6,6 @@ const infoButton = ( props ) =>  {
     let classes = [styles.InfoButton]
 
     if (props.showInfo) {
-        console.log('INFO SHOWING!')
         classes = [styles.ActiveInfo, styles.InfoButton]
     };
 

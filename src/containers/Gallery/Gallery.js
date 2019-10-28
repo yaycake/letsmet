@@ -9,11 +9,12 @@ import ArtControls from '../ArtControls/ArtControls'
 const Gallery = (props) => {
     //Redux Props
     const userGallery = useSelector(state => state.myGallery.gallery)
+    const token = useSelector( state => state.auth.token)
     const lastArtwork = useSelector(state => state.myGallery.lastArtwork)
 
     const error = useSelector(state => state.myGallery.error)
     const loading = useSelector(state => state.myGallery.loading)
-    const token = useSelector( state => state.auth.token)
+  
     const userId = useSelector( state => state.auth.userId)
 
     //Redux Actions
@@ -21,16 +22,25 @@ const Gallery = (props) => {
 
     const onSetGallery =  useCallback((token, userId)  => dispatch(actions.fetchGallery(token,userId)),[token, userId])
 
-    const selectArtPreviewHandler = ( artId ) => {
-        const selectedArt = userGallery.find((art) => art.id === artId)
+    const selectArtPreviewHandler = (  
+            title,
+            artistDisplayName, 
+            medium,  
+            objectId,  
+            primaryImage,  
+            primaryImageSmall, 
+            artId
+    ) => {
+
+        console.log(`In selectArtPreviewHandler`)
 
         setCurArtwork({
-            title: selectedArt.title,
-            artistDisplayName: selectedArt.artistDisplayName, 
-            medium: selectedArt.medium,  
-            objectId: selectedArt.objectId,  
-            primaryImage: selectedArt.primaryImage,  
-            primaryImageSmall: selectedArt.primaryImageSmall
+            title: title,
+            artistDisplayName: artistDisplayName, 
+            medium: medium,  
+            objectId: artId,  
+            primaryImage: primaryImage,  
+            primaryImageSmall: primaryImageSmall
         })
     }
 
@@ -44,7 +54,7 @@ const Gallery = (props) => {
     })
 
 
-    const previewCurrentArtwork = useCallback(() => {
+    const previewLatestArtwork = useCallback(() => {
             setCurArtwork({
                 ...lastArtwork
             })
@@ -56,12 +66,20 @@ const Gallery = (props) => {
     }, [onSetGallery, token, userId])
 
     useEffect (() => {
-        previewCurrentArtwork()
-    }, [previewCurrentArtwork, lastArtwork])
+        previewLatestArtwork()
+    }, [previewLatestArtwork, lastArtwork])
 
     const galleryStrip = (
         userGallery.map(art => 
             <PreviewTile
+                clicked = { () => selectArtPreviewHandler(art.title,
+                    art.artistDisplayName,art.artistDisplayName, 
+                    art.medium,  
+                    art.objectId,  
+                    art.primaryImage,  
+                    art.primaryImageSmall, 
+                    art.objectId
+                ) }
                 key = { art.objectId }
                 altText = { art.title }
                 image = {art.primaryImageSmall}
