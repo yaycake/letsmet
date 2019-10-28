@@ -9,11 +9,12 @@ import ArtControls from '../ArtControls/ArtControls'
 const Gallery = (props) => {
     //Redux Props
     const userGallery = useSelector(state => state.myGallery.gallery)
+    const token = useSelector( state => state.auth.token)
     const lastArtwork = useSelector(state => state.myGallery.lastArtwork)
 
     const error = useSelector(state => state.myGallery.error)
     const loading = useSelector(state => state.myGallery.loading)
-    const token = useSelector( state => state.auth.token)
+  
     const userId = useSelector( state => state.auth.userId)
 
     //Redux Actions

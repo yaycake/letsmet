@@ -15,8 +15,6 @@ export const addGallerySuccess = ( gallery ) => {
     }
 }
 
-
-
 export const addGallery = ( artwork, token) => {
     console.log(`IN GALLERY AXNS: ADD GALLERY`)
     return dispatch => {
@@ -33,13 +31,33 @@ export const addGallery = ( artwork, token) => {
     }
 }
 
+// const checkIfLiked = () => {
+//     const matchedArt = userGallery.find(({art}) => art.objectId === objectId)
+
+//     console.log(`matchedArt: ${matchedArt}`) 
+//     if ( userGallery.find({art} => art.objectId === objectId)){
+//         console.log('art is already in gallery!')
+//         return true
+//     } else {
+//         console.log('New Art!')
+//         return false
+//     }
+// }
+
+// export const addGalleryDuplicate = (artwork, token, error ) => {
+//     console.log('IN GALL AXNS: ADDGALLERYDUPLICATES')
+//     return {
+//         type: actionTypes.ADD_GALLERY_DUPLICATE, 
+        
+//     }
+// }
+
 export const addGalleryFailed = (error) => {
     return {
         type: actionTypes.ADD_GALLERY_FAILED, 
         error: error
     }
 }
-
 
 // export const removeGallery = ( artworkId ) => {
 //     return {
@@ -69,11 +87,6 @@ export const fetchGallery = (token, userId) => {
                     fetchedGallery.push(art)
             )
 
-            console.log(`in GALL ACTIONS: fetchedGallery ${fetchedGallery}`)
-            console.log(`in GALL ACTIONS: typeof fetchedGallery ${typeof fetchedGallery}`)
-            console.log(`in GALL ACTIONS: fetchedGallery[0] ${fetchedGallery[0]}`)
-            console.log(`in GALL ACTIONS: fetchedGallery[0].title ${fetchedGallery[0].title}`)
-
             const lastArtwork = {
                 title: fetchedGallery[fetchedGallery.length - 1].title,
                 artistDisplayName: fetchedGallery[fetchedGallery.length - 1].artistDisplayName,  
@@ -83,9 +96,7 @@ export const fetchGallery = (token, userId) => {
                 primaryImageSmall: fetchedGallery[fetchedGallery.length - 1].primaryImageSmall
             }
 
-            console.log(`In GallActions: Last artworK.title: ${lastArtwork.title}`)
-
-            // Object.keys(response.data).map(i => fetchedGallery[i])
+            // console.log(`In GallActions: Last artworK.title: ${lastArtwork.title}`)
 
             dispatch(fetchGallerySuccess(fetchedGallery, lastArtwork))
 

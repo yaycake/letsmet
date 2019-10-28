@@ -25,7 +25,7 @@ const ArtControls = (props) => {
             </div>
 
             <LikeButton 
-                click = { props.fave }
+                click = { props.bookmark }
                 />
         </div>
     )
