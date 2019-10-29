@@ -1,13 +1,20 @@
 import React from 'react';
 import styles from './LikeButton.module.css';
-import bookmarkLiked from '../../UI/Icons/bookmark_solid.svg'
-import bookmark from '../../UI/Icons/bookmark_outline.svg'
+import bookmarked from '../../UI/Icons/bookmark_solid.svg'
+import unbookmarked from '../../UI/Icons/bookmark_outline.svg'
 
 const likeButton = ( props ) => {
+
+    let icon = (
+        <img alt = "Bookmark this art" src={unbookmarked} className={styles.likeIcon} />)
+
+    if (props.bookmarked){
+        icon = (<img alt = "Unbookmark this art" src={bookmarked} className={styles.likeIcon} />)
+    }
     return (
         <div onClick = {props.click} className={styles.LikeButton}
         >
-            <img alt = "Bookmark this art" src={bookmark} className={styles.likeIcon} />
+            {icon}
         </div>)
 };
 

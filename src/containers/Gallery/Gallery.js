@@ -17,10 +17,31 @@ const Gallery = (props) => {
   
     const userId = useSelector( state => state.auth.userId)
 
+
+    // Set Preview To Latest Artwork
+    const [curArtwork, setCurArtwork] = useState({
+        title: lastArtwork.title,
+        artistDisplayName: lastArtwork.artistDisplayName, 
+        medium: lastArtwork.medium,  
+        objectId: lastArtwork.objectId,  
+        primaryImage: lastArtwork.primaryImage,  
+        primaryImageSmall: lastArtwork.primaryImageSmall
+    })
+
     //Redux Actions
     const dispatch = useDispatch();
 
-    const onSetGallery =  useCallback((token, userId)  => dispatch(actions.fetchGallery(token,userId)),[token, userId])
+    const onSetGallery =  useCallback((token, userId)  => dispatch(actions.fetchGallery(token,userId)),[])
+
+    const onCheckGallery = ()=> {
+        if ( userGallery.some((art) => art.objectId === curArtwork.objectId)) {
+            console.log(`in onCheckGallery: True`)
+            return true
+        } else {
+            console.log(`in onCheckGallery: False`)
+            return false
+        }
+    }
 
     const selectArtPreviewHandler = (  
             title,
@@ -28,57 +49,32 @@ const Gallery = (props) => {
             medium,  
             objectId,  
             primaryImage,  
-            primaryImageSmall, 
-            artId
+            primaryImageSmall
     ) => {
-
         console.log(`In selectArtPreviewHandler`)
-
         setCurArtwork({
             title: title,
             artistDisplayName: artistDisplayName, 
             medium: medium,  
-            objectId: artId,  
+            objectId: objectId,  
             primaryImage: primaryImage,  
             primaryImageSmall: primaryImageSmall
         })
+        onSetGallery(token, userId);
+
+        onCheckGallery(userGallery, curArtwork.objectId)
     }
 
-    const [curArtwork, setCurArtwork] = useState({
-        title: lastArtwork.title,
-        artistDisplayName: null, 
-        medium: null,  
-        objectId: null,  
-        primaryImage: lastArtwork.primaryImage,  
-        primaryImageSmall: lastArtwork.primaryImageSmall
-    })
-
-
-    const previewLatestArtwork = useCallback(() => {
-            setCurArtwork({
-                ...lastArtwork
-            })
-    }, [lastArtwork])
-
-
-    useEffect(() => {
-        onSetGallery(token, userId);
-    }, [onSetGallery, token, userId])
-
-    useEffect (() => {
-        previewLatestArtwork()
-    }, [previewLatestArtwork, lastArtwork])
 
     const galleryStrip = (
         userGallery.map(art => 
             <PreviewTile
                 clicked = { () => selectArtPreviewHandler(art.title,
-                    art.artistDisplayName,art.artistDisplayName, 
+                    art.artistDisplayName, 
                     art.medium,  
                     art.objectId,  
                     art.primaryImage,  
                     art.primaryImageSmall, 
-                    art.objectId
                 ) }
                 key = { art.objectId }
                 altText = { art.title }
@@ -88,6 +84,7 @@ const Gallery = (props) => {
             />)
     )
 
+    console.log(`RENDERING GALLERY`)
 
     return (
         <div>
@@ -107,6 +104,8 @@ const Gallery = (props) => {
                     artistDisplayName = { curArtwork.artistDisplayName }
                 />
                 {/* <NextButton clicked = { onFetchArt } /> */}
+
+                { onCheckGallery(userGallery, curArtwork.objectId) === true ? <p>ONCHECK GALLERY TRUE</p> : <p>ONCHECK GALLERY FALSE</p>}
             </div>
         </div>
     )

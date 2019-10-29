@@ -1,4 +1,4 @@
-import React, { useState, useSelector } from 'react';
+import React, { useState, useEffect, useCallback, useSelector } from 'react';
 import InfoButton from '../../components/Artwork/InfoButton/InfoButton'; 
 import ArtInfo from '../../components/Artwork/ArtInfo/ArtInfo'; 
 import LikeButton from '../../components/Artwork/LikeButton/LikeButton';
@@ -6,34 +6,46 @@ import styles from './ArtControls.module.css';
 
 const ArtControls = (props) => {
 
-    if (props.curBookmarkedStyle){
-        console.log("BOOKMARK IS TRUE")
-    }
-
-
     const [showArtInfo, setShowArtInfo] = useState(false);
+
+    // let artMark = null; 
+
+    // const bookmarkCheckkk = useCallback(() => {
+
+    //     if (props.userGallery.some(art => art.objectId === props.curObjectId)){
+    //         artMark = true
+    //         console.log('ARTMARK IS TRUE!!')
+    //     } else {
+    //         console.log('ARTMARK STAYS FALSE')
+    //     }
+    // }, [])
+
+    // useEffect(() => {
+    //     bookmarkCheckkk()
+    // }, [bookmarkCheckkk, props.userGallery, props.curObjectId])
+
 
     const showInfoToggle = () => {
         setShowArtInfo(!showArtInfo)
     }
 
-
     let bookmarkButton = (
         <LikeButton 
-            bookmarkStyle = "outline"
-            click = { props.bookmark }
+            bookmarkIcon = {props.artBookmarked}
+            click = { props.addBookmark }
+    
         />
     )
 
-    if (props.checkBookmark){
-        
-        let bookmarkButton = (
-            <LikeButton 
-                bookmarkStyle = "solid"
-                click = {props.removeBookmark}
-            />
-        )
-    }
+    // if (artMark){
+
+    //     bookmarkButton = (
+    //         <LikeButton 
+    //             bookmarked = { false }
+    //             click = {props.removeBookmark}
+    //         />
+    //     )
+    // }
 
    
 
@@ -49,9 +61,6 @@ const ArtControls = (props) => {
                 ></ArtInfo>
             </div>
             { bookmarkButton }
-            {/* <LikeButton 
-                click = { props.bookmark }
-                /> */}
         </div>
     )
 }
