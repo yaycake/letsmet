@@ -4,9 +4,11 @@ import Artwork from '../../components/Artwork/Artwork';
 import * as actions from '../../store/actions/index'
 import styles from './BrowseArt.module.css';
 import ArtControls from '../ArtControls/ArtControls';
-import { Redirect, withRouter } from 'react-router-dom';
 import NextButton from '../../components/NextButton/NextButton';
 import { removeGallery } from '../../store/actions/gallery';
+
+
+
 
 const BrowseArt = props => {
     
@@ -20,6 +22,7 @@ const BrowseArt = props => {
     const error = useSelector(state => state.artwork.error)
 
     const userGallery = useSelector(state => state.myGallery.gallery);
+
     const token = useSelector(state => state.auth.token);
     const userId = useSelector( state => state.auth.userId);
 
@@ -28,61 +31,39 @@ const BrowseArt = props => {
     const onFetchArt = useCallback(
         () => {dispatch(actions.startFetchArt())},
         [dispatch])
+    
 
-    const onSetGallery = useCallback((token, userId)  => dispatch(actions.fetchGallery(token,userId)),[dispatch]);
 
-    // const onCheckGallery = useCallback((userGallery, curObjectId) => {
-    //     if ( userGallery.some((art) => art.objectId === curObjectId)) {
-    //         return true
-    //     } else {
-    //         return false
-    //     }
-        
-    // })
-   
-
-    useEffect(() => {
-        onSetGallery(token, userId)
-    }, [onSetGallery, token, userId])
-
-    useEffect ( () => {
+    useEffect (() => {
         onFetchArt();
     }, [onFetchArt])
 
-   
+    const onSetGallery = useCallback((token, userId) => dispatch(actions.fetchGallery(token,userId)),[dispatch]);
+
+    useEffect(() => {
+        onSetGallery(token, userId);
+    }, [onSetGallery, token, userId])
+
+
+    // const onCheckGallery = (userGallery, curObjectId) => {
+    //     if ( userGallery.some((art) => art.objectId === curObjectId)) {
+    //         console.log(`in onCheckGallery: True`)
+    //         return true
+    //     } else {
+    //         console.log(`in onCheckGallery: False`)
+    //         return false
+    //     }
+    // }
+
     const bookmarkCheck = () => {
-        console.log(`IN BOOKMARKCHECK`)
-        console.log(userGallery.some((art) => art.objectId === curObjectId))
+        console.log(`bookmarkCheck: userGallery:${userGallery}`)
         //returns truthy/falsey
         return userGallery.some((art) => art.objectId === curObjectId)
     }
-    
 
-    const addBookmarkHandler = () => {
-        console.log('Gallery.js: bookmarkArtHandler')
-        if (!token) {
-            props.history.push("/auth")
-        } else {
-            //Update userGallery
-            onSetGallery(token,userId)
-            if (!bookmarkCheck()){
-                addGallery()
-                // bookmarkStyleToggle()
-            } else {
-                alert('NOPE, DUPLICATE!')
-            }
-        }
-    }
-
-    const removeBookmarkHandler = () => {
-        console.log('Gallery.js: remove bookmark handler')
-        removeGallery()
-        // bookmarkStyleToggle()
-        alert("art removed!")
-    }
-  
     const addGallery = () => {
-        dispatch(actions.addGallery(
+        console.log(`in browseArt AddGallery: user gallery ${userGallery} `)
+        dispatch(actions.addGallery(token, 
             {
                 title: title, 
                 artistDisplayName: artistDisplayName, 
@@ -90,11 +71,31 @@ const BrowseArt = props => {
                 objectId: curObjectId, 
                 primaryImage: primaryImage, 
                 primaryImageSmall: primaryImageSmall
-            }, token
+            }
         ))
-        // Update Gallery again
-        onSetGallery(token,userId)
     }
+
+    const addBookmarkHandler = () => {
+        console.log('Gallery.js: bookmarkArtHandler')
+        if (!token) {
+            props.history.push("/auth")
+        } else {
+            if (bookmarkCheck() === true ) {
+                console.log(`art already bookmarked! ${bookmarkCheck()}`)
+            } else {
+                console.log(`Add to bookmarks! ${bookmarkCheck()}`)
+                addGallery()
+            }
+            
+        }
+    }
+
+    const removeBookmarkHandler = () => {
+        console.log('Gallery.js: remove bookmark handler')
+        removeGallery()
+        alert("art removed!")
+    }
+  
 
     return (
         <div className = { styles.BrowseArt }>
@@ -108,8 +109,9 @@ const BrowseArt = props => {
                 //bookmark functions & style
                 fave = { addGallery }
                 addBookmark = { addBookmarkHandler }
-                checkBookmark = {bookmarkCheck}
+                // bookmarkStatus = { bookmarkCheck() }
                 removeBookmark = { removeBookmarkHandler }
+
                 //art info 
                 title={title}
                 medium = {medium}
@@ -120,6 +122,12 @@ const BrowseArt = props => {
                 />
 
             <NextButton clicked = { onFetchArt } />
+        
+            { bookmarkCheck() === true ? 
+                <p>ONCHECK GALLERY TRUE</p>
+                : <p>ONCHECK GALLERY FALSE</p>
+            }
+           
         </div>
     )
 }

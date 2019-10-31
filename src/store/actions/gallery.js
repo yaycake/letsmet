@@ -8,10 +8,10 @@ export const startAddGallery = () => {
     }
 }
 
-export const addGallerySuccess = ( gallery ) => {
+export const addGallerySuccess = ( artwork ) => {
     return {
         type: actionTypes.ADD_GALLERY_SUCCESS,
-        gallery: gallery, 
+        artwork: artwork,
         loading: false
     }
 }
@@ -24,16 +24,19 @@ export const addGalleryFailed = (error) => {
     }
 }
 
-export const addGallery = ( artwork, token) => {
+export const addGallery = ( token, artwork ) => {
     console.log(`IN GALLERY AXNS: ADD GALLERY`)
     return dispatch => {
         startAddGallery();
         axios.post(`https://letsmet-43e41.firebaseio.com/gallery.json?auth=${token}`, artwork)
         .then(response => {
-            dispatch(addGallerySuccess( response.data.gallery))
-            dispatch(fetchGallery(token))
+            console.log(`addGallActions: response.data.name: ${response.data.name}`)
+
+            dispatch(addGallerySuccess(artwork))
+
         })
         .catch(error => {
+            console.log(`AddGalleryFailError: ${error}`)
             dispatch(addGalleryFailed(error))
         })        
     }
@@ -48,7 +51,7 @@ export const removeGallery = ( artwork, token ) => {
         .then(response => {
             console.log('in removeGallery axn')
             dispatch(removeGallerySuccess())
-            dispatch(fetchGallery(token))
+            // dispatch(fetchGallery(token))
         })
         .catch(err => {
             console.log(err)
@@ -101,15 +104,14 @@ export const fetchGallery = (token, userId) => {
         .then( response => {
             const fetchedGallery = [];
 
+            console.log(`GALLAXNS: B4 ObjectValues fetchGallery: ${fetchedGallery}`)
             Object.values(response.data).map (
                 art => 
                     fetchedGallery.push(art)
             )
-            const lastArtwork = {
-                ...fetchedGallery[fetchedGallery.length - 1]
-            }
+            console.log(`GALLAXNS: AFTR ObValues: fetchGallery: ${fetchedGallery}`)
 
-            dispatch(fetchGallerySuccess(fetchedGallery, lastArtwork))
+            dispatch(fetchGallerySuccess(fetchedGallery))
 
         })
         .catch(err => {
@@ -120,11 +122,11 @@ export const fetchGallery = (token, userId) => {
 }
 
 
-export const fetchGallerySuccess = ( gallery, lastArtwork ) => {
+export const fetchGallerySuccess = ( gallery ) => {
     return {
         type: actionTypes.FETCH_GALLERY_SUCCESS,
         gallery: gallery, 
-        lastArtwork: lastArtwork
+        // lastArtwork: lastArtwork
     }
 }
 

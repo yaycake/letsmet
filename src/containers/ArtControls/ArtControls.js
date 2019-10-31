@@ -8,47 +8,33 @@ const ArtControls = (props) => {
 
     const [showArtInfo, setShowArtInfo] = useState(false);
 
-    // let artMark = null; 
-
-    // const bookmarkCheckkk = useCallback(() => {
-
-    //     if (props.userGallery.some(art => art.objectId === props.curObjectId)){
-    //         artMark = true
-    //         console.log('ARTMARK IS TRUE!!')
-    //     } else {
-    //         console.log('ARTMARK STAYS FALSE')
-    //     }
-    // }, [])
-
-    // useEffect(() => {
-    //     bookmarkCheckkk()
-    // }, [bookmarkCheckkk, props.userGallery, props.curObjectId])
-
 
     const showInfoToggle = () => {
         setShowArtInfo(!showArtInfo)
     }
 
     let bookmarkButton = (
-        <LikeButton 
-            bookmarkIcon = {props.artBookmarked}
-            click = { props.addBookmark }
-    
-        />
+        <div>
+            <p>Art Not Bookmarked</p>
+            <LikeButton 
+                bookmarkIcon = {props.artBookmarked}
+                click = { props.addBookmark }
+
+            />
+        </div>
+        
     )
 
-    // if (artMark){
-
-    //     bookmarkButton = (
-    //         <LikeButton 
-    //             bookmarked = { false }
-    //             click = {props.removeBookmark}
-    //         />
-    //     )
-    // }
-
-   
-
+    if (props.bookmarkStatus === true)
+        bookmarkButton = (
+            <div>
+                <p>Art Bookmarked</p>
+                <LikeButton 
+                    bookmarkIcon = {props.artBookmarked}
+                    click = { props.removeBookmark }
+                />
+            </div>
+        )
     return (
         <div className={styles.ArtControls}>
             <div className = {styles.infoBox}>

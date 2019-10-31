@@ -21,12 +21,16 @@ const App = props => {
 
   const isAuthenticated = useSelector(state => state.auth.token != null)
 
+ 
+
+
   const dispatch = useDispatch();
 
   const fetchArtObjects = useCallback(
     () => {
     dispatch(actions.initArtObjects())
   }, [dispatch])
+
 
   let routes = (
     <Switch>

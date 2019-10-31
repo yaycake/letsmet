@@ -10,13 +10,12 @@ const Gallery = (props) => {
     //Redux Props
     const userGallery = useSelector(state => state.myGallery.gallery)
     const token = useSelector( state => state.auth.token)
-    const lastArtwork = useSelector(state => state.myGallery.lastArtwork)
-
     const error = useSelector(state => state.myGallery.error)
     const loading = useSelector(state => state.myGallery.loading)
   
     const userId = useSelector( state => state.auth.userId)
 
+    const lastArtwork = {...userGallery[userGallery.length - 1]}
 
     // Set Preview To Latest Artwork
     const [curArtwork, setCurArtwork] = useState({
@@ -31,7 +30,16 @@ const Gallery = (props) => {
     //Redux Actions
     const dispatch = useDispatch();
 
-    const onSetGallery =  useCallback((token, userId)  => dispatch(actions.fetchGallery(token,userId)),[])
+    const onSetGallery =  useCallback((token, userId)  => dispatch(actions.fetchGallery(token,userId)),[dispatch])
+
+    useEffect(() => {
+        onSetGallery(token, userId)
+    }, [onSetGallery, token, userId])
+
+    const bookmarkCheck = () => {
+        //returns truthy/falsey
+        return userGallery.some((art) => art.objectId === curArtwork.objectId)
+    }
 
     const onCheckGallery = ()=> {
         if ( userGallery.some((art) => art.objectId === curArtwork.objectId)) {
@@ -60,9 +68,7 @@ const Gallery = (props) => {
             primaryImage: primaryImage,  
             primaryImageSmall: primaryImageSmall
         })
-        onSetGallery(token, userId);
-
-        onCheckGallery(userGallery, curArtwork.objectId)
+  
     }
 
 
@@ -80,11 +86,8 @@ const Gallery = (props) => {
                 altText = { art.title }
                 image = {art.primaryImageSmall}
                 id = { art.objectId }
-                // clicked = { selectArtPreviewHandler }
             />)
     )
-
-    console.log(`RENDERING GALLERY`)
 
     return (
         <div>
@@ -101,11 +104,12 @@ const Gallery = (props) => {
                 <ArtControls
                     title = { curArtwork.title }
                     medium = { curArtwork.medium }
+                    bookmarkStatus ={ bookmarkCheck()}
                     artistDisplayName = { curArtwork.artistDisplayName }
                 />
                 {/* <NextButton clicked = { onFetchArt } /> */}
 
-                { onCheckGallery(userGallery, curArtwork.objectId) === true ? <p>ONCHECK GALLERY TRUE</p> : <p>ONCHECK GALLERY FALSE</p>}
+                {/* { onCheckGallery() === true ? <p>ONCHECK GALLERY TRUE</p> : <p>ONCHECK GALLERY FALSE</p>} */}
             </div>
         </div>
     )
