@@ -20,7 +20,7 @@ const Gallery = (props) => {
     // Set Preview To Latest Artwork
     const [curArtwork, setCurArtwork] = useState({
         title: lastArtwork.title,
-        artistDisplayName: lastArtwork.artistDisplayName, 
+        artistDisplayName: lastArtwork.artistDisplayName,
         medium: lastArtwork.medium,  
         objectId: lastArtwork.objectId,  
         primaryImage: lastArtwork.primaryImage,  
@@ -70,7 +70,6 @@ const Gallery = (props) => {
         })
   
     }
-
 
     const galleryStrip = (
         userGallery.map(art => 

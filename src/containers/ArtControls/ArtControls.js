@@ -13,40 +13,38 @@ const ArtControls = (props) => {
         setShowArtInfo(!showArtInfo)
     }
 
-    let bookmarkButton = (
-        <div>
-            <p>Art Not Bookmarked</p>
-            <LikeButton 
-                bookmarkIcon = {props.artBookmarked}
-                click = { props.addBookmark }
+    // const [showBookmarkClick, setBookmarkClick] = useState(() => {
+    //     if (props.bookmarkStatus){
+    //         return props.removeBookmark
+    //     } else {
+    //         return props.addBookmark
+    //     }
+    // })
 
-            />
-        </div>
-        
-    )
+    // const bookmarkToggle = () => {
+    //     setBookmarkClick(!showBookmarkClick);
+       
+    // }
 
-    if (props.bookmarkStatus === true)
-        bookmarkButton = (
-            <div>
-                <p>Art Bookmarked</p>
-                <LikeButton 
-                    bookmarkIcon = {props.artBookmarked}
-                    click = { props.removeBookmark }
-                />
-            </div>
-        )
     return (
         <div className={styles.ArtControls}>
             <div className = {styles.infoBox}>
                 <InfoButton showInfo = {showArtInfo} className={styles.infoButton} infoClicked={showInfoToggle}></InfoButton>
-                <ArtInfo className={styles.artInfo}
+                <ArtInfo className=                 {styles.artInfo}
                     title={props.title}
                     medium = {props.medium}
                     artistDisplayName = {props.artistDisplayName}
                     showInfo = {showArtInfo}
                 ></ArtInfo>
             </div>
-            { bookmarkButton }
+            {/* { bookmarkButton } */}
+
+         
+            <LikeButton 
+                bookmarkIcon = {props.bookmarkStatus}
+                click = { props.clickBookmark }
+            />
+            
         </div>
     )
 }

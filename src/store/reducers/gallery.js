@@ -9,7 +9,6 @@ const initialState = {
     loading: false
 }
 
-
 const startFetchGallery = ( state, action ) => {
     return updateObject(state, {
         error: null, 
@@ -28,8 +27,6 @@ const addGallerySuccess = (state, action) => {
     const newArtwork = updateObject(
         {   ...action.artwork}
     )
-
-    console.log(`addGallSuccess Reducer: newArtwork ${newArtwork}`)
 
     return updateObject(state, {
         gallery: state.gallery.concat(newArtwork),

@@ -8,7 +8,7 @@ const likeButton = ( props ) => {
     let icon = (
         <img alt = "Bookmark this art" src={unbookmarked} className={styles.likeIcon} />)
 
-    if (props.bookmarked){
+    if (props.bookmarkIcon){
         icon = (<img alt = "Unbookmark this art" src={bookmarked} className={styles.likeIcon} />)
     }
     return (

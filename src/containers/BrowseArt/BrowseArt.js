@@ -29,11 +29,8 @@ const BrowseArt = props => {
     const dispatch = useDispatch();
 
     const onFetchArt = useCallback(
-        () => {dispatch(actions.startFetchArt())},
-        [dispatch])
+        () => {dispatch(actions.startFetchArt())}, [dispatch])
     
-
-
     useEffect (() => {
         onFetchArt();
     }, [onFetchArt])
@@ -44,28 +41,31 @@ const BrowseArt = props => {
         onSetGallery(token, userId);
     }, [onSetGallery, token, userId])
 
-
-    // const onCheckGallery = (userGallery, curObjectId) => {
-    //     if ( userGallery.some((art) => art.objectId === curObjectId)) {
-    //         console.log(`in onCheckGallery: True`)
-    //         return true
-    //     } else {
-    //         console.log(`in onCheckGallery: False`)
-    //         return false
-    //     }
-    // }
-
     const bookmarkCheck = () => {
-        console.log(`bookmarkCheck: userGallery:${userGallery}`)
         //returns truthy/falsey
         return userGallery.some((art) => art.objectId === curObjectId)
     }
 
+    const clickBookmarkHandler = () => {
+        if (!token) {
+            props.history.push("/auth")
+        } else {
+            bookmarkAction( bookmarkCheck())
+        }
+    }
+
+    const bookmarkAction = ( bookmarked ) => {
+        if(bookmarked) {
+            return removeGallery()
+        }else {
+            return addGallery()
+        }
+    }
+
     const addGallery = () => {
-        console.log(`in browseArt AddGallery: user gallery ${userGallery} `)
+        console.log(`in browseArt AddGallery`)
         dispatch(actions.addGallery(token, 
-            {
-                title: title, 
+            {   title: title, 
                 artistDisplayName: artistDisplayName, 
                 medium: medium, 
                 objectId: curObjectId, 
@@ -75,26 +75,33 @@ const BrowseArt = props => {
         ))
     }
 
-    const addBookmarkHandler = () => {
-        console.log('Gallery.js: bookmarkArtHandler')
-        if (!token) {
-            props.history.push("/auth")
-        } else {
-            if (bookmarkCheck() === true ) {
-                console.log(`art already bookmarked! ${bookmarkCheck()}`)
-            } else {
-                console.log(`Add to bookmarks! ${bookmarkCheck()}`)
-                addGallery()
-            }
-            
-        }
-    }
+    // const removeGallery = () => {
+    //     console.log(`in browseArt RemoveGallery`)
+    //     dispatch(actions.removeGallery(token, {
 
-    const removeBookmarkHandler = () => {
-        console.log('Gallery.js: remove bookmark handler')
-        removeGallery()
-        alert("art removed!")
-    }
+    //     }))
+    // }
+
+    // const addBookmarkHandler = () => {
+    //     console.log('Gallery.js: bookmarkArtHandler')
+    //     if (!token) {
+    //         props.history.push("/auth")
+    //     } else {
+    //         if (bookmarkCheck() === true ) {
+    //             console.log(`art already bookmarked! ${bookmarkCheck()}`)
+    //         } else {
+    //             console.log(`Add to bookmarks! ${bookmarkCheck()}`)
+    //             addGallery()
+    //         }
+            
+    //     }
+    // }
+
+    // const removeBookmarkHandler = () => {
+    //     console.log('Gallery.js: remove bookmark handler')
+    //     removeGallery()
+    //     alert("art removed!")
+    // }
   
 
     return (
@@ -108,9 +115,10 @@ const BrowseArt = props => {
                 isAuth = { token !== null }
                 //bookmark functions & style
                 fave = { addGallery }
-                addBookmark = { addBookmarkHandler }
+                clickBookmark = {clickBookmarkHandler}
+                // addBookmark = { addBookmarkHandler }
                 // bookmarkStatus = { bookmarkCheck() }
-                removeBookmark = { removeBookmarkHandler }
+                // removeBookmark = { removeBookmarkHandler }
 
                 //art info 
                 title={title}
@@ -122,11 +130,11 @@ const BrowseArt = props => {
                 />
 
             <NextButton clicked = { onFetchArt } />
-        
+{/*         
             { bookmarkCheck() === true ? 
                 <p>ONCHECK GALLERY TRUE</p>
                 : <p>ONCHECK GALLERY FALSE</p>
-            }
+            } */}
            
         </div>
     )
