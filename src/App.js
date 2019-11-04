@@ -1,11 +1,11 @@
-import React from 'react';
+import React, {useCallback} from 'react';
 import './App.css';
 import Layout from './hoc/Layout/Layout'
-// import * as actions from './store/actions/index'
+import * as actions from './store/actions/index'
 import { Route, Switch, Redirect } from 'react-router-dom'
 import BrowseArt from './containers/BrowseArt/BrowseArt';
 import About from './components/About/About'
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import Auth from './containers/Auth/Auth';
 
 import Logout from './containers/Auth/Logout/Logout'
@@ -13,7 +13,7 @@ import Logout from './containers/Auth/Logout/Logout'
 import Gallery from './containers/Gallery/Gallery'
 
 // const Artwork = React.lazy(()=> {
-//   return import('./containers/Artwork')
+//   return import('./components/Artwork/Artwork')
 // })
 
 
@@ -21,12 +21,13 @@ const App = props => {
 
   const isAuthenticated = useSelector(state => state.auth.token != null)
 
-  // const dispatch = useDispatch();
+  const dispatch = useDispatch();
 
-  // const fetchArtObjects = useCallback(
-  //   () => {
-  //   dispatch(actions.initArtObjects())
-  // }, [dispatch])
+  const fetchArtObjects = useCallback(
+    () => {
+    dispatch(actions.initArtObjects())
+  }, [dispatch])
+
 
 
   let routes = (

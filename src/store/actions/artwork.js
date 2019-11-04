@@ -16,6 +16,7 @@ export const initArtObjects = () => {
 }
 
 export const getRandomObj = () => {
+    console.log(`in getRandomObj`)
     const artworkArray = localStorage.getItem("objectIdArray").split(',')
 
     const objectId = artworkArray[[Math.floor(Math.random()*artworkArray.length)]];
@@ -44,7 +45,6 @@ export const startFetchArt = () => dispatch =>{
         console.log(error)
     })    
 }
-
 
 
 // const set art state, artwork is an art object

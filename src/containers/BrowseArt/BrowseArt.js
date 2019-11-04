@@ -3,17 +3,15 @@ import { useDispatch, useSelector } from 'react-redux';
 import Artwork from '../../components/Artwork/Artwork';
 import * as actions from '../../store/actions/index'
 import styles from './BrowseArt.module.css';
-import ArtControls from '../ArtControls/ArtControls';
+// import ArtControls from '../ArtControls/ArtControls';
 import NextButton from '../../components/NextButton/NextButton';
 import ArtInfo from '../../components/Artwork/ArtInfo/ArtInfo'; 
 import LikeButton from '../../components/Artwork/LikeButton/LikeButton';
 import InfoButton from '../../components/Artwork/InfoButton/InfoButton'; 
 
 
-
-
 const BrowseArt = props => {
-    
+
     //redux props
     const title = useSelector( state => state.artwork.artwork.title);
     const artistDisplayName = useSelector( state => state.artwork.artwork.artistDisplayName);
@@ -63,6 +61,11 @@ const BrowseArt = props => {
         if (!token) {
             props.history.push("/auth")
         } else {
+
+            setBookmarked({
+                ...showBookmarked, 
+                style: "solid"
+            })
             dispatch(actions.addGallery(token, 
                 {   title: title, 
                     artistDisplayName: artistDisplayName, 
@@ -73,13 +76,15 @@ const BrowseArt = props => {
                 }
             ))
         }
-        
     }
 
 
     const removeGallery = () => {
         console.log(`in browseArt RemoveGallery`)
-        
+        setBookmarked({
+            ...showBookmarked, 
+            style: "outline"
+        })
         dispatch(actions.removeGallery(token, 
             {
                 title: title, 
@@ -104,12 +109,12 @@ const BrowseArt = props => {
         if (bookmarkCheck(curObjectId) === true ){
             setBookmarked({
                 isBookmarked: true, 
-                action: removeGallery
+                action: removeGallery, 
             }) 
         } else {
             setBookmarked({
                isBookmarked: false, 
-               action: addGallery
+               action: addGallery, 
             })
           
         }
@@ -119,26 +124,14 @@ const BrowseArt = props => {
         initBookmark()
     }, [curObjectId])
 
+
+
     return (
         <div className = { styles.BrowseArt }>
           
             <Artwork 
                 image = {primaryImageSmall}
                 altText = {`Title: ${ title } by ${ artistDisplayName}. Medium: ${ medium }`} /> 
-             
-            {/* <ArtControls
-                isAuth = { token !== null }
-                //bookmark functions & style
-                clickBookmark = {clickBookmarkHandler}
-                bookmarkStatus = {showBookmarked.isBookmarked}
-                bookmarkAction = { showBookmarked.action }
-                //art info 
-                title={title}
-                medium = {medium}
-                artistDisplayName = {artistDisplayName}
-                userGallery = { userGallery }
-                curObjectId = { curObjectId }
-                /> */}
 
             <div className = {styles.ArtControls}>
                 <div className = {styles.infoBox}>
@@ -157,15 +150,14 @@ const BrowseArt = props => {
                 <LikeButton
                     bookmarkStatus= {showBookmarked.isBookmarked}
                     bookmarkAction = {showBookmarked.action}
+                    bookmarkStyle = { showBookmarked.style}
                     click = {props.clickBookmark}
                 />
             </div>
 
             <NextButton clicked = { onFetchArt } />
-      
-            { setBookmarked === true ? 
-                <p>ONCHECK GALLERY TRUE</p>
-                : <p>ONCHECK GALLERY FALSE</p>
+            
+            { `ShowBookmarked.isBookmarked:${showBookmarked.isBookmarked}`
             } 
            
         </div>

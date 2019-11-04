@@ -1,7 +1,5 @@
-import React, { useState, useEffect } from  'react';
+import React from  'react';
 import styles from './Artwork.module.css';
-
-import { Transition } from 'react-transition-group';
 
 
 const Artwork = ( props ) => {
