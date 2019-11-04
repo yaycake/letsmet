@@ -19,6 +19,7 @@ const BrowseArt = props => {
     const curObjectId = useSelector(state => state.artwork.artwork.objectId);
     const primaryImage = useSelector(state => state.artwork.artwork.primaryImageSmall);
     const primaryImageSmall = useSelector(state => state.artwork.artwork.primaryImageSmall);
+
     const error = useSelector(state => state.artwork.error)
 
     const userGallery = useSelector(state => state.myGallery.gallery);
@@ -49,9 +50,11 @@ const BrowseArt = props => {
     }, [onSetGallery, token, userId])
 
 
+    //set Bookmark settings
     const [showBookmarked, setBookmarked] = useState({
         isBookmarked: null, 
-        action: null
+        action: null, 
+        style: null
      })
 
 
@@ -61,11 +64,11 @@ const BrowseArt = props => {
         if (!token) {
             props.history.push("/auth")
         } else {
-
             setBookmarked({
-                ...showBookmarked, 
-                style: "solid"
+                isBookmarked: true, 
+                action: removeGallery, 
             })
+            
             dispatch(actions.addGallery(token, 
                 {   title: title, 
                     artistDisplayName: artistDisplayName, 
@@ -110,11 +113,13 @@ const BrowseArt = props => {
             setBookmarked({
                 isBookmarked: true, 
                 action: removeGallery, 
+                style: "solid"
             }) 
         } else {
             setBookmarked({
                isBookmarked: false, 
                action: addGallery, 
+               style: "outline"
             })
           
         }

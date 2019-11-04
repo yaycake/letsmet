@@ -40,40 +40,6 @@
 }
 
 
-@keyframes fadeInArt {
-    
-
-    0% {
-        border: 1px solid pink;
-        opacity: 0; 
-    }
-
-    15% {
-        opacity: 0;
-    }
-
-    25% {
-        opacity: 0;
-    }
-    45%{
-        opacity: 0;
-    }
-    60% {
-   
-        opacity: .1; 
-    }
-    65% {
-        opacity: .15;
-    }
-    70% {
-        opacity: .2;
-    }
-    100% {
-
-        opacity: 1; 
-    }
-}
-
 
 .ArtControls {
     margin-top: 1rem;

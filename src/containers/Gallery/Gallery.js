@@ -5,28 +5,38 @@ import * as actions from '../../store/actions/index';
 import PreviewTile from '../../components/PreviewTile/PreviewTile';
 import Artwork from '../../components/Artwork/Artwork'
 import ArtControls from '../ArtControls/ArtControls'
-
+import InfoButton from '../../components/Artwork/InfoButton/InfoButton';
+import ArtInfo from '../../components/Artwork/ArtInfo/ArtInfo'
+import LikeButton from '../../components/Artwork/LikeButton/LikeButton'
 const Gallery = (props) => {
     //Redux Props
     const userGallery = useSelector(state => state.myGallery.gallery)
     const token = useSelector( state => state.auth.token)
     
-    // const error = useSelector(state => state.myGallery.error)
-    // const loading = useSelector(state => state.myGallery.loading)
+    const error = useSelector(state => state.myGallery.error)
+    const loading = useSelector(state => state.myGallery.loading)
   
     const userId = useSelector( state => state.auth.userId)
 
-    const lastArtwork = {...userGallery[userGallery.length - 1]}
-
     // Set Preview To Latest Artwork
+    const lastArtwork = {...userGallery[userGallery.length - 1]}
     const [curArtwork, setCurArtwork] = useState({
         title: lastArtwork.title,
         artistDisplayName: lastArtwork.artistDisplayName,
         medium: lastArtwork.medium,  
         objectId: lastArtwork.objectId,  
         primaryImage: lastArtwork.primaryImage,  
-        primaryImageSmall: lastArtwork.primaryImageSmall
+        primaryImageSmall: lastArtwork.primaryImageSmall, 
     })
+
+    const [showBookmarked, setBookmarked] = useState(true)
+
+
+    const [showArtInfo, setShowArtInfo] = useState(false);
+
+    const showInfoToggle = () => {
+        setShowArtInfo(!showArtInfo)
+    }
 
     //Redux Actions
     const dispatch = useDispatch();
@@ -37,19 +47,9 @@ const Gallery = (props) => {
         onSetGallery(token, userId)
     }, [onSetGallery, token, userId])
 
-    const bookmarkCheck = () => {
+    const bookmarkCheck = (ObjectId) => {
         //returns truthy/falsey
-        return userGallery.some((art) => art.objectId === curArtwork.objectId)
-    }
-
-    const onCheckGallery = ()=> {
-        if ( userGallery.some((art) => art.objectId === curArtwork.objectId)) {
-            console.log(`in onCheckGallery: True`)
-            return true
-        } else {
-            console.log(`in onCheckGallery: False`)
-            return false
-        }
+        return userGallery.some((art) => art.objectId === ObjectId)
     }
 
     const selectArtPreviewHandler = (  
@@ -70,6 +70,24 @@ const Gallery = (props) => {
             primaryImageSmall: primaryImageSmall
         })
   
+    }
+
+    const removeGallery = () => {
+        console.log(`in browseArt RemoveGallery`)
+        setBookmarked({
+            ...showBookmarked, 
+            style: "outline"
+        })
+        dispatch(actions.removeGallery(token, 
+            {
+                title: curArtwork.title, 
+                artistDisplayName: curArtwork.artistDisplayName, 
+                medium: curArtwork.medium, 
+                objectId: curArtwork.curObjectId, 
+                primaryImage: curArtwork.primaryImage, 
+                primaryImageSmall: curArtwork.primaryImageSmall
+            }
+        ))
     }
 
     const galleryStrip = (
@@ -101,15 +119,28 @@ const Gallery = (props) => {
                 <Artwork 
                     image = {curArtwork.primaryImageSmall}
                     altText = {`Title: ${ curArtwork.title } by ${ curArtwork.artistDisplayName}. Medium: ${ curArtwork.medium }`} />  
-                <ArtControls
-                    title = { curArtwork.title }
-                    medium = { curArtwork.medium }
-                    bookmarkStatus ={ bookmarkCheck()}
-                    artistDisplayName = { curArtwork.artistDisplayName }
-                />
-                {/* <NextButton clicked = { onFetchArt } /> */}
 
-                {/* { onCheckGallery() === true ? <p>ONCHECK GALLERY TRUE</p> : <p>ONCHECK GALLERY FALSE</p>} */}
+                <div className = {styles.ArtControls}>
+                    <div className = {styles.infoBox}>
+                        <InfoButton
+                            showinfo = {showArtInfo}
+                            infoClicked = { showInfoToggle }
+                        />
+                        <ArtInfo
+                            className = { styles.artInfo}
+                            title = {curArtwork.title}
+                            medium = {curArtwork.medium}
+                            artistDisplayName = {curArtwork.artistDisplayName}
+                            showInfo = {showArtInfo}
+                        />  
+                        <LikeButton
+                            bookmarkStatus = {showBookmarked}
+                            bookmarkAction = {removeGallery}
+                            bookmarkStyle = {"solid"}
+                        />
+                        
+                    </div>
+                </div>               
             </div>
         </div>
     )
