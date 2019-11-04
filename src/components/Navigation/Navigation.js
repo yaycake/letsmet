@@ -3,13 +3,11 @@ import styles from './Navigation.module.css';
 import NavigationLink from './NavigationLink/NavigationLink'; 
 import Logo from '../Logo/Logo'; 
 import PageTitle from '../PageTitle/PageTitle';
-import {useSelector, useDispatch } from 'react-redux'
+import {useSelector} from 'react-redux'
 
 const Navigation = props => {
 
     const isAuthenticated = useSelector(state => state.auth.token != null)
-
-    const dispatch = useDispatch()
 
     let userOptions = (
         <div className = {styles.mainNavLinks}>

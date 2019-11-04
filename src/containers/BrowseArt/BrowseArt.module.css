@@ -73,3 +73,25 @@
         opacity: 1; 
     }
 }
+
+
+.ArtControls {
+    margin-top: 1rem;
+    display: flex; 
+    flex-direction: row; 
+    position: relative;
+  }
+  
+  .infoBox {
+      margin-left: 0;
+      display: flex;
+      flex-direction: row;
+  }
+  
+  .infoButton {
+      width: 20%;
+  }
+  
+  .artInfo > p {
+      text-align: left; 
+  }

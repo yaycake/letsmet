@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import { BrowserRouter } from 'react-router-dom'
 import { Provider } from 'react-redux';
-import { createStore, compose, applyMiddleware, combineReducers } from 'redux';
+import { createStore, applyMiddleware, combineReducers } from 'redux';
 import thunk from 'redux-thunk';
 
 import artworkReducer from './store/reducers/artwork'; 

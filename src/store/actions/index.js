@@ -10,6 +10,7 @@ export {
     addGallery, 
     addGalleryFailed, 
     addGallerySuccess,
+    removeGallery,
     fetchGallery,
     fetchGalleryFail, 
     fetchGallerySuccess

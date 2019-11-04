@@ -1,13 +1,14 @@
 import * as actionTypes from '../actions/actionTypes'; 
 import { updateObject } from '../../shared/utility'
 
-import { startRemoveGallery, removeGalleryFailed, removeGallerySuccess } from '../actions/gallery';
+
 
 const initialState = {
     gallery: [], 
     error: null, 
     loading: false
 }
+
 
 const startFetchGallery = ( state, action ) => {
     return updateObject(state, {
@@ -42,19 +43,14 @@ const addGalleryFailed =  (state, action ) => {
     })
 }
 
-// const addGallery = (state, action ) => {
-//     //currently only for add Artwork
+const startRemoveGallery = ( state, action ) => {
+    return updateObject (state, {
+        error: null, 
+        loading: true
+    })
+}
 
-//     console.log(`in Gallery Reducer: New artwork: ${action.artwork}`)
-//     const newArtwork = action.artwork;
-
-//     return updateObject(state, {
-//         loading: false, 
-//         gallery: state.gallery.push(newArtwork)
-//     })
-// }
-
-const removeGallery = (state, action) => {
+const removeGallerySuccess = (state, action) => {
     return updateObject(state, {
         loading: false, 
         gallery: state.gallery.filter(art => 
@@ -62,6 +58,14 @@ const removeGallery = (state, action) => {
         )
     })
 }
+
+const removeGalleryFailed = (state, action) => {
+    return updateObject(state, {
+        loading: false, 
+        error: action.error
+    })
+}
+
 
 const fetchGalleryFail = (state, action) => {
     return updateObject( state, {
@@ -88,8 +92,7 @@ const reducer = ( state = initialState, action ) => {
             return fetchGallerySuccess(state, action)
         case actionTypes.START_ADD_GALLERY:
             return startAddGallery(state,action)
-        // case actionTypes.ADD_GALLERY: 
-        //     return addGallery(state,action)
+ 
         case actionTypes.ADD_GALLERY_SUCCESS: 
             return addGallerySuccess(state, action)
         case actionTypes.ADD_GALLERY_FAILED: 
@@ -101,10 +104,6 @@ const reducer = ( state = initialState, action ) => {
             return removeGalleryFailed(state, action)
         case actionTypes.REMOVE_GALLERY_SUCCESS:
             return removeGallerySuccess(state, action)
-        case actionTypes.REMOVE_GALLERY:
-            return removeGallery(state,action)
-        case actionTypes.FETCH_GALLERY_SUCCESS:
-            return fetchGallerySuccess(state,action)
         case actionTypes.FETCH_GALLERY_FAIL:
             return fetchGalleryFail(state,action)
         default: 

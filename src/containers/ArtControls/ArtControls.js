@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useCallback, useSelector } from 'react';
+import React, { useState } from 'react';
 import InfoButton from '../../components/Artwork/InfoButton/InfoButton'; 
 import ArtInfo from '../../components/Artwork/ArtInfo/ArtInfo'; 
 import LikeButton from '../../components/Artwork/LikeButton/LikeButton';
@@ -13,19 +13,6 @@ const ArtControls = (props) => {
         setShowArtInfo(!showArtInfo)
     }
 
-    // const [showBookmarkClick, setBookmarkClick] = useState(() => {
-    //     if (props.bookmarkStatus){
-    //         return props.removeBookmark
-    //     } else {
-    //         return props.addBookmark
-    //     }
-    // })
-
-    // const bookmarkToggle = () => {
-    //     setBookmarkClick(!showBookmarkClick);
-       
-    // }
-
     return (
         <div className={styles.ArtControls}>
             <div className = {styles.infoBox}>
@@ -37,13 +24,12 @@ const ArtControls = (props) => {
                     showInfo = {showArtInfo}
                 ></ArtInfo>
             </div>
-            {/* { bookmarkButton } */}
-
          
             <LikeButton 
-                bookmarkIcon = {props.bookmarkStatus}
+                bookmark = {props.setBookmark}
                 click = { props.clickBookmark }
             />
+
             
         </div>
     )

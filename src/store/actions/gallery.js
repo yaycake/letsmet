@@ -47,8 +47,7 @@ export const removeGallery = ( artwork, token ) => {
         axios.delete(`https://letsmet-43e41.firebaseio.com/gallery.json?auth=${token}`, artwork)
         .then(response => {
             console.log('in removeGallery axn')
-            dispatch(removeGallerySuccess())
-            // dispatch(fetchGallery(token))
+            dispatch(removeGallerySuccess(artwork))
         })
         .catch(err => {
             console.log(err)
@@ -71,19 +70,14 @@ export const removeGalleryFailed = ( error ) => {
     }
 }
 
-export const removeGallerySuccess = () => {
+export const removeGallerySuccess = ( artwork ) => {
     return {
         type: actionTypes.REMOVE_GALLERY_SUCCESS,
+        artwork: artwork,
         loading: false
     }
 }
 
-// export const removeGallery = ( artworkId ) => {
-//     return {
-//         type: actionTypes.REMOVE_GALLERY, 
-//         objectId: artworkId
-//     }
-// }
 
 export const startFetchGallery = () => {
     return {

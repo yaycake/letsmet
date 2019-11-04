@@ -8,13 +8,14 @@ const likeButton = ( props ) => {
     let icon = (
         <img alt = "Bookmark this art" src={unbookmarked} className={styles.likeIcon} />)
 
-    if (props.bookmarkIcon){
+    if (props.bookmarkStatus === "solid"){
         icon = (<img alt = "Unbookmark this art" src={bookmarked} className={styles.likeIcon} />)
     }
     return (
-        <div onClick = {props.click} className={styles.LikeButton}
+        <div onClick = {props.bookmarkAction} className={styles.LikeButton}
         >
             {icon}
+            { `bookmarkStatus: ${props.bookmarkStatus}`}
         </div>)
 };
 

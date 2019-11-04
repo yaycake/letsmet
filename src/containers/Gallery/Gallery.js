@@ -10,8 +10,9 @@ const Gallery = (props) => {
     //Redux Props
     const userGallery = useSelector(state => state.myGallery.gallery)
     const token = useSelector( state => state.auth.token)
-    const error = useSelector(state => state.myGallery.error)
-    const loading = useSelector(state => state.myGallery.loading)
+    
+    // const error = useSelector(state => state.myGallery.error)
+    // const loading = useSelector(state => state.myGallery.loading)
   
     const userId = useSelector( state => state.auth.userId)
 
