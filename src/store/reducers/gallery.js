@@ -26,10 +26,8 @@ const startAddGallery = ( state, action ) => {
 
 const addGallerySuccess = (state, action) => {
     const newArtwork = updateObject(
-        {   ...action.artwork
-        }
+        { ...action.artwork }
     )
-
     return updateObject(state, {
         gallery: state.gallery.concat(newArtwork),
         error: null, 
@@ -53,6 +51,7 @@ const startRemoveGallery = ( state, action ) => {
 
 const removeGallerySuccess = (state, action) => {
     return updateObject(state, {
+        error: null, 
         loading: false, 
     })
 }

@@ -70,7 +70,7 @@ const BrowseArt = props => {
                 medium: medium, 
                 objectId: curObjectId, 
                 primaryImage: primaryImage, 
-                primaryImageSmall: primaryImageSmall, 
+                primaryImageSmall: primaryImageSmall
             
             }
         ))
@@ -98,10 +98,6 @@ const BrowseArt = props => {
             ))
         }
     }
-
-
-
-
 
     const bookmarkCheck = (ObjectId) => {
         console.log(`in bookmarkCheck: title: ${ title }`)
@@ -131,8 +127,6 @@ const BrowseArt = props => {
         initBookmark()
     }, [curObjectId])
 
-
-
     return (
         <div className = { styles.BrowseArt }>
           
@@ -161,11 +155,7 @@ const BrowseArt = props => {
                     click = {props.clickBookmark}
                 />
             </div>
-
             <NextButton clicked = { onFetchArt } />
-            
-            { `ShowBookmarked.isBookmarked:${showBookmarked.isBookmarked}`
-            } 
            
         </div>
     )

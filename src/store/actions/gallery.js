@@ -30,7 +30,6 @@ export const addGallery = ( token, artwork ) => {
         startAddGallery();
         axios.post(`https://letsmet-43e41.firebaseio.com/gallery.json?auth=${token}`, artwork)
         .then(response => {
-
             console.log(`addGallery response.data; ${JSON.stringify(response.data)}`)
             dispatch(addGallerySuccess({
                     dataId: response.data.name, 
@@ -53,6 +52,7 @@ export const removeGallery = ( token, artwork) => {
         .then(response => {
             console.log(`removeGall response: ${response.data}`)
             dispatch(removeGallerySuccess(artwork))
+            dispatch(fetchGallery(token))
         })
         .catch(err => {
             console.log(err)

@@ -19,6 +19,15 @@ const Gallery = (props) => {
   
     const userId = useSelector( state => state.auth.userId)
 
+    //Redux Actions
+    const dispatch = useDispatch();
+
+    const onSetGallery =  useCallback((token, userId)  => dispatch(actions.fetchGallery(token,userId)),[dispatch])
+
+    useEffect(() => {
+        onSetGallery(token, userId)
+    }, [onSetGallery, token, userId])
+
     // Set Preview To Latest Artwork
     const lastArtwork = {...userGallery[userGallery.length - 1]}
 
@@ -32,6 +41,27 @@ const Gallery = (props) => {
         dataId: lastArtwork.dataId
     })
 
+
+    const setLastArtwork = () => {
+        onSetGallery(token, userId)
+        
+        console.log(`in setLastArtwork`)
+       console.log(`Length of array? ${userGallery.length}`)
+        const lastArtwork = {...userGallery[userGallery.length-1]}
+
+        console.log(`setLastArt: lastArtwork: ${lastArtwork.title}`)
+
+        setCurArtwork({
+            title: lastArtwork.title,
+            artistDisplayName: lastArtwork.artistDisplayName,
+            medium: lastArtwork.medium,  
+            objectId: lastArtwork.objectId,  
+            primaryImage: lastArtwork.primaryImage,  
+            primaryImageSmall: lastArtwork.primaryImageSmall,
+            dataId: lastArtwork.dataId
+        })
+    }
+
     const [showBookmarked, setBookmarked] = useState(true)
 
     const [showArtInfo, setShowArtInfo] = useState(false);
@@ -40,19 +70,7 @@ const Gallery = (props) => {
         setShowArtInfo(!showArtInfo)
     }
 
-    //Redux Actions
-    const dispatch = useDispatch();
 
-    const onSetGallery =  useCallback((token, userId)  => dispatch(actions.fetchGallery(token,userId)),[dispatch])
-
-    useEffect(() => {
-        onSetGallery(token, userId)
-    }, [onSetGallery, token, userId])
-
-    const bookmarkCheck = (ObjectId) => {
-        //returns truthy/falsey
-        return userGallery.some((art) => art.objectId === ObjectId)
-    }
 
     const selectArtPreviewHandler = (  
             title,
@@ -95,7 +113,10 @@ const Gallery = (props) => {
                 dataId: curArtwork.dataId
             }
         ))
+        setLastArtwork()
     }
+
+    
 
     const galleryStrip = (
         userGallery.map(art => 
