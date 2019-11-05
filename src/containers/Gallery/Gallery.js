@@ -38,27 +38,29 @@ const Gallery = (props) => {
         objectId: lastArtwork.objectId,  
         primaryImage: lastArtwork.primaryImage,  
         primaryImageSmall: lastArtwork.primaryImageSmall, 
-        dataId: lastArtwork.dataId
+        dataId: lastArtwork.dataId,
+        index: userGallery.length - 1
+      
     })
 
 
-    const setLastArtwork = () => {
-        onSetGallery(token, userId)
-        
-        console.log(`in setLastArtwork`)
-       console.log(`Length of array? ${userGallery.length}`)
-        const lastArtwork = {...userGallery[userGallery.length-1]}
+    const resetArtwork = (newIndex) => {
+        onSetGallery(token, userId);
 
-        console.log(`setLastArt: lastArtwork: ${lastArtwork.title}`)
+        console.log(`in setLastArtwork`)
+        console.log(`Length of array? ${userGallery.length}`)
+        const nextArtwork = {...userGallery[newIndex]}
+
+        console.log(`setLastArt: lastArtwork: ${nextArtwork.title}`)
 
         setCurArtwork({
-            title: lastArtwork.title,
+            title: nextArtwork.title,
             artistDisplayName: lastArtwork.artistDisplayName,
-            medium: lastArtwork.medium,  
-            objectId: lastArtwork.objectId,  
-            primaryImage: lastArtwork.primaryImage,  
-            primaryImageSmall: lastArtwork.primaryImageSmall,
-            dataId: lastArtwork.dataId
+            medium: nextArtwork.medium,  
+            objectId: nextArtwork.objectId,  
+            primaryImage: nextArtwork.primaryImage,  
+            primaryImageSmall: nextArtwork.primaryImageSmall,
+            dataId: nextArtwork.dataId
         })
     }
 
@@ -70,8 +72,6 @@ const Gallery = (props) => {
         setShowArtInfo(!showArtInfo)
     }
 
-
-
     const selectArtPreviewHandler = (  
             title,
             artistDisplayName, 
@@ -79,9 +79,11 @@ const Gallery = (props) => {
             objectId,  
             primaryImage,  
             primaryImageSmall, 
-            dataId
+            dataId, 
+            index
     ) => {
         console.log(`In selectArtPreviewHandler`)
+
         setCurArtwork({
             title: title,
             artistDisplayName: artistDisplayName, 
@@ -89,9 +91,9 @@ const Gallery = (props) => {
             objectId: objectId,  
             primaryImage: primaryImage,  
             primaryImageSmall: primaryImageSmall, 
-            dataId: dataId
+            dataId: dataId, 
+            index: index
         })
-        console.log(`curdataID: ${curArtwork.dataId}`)
     }   
 
     const removeGallery = () => {
@@ -113,21 +115,20 @@ const Gallery = (props) => {
                 dataId: curArtwork.dataId
             }
         ))
-        setLastArtwork()
+        resetArtwork(curArtwork.index -1)
     }
 
-    
-
     const galleryStrip = (
-        userGallery.map(art => 
+        userGallery.map((art, index ) => 
             <PreviewTile
-                clicked = { () => selectArtPreviewHandler(art.title,
+                clicked = { () => selectArtPreviewHandler(       art.title,
                     art.artistDisplayName, 
                     art.medium,  
                     art.objectId,  
                     art.primaryImage,  
                     art.primaryImageSmall,
-                    art.dataId 
+                    art.dataId, 
+                    index
                 ) }
                 key = { art.objectId }
                 altText = { art.title }
@@ -147,7 +148,7 @@ const Gallery = (props) => {
             <div className = { styles.Gallery }>
                 <Artwork 
                     image = {curArtwork.primaryImageSmall}
-                    altText = {`Title: ${ curArtwork.title } by ${ curArtwork.artistDisplayName}. Medium: ${ curArtwork.medium }`} />  
+                    altText = {`Title: ${ curArtwork.title } by ${ curArtwork.artistDisplayName}.`} />  
 
                 <div className = {styles.ArtControls}>
                     <div className = {styles.infoBox}>
