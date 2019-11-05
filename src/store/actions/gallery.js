@@ -39,20 +39,33 @@ export const addGallery = ( token, artwork ) => {
     }
 }
 
-export const removeGallery = ( artwork, token ) => {
+export const removeGallery = ( token, artwork) => {
     console.log('IN GALLERY AXNS: REMOVE GALLERY')
+
+    console.log(`artwork.objectId: ${artwork.objectId}`)
     return dispatch => { 
         startRemoveGallery(); 
         
-        axios.delete(`https://letsmet-43e41.firebaseio.com/gallery.json?auth=${token}`, artwork)
-        .then(response => {
-            console.log('in removeGallery axn')
-            dispatch(removeGallerySuccess(artwork))
+        axios.get(`https://letsmet-43e41.firebaseio.com/gallery.json?auth=${token}&orderBy="objectId"&equalTo="${artwork.objectId}"`)
+        .then( response => {
+            console.log(`got the artnode: ${response.data}`)
+            
         })
-        .catch(err => {
-            console.log(err)
-            dispatch(removeGalleryFailed(err))
+        .catch(error => {
+            console.log(`removeGallery error: ${error}`)
+            dispatch(removeGalleryFailed(error))
         })
+
+        // axios.delete(`https://letsmet-43e41.firebaseio.com/gallery.json?auth=${token}&orderBy="objectId"&equalTo=${artwork.objectId}`, artwork)
+        // axios.delete(artNode)
+        // .then(response => {
+        //     console.log('in removeGallery axn')
+        //     dispatch(removeGallerySuccess(artwork))
+        // })
+        // .catch(err => {
+        //     console.log(err)
+        //     dispatch(removeGalleryFailed(err))
+        // })
     }
 }
 
@@ -91,11 +104,30 @@ export const fetchGallery = (token, userId) => {
         const queryParams = '?auth=' + token + '&galleryBy="userId"&equalTo"' + userId + '"';
         axios.get('https://letsmet-43e41.firebaseio.com/gallery.json' + queryParams )
         .then( response => {
+
+            console.log(`fetchedGallery response: ${JSON.stringify(response.data)}`)
+
+            console.log(`galleryTypeof ${typeof response.data}`)
+
             const fetchedGallery = [];
 
-            Object.values(response.data).map (
+            // Object.values(response.data).map (
+            //     art =>  
+            //         // fetchedGallery.push(art)
+            // )
+
+            Object.entries(response.data).map(
                 art => 
-                    fetchedGallery.push(art)
+
+                    fetchedGallery.push({
+                        dataId: art[0],
+                        title: art[1].title, 
+                        artistDisplayName: art[1].artistDisplayName, 
+                        medium: art[1].medium, 
+                        primaryImage: art[1].primaryImage, 
+                        primaryImageSmall: art[1].primaryImageSmall,
+                        objectId: art[1].objectId
+                    })    
             )
 
             dispatch(fetchGallerySuccess(fetchedGallery))
@@ -103,6 +135,7 @@ export const fetchGallery = (token, userId) => {
         })
         .catch(err => {
             console.log('Error Fetching Gallery:')
+            console.log(`Error Fetching Gallery:${err}`)
             dispatch(fetchGalleryFail(err))
         })
     }

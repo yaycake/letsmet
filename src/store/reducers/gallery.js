@@ -26,7 +26,9 @@ const startAddGallery = ( state, action ) => {
 
 const addGallerySuccess = (state, action) => {
     const newArtwork = updateObject(
-        {   ...action.artwork}
+        {   ...action.artwork
+        
+        }
     )
 
     return updateObject(state, {

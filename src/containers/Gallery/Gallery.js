@@ -8,6 +8,8 @@ import ArtControls from '../ArtControls/ArtControls'
 import InfoButton from '../../components/Artwork/InfoButton/InfoButton';
 import ArtInfo from '../../components/Artwork/ArtInfo/ArtInfo'
 import LikeButton from '../../components/Artwork/LikeButton/LikeButton'
+
+
 const Gallery = (props) => {
     //Redux Props
     const userGallery = useSelector(state => state.myGallery.gallery)
@@ -73,17 +75,20 @@ const Gallery = (props) => {
     }
 
     const removeGallery = () => {
-        console.log(`in browseArt RemoveGallery`)
+        console.log(`in RemoveGallery`)
         setBookmarked({
             ...showBookmarked, 
             style: "outline"
         })
+
+        console.log(`curArtwork.curObjectId: ${curArtwork.objectId}`)
+
         dispatch(actions.removeGallery(token, 
             {
                 title: curArtwork.title, 
                 artistDisplayName: curArtwork.artistDisplayName, 
                 medium: curArtwork.medium, 
-                objectId: curArtwork.curObjectId, 
+                objectId: curArtwork.objectId, 
                 primaryImage: curArtwork.primaryImage, 
                 primaryImageSmall: curArtwork.primaryImageSmall
             }
