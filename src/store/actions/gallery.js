@@ -30,7 +30,12 @@ export const addGallery = ( token, artwork ) => {
         startAddGallery();
         axios.post(`https://letsmet-43e41.firebaseio.com/gallery.json?auth=${token}`, artwork)
         .then(response => {
-            dispatch(addGallerySuccess(artwork))
+
+            console.log(`addGallery response.data; ${JSON.stringify(response.data)}`)
+            dispatch(addGallerySuccess({
+                    dataId: response.data.name, 
+                    ...artwork
+                }))
         })
         .catch(error => {
             console.log(`AddGalleryFailError: ${error}`)
@@ -41,31 +46,18 @@ export const addGallery = ( token, artwork ) => {
 
 export const removeGallery = ( token, artwork) => {
     console.log('IN GALLERY AXNS: REMOVE GALLERY')
-
-    console.log(`artwork.objectId: ${artwork.objectId}`)
+    console.log(`artwork.dataId: ${artwork.dataId}`)
     return dispatch => { 
         startRemoveGallery(); 
-        
-        axios.get(`https://letsmet-43e41.firebaseio.com/gallery.json?auth=${token}&orderBy="objectId"&equalTo="${artwork.objectId}"`)
-        .then( response => {
-            console.log(`got the artnode: ${response.data}`)
-            
+        axios.delete(`https://letsmet-43e41.firebaseio.com/gallery/${artwork.dataId}.json?auth=${token}`)
+        .then(response => {
+            console.log(`removeGall response: ${response.data}`)
+            dispatch(removeGallerySuccess(artwork))
         })
-        .catch(error => {
-            console.log(`removeGallery error: ${error}`)
-            dispatch(removeGalleryFailed(error))
+        .catch(err => {
+            console.log(err)
+            dispatch(removeGalleryFailed(err))
         })
-
-        // axios.delete(`https://letsmet-43e41.firebaseio.com/gallery.json?auth=${token}&orderBy="objectId"&equalTo=${artwork.objectId}`, artwork)
-        // axios.delete(artNode)
-        // .then(response => {
-        //     console.log('in removeGallery axn')
-        //     dispatch(removeGallerySuccess(artwork))
-        // })
-        // .catch(err => {
-        //     console.log(err)
-        //     dispatch(removeGalleryFailed(err))
-        // })
     }
 }
 
@@ -105,20 +97,10 @@ export const fetchGallery = (token, userId) => {
         axios.get('https://letsmet-43e41.firebaseio.com/gallery.json' + queryParams )
         .then( response => {
 
-            console.log(`fetchedGallery response: ${JSON.stringify(response.data)}`)
-
-            console.log(`galleryTypeof ${typeof response.data}`)
-
             const fetchedGallery = [];
-
-            // Object.values(response.data).map (
-            //     art =>  
-            //         // fetchedGallery.push(art)
-            // )
 
             Object.entries(response.data).map(
                 art => 
-
                     fetchedGallery.push({
                         dataId: art[0],
                         title: art[1].title, 

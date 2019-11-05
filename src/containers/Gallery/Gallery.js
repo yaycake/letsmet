@@ -4,7 +4,6 @@ import { useDispatch, useSelector } from 'react-redux';
 import * as actions from '../../store/actions/index';
 import PreviewTile from '../../components/PreviewTile/PreviewTile';
 import Artwork from '../../components/Artwork/Artwork'
-import ArtControls from '../ArtControls/ArtControls'
 import InfoButton from '../../components/Artwork/InfoButton/InfoButton';
 import ArtInfo from '../../components/Artwork/ArtInfo/ArtInfo'
 import LikeButton from '../../components/Artwork/LikeButton/LikeButton'
@@ -22,6 +21,7 @@ const Gallery = (props) => {
 
     // Set Preview To Latest Artwork
     const lastArtwork = {...userGallery[userGallery.length - 1]}
+
     const [curArtwork, setCurArtwork] = useState({
         title: lastArtwork.title,
         artistDisplayName: lastArtwork.artistDisplayName,
@@ -29,10 +29,10 @@ const Gallery = (props) => {
         objectId: lastArtwork.objectId,  
         primaryImage: lastArtwork.primaryImage,  
         primaryImageSmall: lastArtwork.primaryImageSmall, 
+        dataId: lastArtwork.dataId
     })
 
     const [showBookmarked, setBookmarked] = useState(true)
-
 
     const [showArtInfo, setShowArtInfo] = useState(false);
 
@@ -60,7 +60,8 @@ const Gallery = (props) => {
             medium,  
             objectId,  
             primaryImage,  
-            primaryImageSmall
+            primaryImageSmall, 
+            dataId
     ) => {
         console.log(`In selectArtPreviewHandler`)
         setCurArtwork({
@@ -69,10 +70,11 @@ const Gallery = (props) => {
             medium: medium,  
             objectId: objectId,  
             primaryImage: primaryImage,  
-            primaryImageSmall: primaryImageSmall
+            primaryImageSmall: primaryImageSmall, 
+            dataId: dataId
         })
-  
-    }
+        console.log(`curdataID: ${curArtwork.dataId}`)
+    }   
 
     const removeGallery = () => {
         console.log(`in RemoveGallery`)
@@ -80,7 +82,6 @@ const Gallery = (props) => {
             ...showBookmarked, 
             style: "outline"
         })
-
         console.log(`curArtwork.curObjectId: ${curArtwork.objectId}`)
 
         dispatch(actions.removeGallery(token, 
@@ -90,7 +91,8 @@ const Gallery = (props) => {
                 medium: curArtwork.medium, 
                 objectId: curArtwork.objectId, 
                 primaryImage: curArtwork.primaryImage, 
-                primaryImageSmall: curArtwork.primaryImageSmall
+                primaryImageSmall: curArtwork.primaryImageSmall, 
+                dataId: curArtwork.dataId
             }
         ))
     }
@@ -103,7 +105,8 @@ const Gallery = (props) => {
                     art.medium,  
                     art.objectId,  
                     art.primaryImage,  
-                    art.primaryImageSmall, 
+                    art.primaryImageSmall,
+                    art.dataId 
                 ) }
                 key = { art.objectId }
                 altText = { art.title }

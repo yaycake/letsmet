@@ -57,6 +57,24 @@ const BrowseArt = props => {
         style: null
      })
 
+     const removeGallery = () => {
+        console.log(`in browseArt RemoveGallery`)
+        setBookmarked({
+            ...showBookmarked, 
+            style: "outline"
+        })
+        dispatch(actions.removeGallery(token, 
+            {
+                title: title, 
+                artistDisplayName: artistDisplayName, 
+                medium: medium, 
+                objectId: curObjectId, 
+                primaryImage: primaryImage, 
+                primaryImageSmall: primaryImageSmall, 
+            
+            }
+        ))
+    }
 
     const addGallery = () => {
         console.log(`in browseArt AddGallery`)
@@ -82,23 +100,7 @@ const BrowseArt = props => {
     }
 
 
-    const removeGallery = () => {
-        console.log(`in browseArt RemoveGallery`)
-        setBookmarked({
-            ...showBookmarked, 
-            style: "outline"
-        })
-        dispatch(actions.removeGallery(token, 
-            {
-                title: title, 
-                artistDisplayName: artistDisplayName, 
-                medium: medium, 
-                objectId: curObjectId, 
-                primaryImage: primaryImage, 
-                primaryImageSmall: primaryImageSmall
-            }
-        ))
-    }
+
 
 
     const bookmarkCheck = (ObjectId) => {

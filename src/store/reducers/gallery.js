@@ -27,7 +27,6 @@ const startAddGallery = ( state, action ) => {
 const addGallerySuccess = (state, action) => {
     const newArtwork = updateObject(
         {   ...action.artwork
-        
         }
     )
 
@@ -55,9 +54,6 @@ const startRemoveGallery = ( state, action ) => {
 const removeGallerySuccess = (state, action) => {
     return updateObject(state, {
         loading: false, 
-        gallery: state.gallery.filter(art => 
-            art.objectId !== action.objectId
-        )
     })
 }
 
