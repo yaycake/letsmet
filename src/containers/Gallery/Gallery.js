@@ -96,6 +96,10 @@ const Gallery = (props) => {
         })
     }   
 
+    const addGallery = () => {
+        console.log(`Gallery component addGallery`)
+    }
+
     const removeGallery = () => {
         console.log(`in RemoveGallery`)
         setBookmarked({
@@ -164,9 +168,10 @@ const Gallery = (props) => {
                             showInfo = {showArtInfo}
                         />  
                         <LikeButton
-                            bookmarkStatus = {showBookmarked}
-                            bookmarkAction = {removeGallery}
-                            bookmarkStyle = {"solid"}
+                            bookmarkStatus = {true}
+                            bookmarkRemove = {removeGallery}
+                            bookmarkAdd = { addGallery }
+                          
                         />
                         
                     </div>

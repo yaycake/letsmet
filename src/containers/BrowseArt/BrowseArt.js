@@ -83,8 +83,7 @@ const BrowseArt = props => {
             }
         ))
         setBookmarked({
-            ...showBookmarked, 
-            style: "outline"
+            isBookmarked: false
         })
         onSetGallery(token, userId) 
     }
@@ -138,8 +137,6 @@ const BrowseArt = props => {
 
     return (
         <div className = { styles.BrowseArt }>
-
-            <h1>{dataId!= null ? dataId : "NONE"}</h1>
           
             <Artwork 
                 image = {primaryImageSmall}
