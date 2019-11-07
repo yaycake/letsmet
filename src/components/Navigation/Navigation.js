@@ -20,7 +20,7 @@ const Navigation = props => {
             </div>
             <div className={styles.rotateLink}> 
                 <NavigationLink path = "/auth">
-                    Sign In
+                    Curate
                 </NavigationLink>
             </div>
             

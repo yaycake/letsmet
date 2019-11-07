@@ -36,18 +36,65 @@ export const checkAuthTimeout = (expirationTime) => {
     }
 }
 
-export const auth = (email, password, isSignup ) => {
+
+
+const startSaveUsername = () => {
+    return {
+        type: actionTypes.START_SAVE_USERNAME
+    }
+}
+
+const saveUsernameFail = (error) => {
+    return {
+        type: actionTypes.SAVE_USERNAME_FAIL, 
+        error: error
+    }
+}
+
+const saveUsernameSuccess = ( username ) => {
+    return {
+        type: actionTypes.SAVE_USERNAME_SUCCESS, 
+        username: username
+    }
+}
+
+export const saveUsername = ( username, token, userId ) => {
+
+    console.log(`in saveUsername action`)
+    console.log(`in saveUsername action: username: ${username}`)
+    console.log(`in saveUsername action: token: ${token}`)
+    console.log(`in saveUsername action: userId: ${userId}`)
+
+
+    return dispatch =>{
+        dispatch(startSaveUsername());
+        axios.put(`https://letsmet-43e41.firebaseio.com/users/${userId}.json?auth=${token}`, {username: username})
+        .then( response => {
+            console.log(`in Saveusername: response: ${JSON.stringify(response)}`)
+            dispatch(saveUsernameSuccess({
+                ...username}))
+        })
+        .catch(error => {
+            console.log(`saveUsernameFail: ${error}`)
+            dispatch(saveUsernameFail(error))
+        })
+    }
+}
+
+export const auth = (username, email, password, isSignup ) => {
     return dispatch => {
+
         dispatch(authStart());
+
         const authData = {
             email: email,
             password: password,
             returnSecureToken: true
         }
         const baseUrl = 'https://identitytoolkit.googleapis.com/v1/accounts:'
+
         const signInUrl = 'signInWithPassword?key='
         const signUpUrl = 'signUp?key='
-        // const apiKey = process.env.AUTH_API_KEY
 
         const apiKey = 'AIzaSyADeOJD-zT2jntAdDpY2ebcD8LllNUTSsE'
 
@@ -59,8 +106,9 @@ export const auth = (email, password, isSignup ) => {
 
         axios.post(apiCall, authData)
         .then( response => {
-            console.log(response);
+            console.log(`AUTH RESPONSE: ${response}`);
             dispatch(authSuccess(response.data.idToken, response.data.localId))
+            dispatch(saveUsername(username, response.data.idToken, response.data.localId))
             dispatch(checkAuthTimeout(response.data.expiresIn))
         })
         .catch(error => {

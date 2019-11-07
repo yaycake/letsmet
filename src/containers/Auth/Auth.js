@@ -14,9 +14,25 @@ import NavigationLink from '../../components/Navigation/NavigationLink/Navigatio
 const Auth = ( props ) => {
 
     const token = useSelector(state => state.auth.token)
+    // const userId = useSelector(state => state.auth.userId)
+    // const username = useSelector(state => state.auth.username)
 
     const [authForm, setAuthForm] = useState(
-        { 
+        {   
+            username: {
+                elementType: 'input',
+                elementConfig: {
+                    type: 'username',
+                    placeholder: 'Your Username'
+                }, 
+                value: '', 
+                validation: {
+                    required: false
+                }, 
+                valid: false, 
+                touched: false
+            }, 
+
             email: {
             elementType: 'input',
             elementConfig: {
@@ -31,6 +47,7 @@ const Auth = ( props ) => {
             valid: false, 
             touched: false
             }, 
+
             password: {
             elementType: 'input',
             elementConfig: {
@@ -57,15 +74,19 @@ const Auth = ( props ) => {
 
     // Redux Store Methods
     const dispatch = useDispatch();
-    const onAuth = (email, password, isSignup) => {
-        dispatch(actions.auth(email, password, isSignup))
+
+    const onAuth = (username, email, password, isSignup) => {
+        dispatch(actions.auth(username, email, password, isSignup))
     };
+
+   
 
     const [isSignup, setIsSignup] = useState(true);
     
     const submitHandler = (event) => {
         event.preventDefault();
-        onAuth(authForm.email.value, authForm.password.value, isSignup)
+        onAuth(authForm.username.value, authForm.email.value, authForm.password.value, isSignup)
+        
     }
 
     const switchAuthHandler = () => {

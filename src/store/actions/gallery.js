@@ -25,6 +25,8 @@ export const addGalleryFailed = (error) => {
 }
 
 export const addGallery = ( token, userId, artwork) => {
+    console.log(`https://letsmet-43e41.firebaseio.com/users/${userId}/gallery.json?auth=${token}`)
+    
     return dispatch => {
         startAddGallery();
         axios.post(`https://letsmet-43e41.firebaseio.com/users/${userId}/gallery.json?auth=${token}`, artwork)
