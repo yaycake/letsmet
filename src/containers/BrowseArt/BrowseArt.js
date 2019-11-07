@@ -41,7 +41,7 @@ const BrowseArt = props => {
         onFetchArt();
     }, [onFetchArt])
 
-    const onSetGallery = useCallback((token, userId) => dispatch(actions.fetchGallery(token,userId)),[dispatch]);
+    const onSetGallery = useCallback((token, userId) => dispatch(actions.fetchGallery(token, userId)),[dispatch]);
 
     useEffect(() => {
         if (token){
@@ -53,7 +53,7 @@ const BrowseArt = props => {
     const [isBookmarked, setBookmarked] = useState(null)
 
     const removeGallery = (objectDataId) => {
-        dispatch(actions.removeGallery(token, 
+        dispatch(actions.removeGallery(token, userId, 
             {
                 title: title, 
                 artistDisplayName: artistDisplayName, 
@@ -72,7 +72,7 @@ const BrowseArt = props => {
         if (!token) {
             props.history.push("/auth")
         } else {
-            dispatch(actions.addGallery(token, 
+            dispatch(actions.addGallery(token, userId, 
                 {   title: title, 
                     artistDisplayName: artistDisplayName,
                     medium: medium, 

@@ -24,31 +24,34 @@ export const addGalleryFailed = (error) => {
     }
 }
 
-export const addGallery = ( token, artwork ) => {
+export const addGallery = ( token, userId, artwork) => {
     return dispatch => {
         startAddGallery();
-        axios.post(`https://letsmet-43e41.firebaseio.com/gallery.json?auth=${token}`, artwork)
+        axios.post(`https://letsmet-43e41.firebaseio.com/users/${userId}/gallery.json?auth=${token}`, artwork)
         .then(response => {
             dispatch(addGallerySuccess({
                     dataId: response.data.name, 
                     ...artwork
                 }))
-            dispatch(fetchGallery(token))
+            dispatch(fetchGallery(token, userId))
         })
         .catch(error => {
-            console.log(`AddGalleryFailError: ${error}`)
+            console.log(`AddGalleryFailError: ${JSON.stringify(error)}`)
+
             dispatch(addGalleryFailed(error))
         })        
     }
 };
 
-export const removeGallery = ( token, artwork) => {
+export const removeGallery = ( token, userId, artwork) => {
+    console.log(`removeGallery.js: dataId: ${artwork.dataId}`)
+    
     return dispatch => { 
         startRemoveGallery(); 
-        axios.delete(`https://letsmet-43e41.firebaseio.com/gallery/${artwork.dataId}.json?auth=${token}`)
+        axios.delete(`https://letsmet-43e41.firebaseio.com/users/${userId}/gallery/${artwork.dataId}.json?auth=${token}`)
         .then(response => {
             dispatch(removeGallerySuccess(artwork))
-            dispatch(fetchGallery(token))
+            dispatch(fetchGallery(token, userId))
         })
         .catch(err => {
             console.log(err)
@@ -87,11 +90,24 @@ export const startFetchGallery = () => {
 };
 
 export const fetchGallery = (token, userId) => {
+    console.log(`fetchGallery AXN: userId: ${userId}`)
     return dispatch => {
         dispatch(startFetchGallery());
-        const queryParams = '?auth=' + token + '&galleryBy="userId"&equalTo"' + userId + '"';
-        axios.get('https://letsmet-43e41.firebaseio.com/gallery.json' + queryParams )
+
+        // const queryParams =  `?auth=${token}&galleryBy="userId"&equalTo"${userId}"`
+
+        const queryParams =  `?auth=${token}`
+
+        // const queryParams = '?auth=' + token 
+    
+        console.log(`FetchGalleryAXN URL: https://letsmet-43e41.firebaseio.com/users/${userId}/gallery.json${queryParams}`)
+
+        axios.get(`https://letsmet-43e41.firebaseio.com/users/${userId}/gallery.json${queryParams}` )
         .then( response => {
+
+            console.log(`inFetchGalleryActions`)
+
+            console.log(`inFetchGalleryActions: ${userId}`)
 
             const fetchedGallery = [];
 
@@ -110,7 +126,7 @@ export const fetchGallery = (token, userId) => {
             dispatch(fetchGallerySuccess(fetchedGallery))
         })
         .catch(err => {
-            console.log('Error Fetching Gallery:')
+            console.log(`Error Fetching Gallery:${err}`)
             dispatch(fetchGalleryFail(err))
         })
     }

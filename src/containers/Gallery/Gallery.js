@@ -22,7 +22,7 @@ const Gallery = (props) => {
     //Redux Actions
     const dispatch = useDispatch();
 
-    const onSetGallery =  useCallback((token, userId)  => dispatch(actions.fetchGallery(token,userId)),[dispatch])
+    const onSetGallery =  useCallback(()  => dispatch(actions.fetchGallery(token,userId)),[dispatch, token, userId])
 
     useEffect(() => {
         onSetGallery(token, userId)
@@ -44,7 +44,7 @@ const Gallery = (props) => {
 
 
     const resetArtwork = (newIndex) => {
-        onSetGallery(token, userId);
+        // onSetGallery(token, userId);
 
         const nextArtwork = {...userGallery[newIndex]}
 
@@ -92,13 +92,14 @@ const Gallery = (props) => {
     const addGallery = () => {
     }
 
-    const removeGallery = () => {
+    const removeGallery = ( objectDataId ) => {
+        console.log(`Gallery.js: addGallery: ${objectDataId}`)
         setBookmarked({
             ...showBookmarked, 
             style: "outline"
         })
 
-        dispatch(actions.removeGallery(token, 
+        dispatch(actions.removeGallery(token, userId,
             {
                 title: curArtwork.title, 
                 artistDisplayName: curArtwork.artistDisplayName, 
@@ -110,6 +111,7 @@ const Gallery = (props) => {
             }
         ))
         resetArtwork(curArtwork.index -1)
+        // onSetGallery(token, userId)
     }
 
     const galleryStrip = (
@@ -161,6 +163,7 @@ const Gallery = (props) => {
                             bookmarkStatus = {true}
                             bookmarkRemove = {removeGallery}
                             bookmarkAdd = { addGallery }
+                            objectDataId = { curArtwork.dataId }
                         />
                     </div>
                 </div>               
