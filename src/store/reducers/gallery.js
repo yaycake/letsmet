@@ -1,14 +1,12 @@
 import * as actionTypes from '../actions/actionTypes'; 
 import { updateObject } from '../../shared/utility'
 
-
-
 const initialState = {
     gallery: [], 
     error: null, 
-    loading: false
+    loading: false, 
+    dataId: null
 }
-
 
 const startFetchGallery = ( state, action ) => {
     return updateObject(state, {
@@ -25,11 +23,13 @@ const startAddGallery = ( state, action ) => {
 }
 
 const addGallerySuccess = (state, action) => {
+    console.log(`in addGallSuccess reducer: action.artwork.dataId ${action.artwork.dataId}`)
     const newArtwork = updateObject(
         { ...action.artwork }
     )
     return updateObject(state, {
         gallery: state.gallery.concat(newArtwork),
+        dataId: action.artwork.dataId,
         error: null, 
         loading: false, 
     })
@@ -52,7 +52,7 @@ const startRemoveGallery = ( state, action ) => {
 const removeGallerySuccess = (state, action) => {
     return updateObject(state, {
         error: null, 
-        loading: false, 
+        loading: false
     })
 }
 
@@ -75,7 +75,7 @@ const fetchGallerySuccess = (state, action) => {
 
     return updateObject( state, {
         gallery: action.gallery,
-        // lastArtwork: action.lastArtwork,
+        
         error: null, 
         loading: false
     })

@@ -35,6 +35,7 @@ export const addGallery = ( token, artwork ) => {
                     dataId: response.data.name, 
                     ...artwork
                 }))
+            dispatch(fetchGallery(token))
         })
         .catch(error => {
             console.log(`AddGalleryFailError: ${error}`)
@@ -46,6 +47,8 @@ export const addGallery = ( token, artwork ) => {
 export const removeGallery = ( token, artwork) => {
     console.log('IN GALLERY AXNS: REMOVE GALLERY')
     console.log(`artwork.dataId: ${artwork.dataId}`)
+
+    console.log(`DELETE URL : https://letsmet-43e41.firebaseio.com/gallery/${artwork.dataId}.json?auth=${token}`)
     return dispatch => { 
         startRemoveGallery(); 
         axios.delete(`https://letsmet-43e41.firebaseio.com/gallery/${artwork.dataId}.json?auth=${token}`)

@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useCallback } from 'react';
+import React, { useState, useEffect, useCallback, useRef } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import Artwork from '../../components/Artwork/Artwork';
 import * as actions from '../../store/actions/index'
@@ -19,6 +19,8 @@ const BrowseArt = props => {
     const curObjectId = useSelector(state => state.artwork.artwork.objectId);
     const primaryImage = useSelector(state => state.artwork.artwork.primaryImageSmall);
     const primaryImageSmall = useSelector(state => state.artwork.artwork.primaryImageSmall);
+
+    let dataId = useSelector(state => state.myGallery.dataId)
 
     const error = useSelector(state => state.artwork.error)
 
@@ -47,7 +49,14 @@ const BrowseArt = props => {
         if (token){
             onSetGallery(token, userId);
         }
-    }, [onSetGallery, token, userId])
+    }, [onSetGallery, token, userId, dataId])
+
+
+    const myRef = useRef();
+
+    useEffect(()=> {
+        myRef.current = dataId
+    }, [dataId])
 
 
     //set Bookmark settings
@@ -57,12 +66,11 @@ const BrowseArt = props => {
         style: null
      })
 
-     const removeGallery = () => {
-        console.log(`in browseArt RemoveGallery`)
-        setBookmarked({
-            ...showBookmarked, 
-            style: "outline"
-        })
+     const removeGallery = (objectDataId) => {
+        console.log(`[browseArt RemoveGallery]`)
+        console.log(`[browseArt removeGallery] ${title}`)
+        console.log(`[browseArt removeGallery] dataId: ${JSON.stringify(dataId)}`)
+        
         dispatch(actions.removeGallery(token, 
             {
                 title: title, 
@@ -70,32 +78,36 @@ const BrowseArt = props => {
                 medium: medium, 
                 objectId: curObjectId, 
                 primaryImage: primaryImage, 
-                primaryImageSmall: primaryImageSmall
-            
+                primaryImageSmall: primaryImageSmall, 
+                dataId: dataId
             }
         ))
+        setBookmarked({
+            ...showBookmarked, 
+            style: "outline"
+        })
+        onSetGallery(token, userId) 
     }
 
-    const addGallery = () => {
+    const addGallery = (objectDataId) => {
         console.log(`in browseArt AddGallery`)
-        console.log(`in addGallery: title ${title}`)
         if (!token) {
             props.history.push("/auth")
         } else {
-            setBookmarked({
-                isBookmarked: true, 
-                action: removeGallery, 
-            })
-            
             dispatch(actions.addGallery(token, 
                 {   title: title, 
-                    artistDisplayName: artistDisplayName, 
+                    artistDisplayName: artistDisplayName,
                     medium: medium, 
                     objectId: curObjectId, 
                     primaryImage: primaryImage, 
                     primaryImageSmall: primaryImageSmall
                 }
             ))
+            setBookmarked({
+                isBookmarked: true, 
+                style: "solid"
+            })  
+          
         }
     }
 
@@ -110,16 +122,13 @@ const BrowseArt = props => {
         if (bookmarkCheck(curObjectId) === true ){
             setBookmarked({
                 isBookmarked: true, 
-                action: removeGallery, 
-                style: "solid"
+                // style: "solid"
             }) 
         } else {
             setBookmarked({
                isBookmarked: false, 
-               action: addGallery, 
-               style: "outline"
+            //    style: "outline"
             })
-          
         }
     }
 
@@ -129,10 +138,13 @@ const BrowseArt = props => {
 
     return (
         <div className = { styles.BrowseArt }>
+
+            <h1>{dataId!= null ? dataId : "NONE"}</h1>
           
             <Artwork 
                 image = {primaryImageSmall}
                 altText = {`Title: ${ title } by ${ artistDisplayName}. Medium: ${ medium }`} /> 
+            
 
             <div className = {styles.ArtControls}>
                 <div className = {styles.infoBox}>
@@ -149,10 +161,11 @@ const BrowseArt = props => {
                     />
                 </div>
                 <LikeButton
+                    bookmarkAdd = { addGallery }
+                    bookmarkRemove = { removeGallery }
                     bookmarkStatus= {showBookmarked.isBookmarked}
-                    bookmarkAction = {showBookmarked.action}
-                    bookmarkStyle = { showBookmarked.style}
-                    click = {props.clickBookmark}
+                    objectDataId = { dataId }
+                    // bookmarkStyle = { showBookmarked.style}
                 />
             </div>
             <NextButton clicked = { onFetchArt } />
