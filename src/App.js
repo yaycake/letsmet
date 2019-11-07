@@ -36,6 +36,20 @@ const App = props => {
       onFetchArt();
   }, [])
 
+  const eyeAnimate = (event) => {
+    console.log('eye Animate!!!')
+    let ball = document.getElementById("LogoBall");
+
+    let x = event.clientX * 50 / window.innerWidth + "%"
+    let y = event.clientY * 50 / window.innerHeight + "%"
+
+    ball.style.left = x; 
+    ball.style.top = y;
+    ball.style.transform = "translate("+x+", "+y+")"
+
+}
+
+  
 
 
   let routes = (
@@ -62,7 +76,7 @@ const App = props => {
 
   return (
     <Layout>
-      <div className="App">
+      <div className="App" onMouseMove = { eyeAnimate }>
        { routes }
       </div>
     </Layout>

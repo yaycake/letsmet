@@ -9,6 +9,7 @@ const Navigation = props => {
 
     const isAuthenticated = useSelector(state => state.auth.token != null)
 
+
     let userOptions = (
         <div className = {styles.mainNavLinks}>
             <div className={styles.rotateLink}> 

@@ -1,0 +1,9 @@
+.LogoBall {
+    width: 20px;
+    height: 20px;
+    background-color: black;
+    margin: 15px;
+    box-sizing: border-box;
+    border-radius: 50%; 
+ 
+}
