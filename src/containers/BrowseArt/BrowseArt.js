@@ -60,11 +60,7 @@ const BrowseArt = props => {
 
 
     //set Bookmark settings
-    const [showBookmarked, setBookmarked] = useState({
-        isBookmarked: null, 
-        action: null, 
-        style: null
-     })
+    const [isBookmarked, setBookmarked] = useState(null)
 
      const removeGallery = (objectDataId) => {
         console.log(`[browseArt RemoveGallery]`)
@@ -82,9 +78,7 @@ const BrowseArt = props => {
                 dataId: dataId
             }
         ))
-        setBookmarked({
-            isBookmarked: false
-        })
+        setBookmarked(false)
         onSetGallery(token, userId) 
     }
 
@@ -102,47 +96,35 @@ const BrowseArt = props => {
                     primaryImageSmall: primaryImageSmall
                 }
             ))
-            setBookmarked({
-                isBookmarked: true, 
-                style: "solid"
-            })  
-          
+            setBookmarked(true)  
         }
     }
 
-    const bookmarkCheck = (ObjectId) => {
+    const bookmarkCheck = useCallback((ObjectId) => {
         console.log(`in bookmarkCheck: title: ${ title }`)
         //returns truthy/falsey
         return userGallery.some((art) => art.objectId === ObjectId)
-    }
+    }, [userGallery, title])
 
-    const initBookmark = () => {
+    const initBookmark = useCallback((curObjectId) => {
         console.log(`in initBookmark`)
         if (bookmarkCheck(curObjectId) === true ){
-            setBookmarked({
-                isBookmarked: true, 
-                // style: "solid"
-            }) 
+            setBookmarked(true) 
         } else {
-            setBookmarked({
-               isBookmarked: false, 
-            //    style: "outline"
-            })
+            setBookmarked(false)
         }
-    }
+    }, [bookmarkCheck, setBookmarked])
 
-    useEffect(() => {
-        initBookmark()
-    }, [curObjectId])
+    // useEffect(() => {
+    //     initBookmark(curObjectId)
+    // }, [initBookmark, curObjectId])
 
     return (
         <div className = { styles.BrowseArt }>
-          
             <Artwork 
                 image = {primaryImageSmall}
-                altText = {`Title: ${ title } by ${ artistDisplayName}. Medium: ${ medium }`} /> 
-            
-
+                altText = {`Title: ${ title } by ${ artistDisplayName}. Medium: ${ medium }`} 
+            /> 
             <div className = {styles.ArtControls}>
                 <div className = {styles.infoBox}>
                     <InfoButton
@@ -160,13 +142,11 @@ const BrowseArt = props => {
                 <LikeButton
                     bookmarkAdd = { addGallery }
                     bookmarkRemove = { removeGallery }
-                    bookmarkStatus= {showBookmarked.isBookmarked}
+                    bookmarkStatus= {isBookmarked}
                     objectDataId = { dataId }
-                    // bookmarkStyle = { showBookmarked.style}
                 />
             </div>
             <NextButton clicked = { onFetchArt } />
-           
         </div>
     )
 }

@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 
 import styles from './LikeButton.module.css';
 import bookmarked from '../../UI/Icons/bookmark_solid.svg'
@@ -6,17 +6,17 @@ import unbookmarked from '../../UI/Icons/bookmark_outline.svg'
 
 const LikeButton = ( props ) => {
 
-    return (
-        <div onClick = { props.bookmarkStatus === true ? 
-            () => {
-                props.bookmarkRemove(props.objectDataId) }
-                :
+    const remove = () => {
+        props.bookmarkRemove(props.objectDataId) }
 
-            () => {
-                props.bookmarkAdd()
-            }
-            
-            } 
+    const add = () => {
+        props.bookmarkAdd()
+    }
+
+    return (
+        <div 
+            onClick = { props.bookmarkStatus === true ? remove :
+                add } 
             className={styles.LikeButton} >
             <img  
                 alt={ props.bookmarkStatus ? "Remove From gallery" : "Add To Gallery"} 
