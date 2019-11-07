@@ -40,18 +40,13 @@ const Gallery = (props) => {
         primaryImageSmall: lastArtwork.primaryImageSmall, 
         dataId: lastArtwork.dataId,
         index: userGallery.length - 1
-      
     })
 
 
     const resetArtwork = (newIndex) => {
         onSetGallery(token, userId);
 
-        console.log(`in setLastArtwork`)
-        console.log(`Length of array? ${userGallery.length}`)
         const nextArtwork = {...userGallery[newIndex]}
-
-        console.log(`setLastArt: lastArtwork: ${nextArtwork.title}`)
 
         setCurArtwork({
             title: nextArtwork.title,
@@ -82,8 +77,6 @@ const Gallery = (props) => {
             dataId, 
             index
     ) => {
-        console.log(`In selectArtPreviewHandler`)
-
         setCurArtwork({
             title: title,
             artistDisplayName: artistDisplayName, 
@@ -97,16 +90,13 @@ const Gallery = (props) => {
     }   
 
     const addGallery = () => {
-        console.log(`Gallery component addGallery`)
     }
 
     const removeGallery = () => {
-        console.log(`in RemoveGallery`)
         setBookmarked({
             ...showBookmarked, 
             style: "outline"
         })
-        console.log(`curArtwork.curObjectId: ${curArtwork.objectId}`)
 
         dispatch(actions.removeGallery(token, 
             {
@@ -171,9 +161,7 @@ const Gallery = (props) => {
                             bookmarkStatus = {true}
                             bookmarkRemove = {removeGallery}
                             bookmarkAdd = { addGallery }
-                          
                         />
-                        
                     </div>
                 </div>               
             </div>

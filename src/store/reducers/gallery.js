@@ -13,17 +13,16 @@ const startFetchGallery = ( state, action ) => {
         error: null, 
         loading: true
     })
-}
+};
 
 const startAddGallery = ( state, action ) => {
     return updateObject(state, {
         error: null, 
         loading: true
     })
-}
+};
 
 const addGallerySuccess = (state, action) => {
-    console.log(`in addGallSuccess reducer: action.artwork.dataId ${action.artwork.dataId}`)
     const newArtwork = updateObject(
         { ...action.artwork }
     )
@@ -33,43 +32,42 @@ const addGallerySuccess = (state, action) => {
         error: null, 
         loading: false, 
     })
-}
+};
 
 const addGalleryFailed =  (state, action ) => {
     return updateObject(state, {
         error: action.error, 
         loading: false
     })
-}
+};
 
 const startRemoveGallery = ( state, action ) => {
     return updateObject (state, {
         error: null, 
         loading: true
     })
-}
+};
 
 const removeGallerySuccess = (state, action) => {
     return updateObject(state, {
         error: null, 
         loading: false
     })
-}
+};
 
 const removeGalleryFailed = (state, action) => {
     return updateObject(state, {
         loading: false, 
         error: action.error
     })
-}
-
+};
 
 const fetchGalleryFail = (state, action) => {
     return updateObject( state, {
         error: action.error, 
         loading: false
     })
-}
+};
 
 const fetchGallerySuccess = (state, action) => {
 
@@ -79,7 +77,7 @@ const fetchGallerySuccess = (state, action) => {
         error: null, 
         loading: false
     })
-}
+};
 
 const reducer = ( state = initialState, action ) => {
     switch (action.type) {
