@@ -1,108 +1,151 @@
-import React, { useState, useEffect, useCallback } from 'react';
+import React, { useState, useEffect, useCallback, useRef } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import Artwork from '../../components/Artwork/Artwork';
 import * as actions from '../../store/actions/index'
 import styles from './BrowseArt.module.css';
-import ArtControls from '../ArtControls/ArtControls';
-import { Redirect, withRouter } from 'react-router-dom';
+// import ArtControls from '../ArtControls/ArtControls';
 import NextButton from '../../components/NextButton/NextButton';
+import ArtInfo from '../../components/Artwork/ArtInfo/ArtInfo'; 
+import LikeButton from '../../components/Artwork/LikeButton/LikeButton';
+import InfoButton from '../../components/Artwork/InfoButton/InfoButton'; 
+
 
 const BrowseArt = props => {
 
-    // const [curArtwork, setCurArtwork] = setState
-    
+    //redux props
     const title = useSelector( state => state.artwork.artwork.title);
     const artistDisplayName = useSelector( state => state.artwork.artwork.artistDisplayName);
     const medium = useSelector(state => state.artwork.artwork.medium);
     const curObjectId = useSelector(state => state.artwork.artwork.objectId);
     const primaryImage = useSelector(state => state.artwork.artwork.primaryImageSmall);
     const primaryImageSmall = useSelector(state => state.artwork.artwork.primaryImageSmall);
-    // const error = useSelector(state => state.artwork.error)
 
-    const userId = useSelector( state => state.auth.userId)
-   
-    const userGallery = useSelector(state => state.myGallery.gallery)
-    const token = useSelector(state => state.auth.token)
+    let dataId = useSelector(state => state.myGallery.dataId)
+
+    const error = useSelector(state => state.artwork.error)
+
+    const userGallery = useSelector(state => state.myGallery.gallery);
+    const token = useSelector(state => state.auth.token);
+    const userId = useSelector( state => state.auth.userId);
+
+    const [showArtInfo, setShowArtInfo] = useState(false);
+
+    const showInfoToggle = () => {
+        setShowArtInfo(!showArtInfo)
+    }
 
     const dispatch = useDispatch();
 
     const onFetchArt = useCallback(
-        () => {dispatch(actions.startFetchArt())},
-        [dispatch])
+        () => {dispatch(actions.startFetchArt())}, [dispatch])
+    
+    useEffect (() => {
+        onFetchArt();
+    }, [onFetchArt])
 
-    const onSetGallery = useCallback((token, userId)  => dispatch(actions.fetchGallery(token,userId)),[dispatch])
+    const onSetGallery = useCallback((token, userId) => dispatch(actions.fetchGallery(token,userId)),[dispatch]);
 
     useEffect(() => {
-        onSetGallery(token, userId)
-    }, [onSetGallery, token, userId])
-
-
-    const bookmarkArtHandler = () => {
-        console.log('Gallery.js: bookmarkArtHandler')
-        
-        if (!token) {
-            props.history.push("/auth")
-        } else {
-            //Update userGallery
-            onSetGallery(token,userId)
-
-            if (!checkIfBookmarked()){
-                console.log(`Not in Gallery!!`)
-                addGallery()
-            } else {
-                alert('NOPE, DUPLICATE!')
-            }
+        if (token){
+            onSetGallery(token, userId);
         }
-    }
-    const checkTest = (galleryArray, objectId) => {
-        return galleryArray.some((art) => art.objectId === curObjectId)
-    }
+    }, [onSetGallery, token, userId, dataId])
 
-    const checkIfBookmarked = () => {
-        console.log(`Gallery.js: check if Bookmarked!`)
+
+    const myRef = useRef();
+
+    useEffect(()=> {
+        myRef.current = dataId
+    }, [dataId])
+
+
+    //set Bookmark settings
+    const [isBookmarked, setBookmarked] = useState(null)
+
+     const removeGallery = (objectDataId) => {
+        console.log(`[browseArt RemoveGallery]`)
+        console.log(`[browseArt removeGallery] ${title}`)
+        console.log(`[browseArt removeGallery] dataId: ${JSON.stringify(dataId)}`)
         
-        return checkTest(userGallery, curObjectId)
-    }
-
-    const addGallery = () => {
-        console.log('Gallery.js: addGallery')
-       
-        dispatch(actions.addGallery(
+        dispatch(actions.removeGallery(token, 
             {
                 title: title, 
                 artistDisplayName: artistDisplayName, 
                 medium: medium, 
                 objectId: curObjectId, 
                 primaryImage: primaryImage, 
-                primaryImageSmall: primaryImageSmall
-            }, token
+                primaryImageSmall: primaryImageSmall, 
+                dataId: dataId
+            }
         ))
-
-        console.log('Gallery.js: ADDED TO GALLERY')
-        // Update Gallery again
-        onSetGallery(token,userId)
+        setBookmarked(false)
+        onSetGallery(token, userId) 
     }
 
-    useEffect ( () => {
-        onFetchArt();
-    }, [onFetchArt])
- 
+    const addGallery = (objectDataId) => {
+        console.log(`in browseArt AddGallery`)
+        if (!token) {
+            props.history.push("/auth")
+        } else {
+            dispatch(actions.addGallery(token, 
+                {   title: title, 
+                    artistDisplayName: artistDisplayName,
+                    medium: medium, 
+                    objectId: curObjectId, 
+                    primaryImage: primaryImage, 
+                    primaryImageSmall: primaryImageSmall
+                }
+            ))
+            setBookmarked(true)  
+        }
+    }
+
+    const bookmarkCheck = useCallback((ObjectId) => {
+        console.log(`in bookmarkCheck: title: ${ title }`)
+        //returns truthy/falsey
+        return userGallery.some((art) => art.objectId === ObjectId)
+    }, [userGallery, title])
+
+    const initBookmark = useCallback((curObjectId) => {
+        console.log(`in initBookmark`)
+        if (bookmarkCheck(curObjectId) === true ){
+            setBookmarked(true) 
+        } else {
+            setBookmarked(false)
+        }
+    }, [bookmarkCheck, setBookmarked])
+
+    // useEffect(() => {
+    //     initBookmark(curObjectId)
+    // }, [initBookmark, curObjectId])
 
     return (
         <div className = { styles.BrowseArt }>
-          
             <Artwork 
                 image = {primaryImageSmall}
-                altText = {`Title: ${ title } by ${ artistDisplayName}. Medium: ${ medium }`} /> 
-             
-            <ArtControls
-                isAuth = { token !== null }
-                fave = { addGallery }
-                bookmark = {bookmarkArtHandler}
-                title={title}
-                medium = {medium}
-                artistDisplayName = {artistDisplayName}/>
-
+                altText = {`Title: ${ title } by ${ artistDisplayName}. Medium: ${ medium }`} 
+            /> 
+            <div className = {styles.ArtControls}>
+                <div className = {styles.infoBox}>
+                    <InfoButton
+                        showinfo = {showArtInfo}
+                        infoClicked = { showInfoToggle }
+                    />
+                    <ArtInfo
+                        className = { styles.artInfo}
+                        title = {title}
+                        medium = { medium }
+                        artistDisplayName = {props.artistDisplayName}
+                        showInfo = {showArtInfo}
+                    />
+                </div>
+                <LikeButton
+                    bookmarkAdd = { addGallery }
+                    bookmarkRemove = { removeGallery }
+                    bookmarkStatus= {isBookmarked}
+                    objectDataId = { dataId }
+                />
+            </div>
             <NextButton clicked = { onFetchArt } />
         </div>
     )

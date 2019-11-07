@@ -40,36 +40,24 @@
 }
 
 
-@keyframes fadeInArt {
-    
 
-    0% {
-        border: 1px solid pink;
-        opacity: 0; 
-    }
-
-    15% {
-        opacity: 0;
-    }
-
-    25% {
-        opacity: 0;
-    }
-    45%{
-        opacity: 0;
-    }
-    60% {
-   
-        opacity: .1; 
-    }
-    65% {
-        opacity: .15;
-    }
-    70% {
-        opacity: .2;
-    }
-    100% {
-
-        opacity: 1; 
-    }
-}
+.ArtControls {
+    margin-top: 1rem;
+    display: flex; 
+    flex-direction: row; 
+    position: relative;
+  }
+  
+  .infoBox {
+      margin-left: 0;
+      display: flex;
+      flex-direction: row;
+  }
+  
+  .infoButton {
+      width: 20%;
+  }
+  
+  .artInfo > p {
+      text-align: left; 
+  }

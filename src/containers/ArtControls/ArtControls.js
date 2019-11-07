@@ -1,4 +1,4 @@
-import React, { useState, useSelector } from 'react';
+import React, { useState } from 'react';
 import InfoButton from '../../components/Artwork/InfoButton/InfoButton'; 
 import ArtInfo from '../../components/Artwork/ArtInfo/ArtInfo'; 
 import LikeButton from '../../components/Artwork/LikeButton/LikeButton';
@@ -8,6 +8,7 @@ const ArtControls = (props) => {
 
     const [showArtInfo, setShowArtInfo] = useState(false);
 
+
     const showInfoToggle = () => {
         setShowArtInfo(!showArtInfo)
     }
@@ -16,17 +17,20 @@ const ArtControls = (props) => {
         <div className={styles.ArtControls}>
             <div className = {styles.infoBox}>
                 <InfoButton showInfo = {showArtInfo} className={styles.infoButton} infoClicked={showInfoToggle}></InfoButton>
-                <ArtInfo className={styles.artInfo}
+                <ArtInfo className=                 {styles.artInfo}
                     title={props.title}
                     medium = {props.medium}
                     artistDisplayName = {props.artistDisplayName}
                     showInfo = {showArtInfo}
                 ></ArtInfo>
             </div>
-
+         
             <LikeButton 
-                click = { props.bookmark }
-                />
+                bookmark = {props.setBookmark}
+                click = { props.clickBookmark }
+            />
+
+            
         </div>
     )
 }
