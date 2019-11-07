@@ -51,14 +51,6 @@ const BrowseArt = props => {
         }
     }, [onSetGallery, token, userId, dataId])
 
-
-    const myRef = useRef();
-
-    useEffect(()=> {
-        myRef.current = dataId
-    }, [dataId])
-
-
     //set Bookmark settings
     const [isBookmarked, setBookmarked] = useState(null)
 
@@ -100,27 +92,26 @@ const BrowseArt = props => {
         }
     }
 
-    const bookmarkCheck = useCallback((ObjectId) => {
+    const bookmarkCheck = useCallback(() => {
         console.log(`in bookmarkCheck: title: ${ title }`)
         //returns truthy/falsey
-        return userGallery.some((art) => art.objectId === ObjectId)
-    }, [userGallery, title])
+        return userGallery.some((art) => art.objectId === curObjectId)
+    }, [curObjectId, userGallery, title])
 
-    const initBookmark = useCallback((curObjectId) => {
+     useEffect(() => {
         console.log(`in initBookmark`)
         if (bookmarkCheck(curObjectId) === true ){
+            console.log(`in initBookmark, bookmark set to true`)
             setBookmarked(true) 
         } else {
+            console.log(`in initBookmark, bookmark set to false`)
             setBookmarked(false)
         }
-    }, [bookmarkCheck, setBookmarked])
-
-    // useEffect(() => {
-    //     initBookmark(curObjectId)
-    // }, [initBookmark, curObjectId])
+    }, [curObjectId])
 
     return (
         <div className = { styles.BrowseArt }>
+            <h1>{ isBookmarked ? "bookmarked" : "not bookmarked" }</h1>
             <Artwork 
                 image = {primaryImageSmall}
                 altText = {`Title: ${ title } by ${ artistDisplayName}. Medium: ${ medium }`} 
