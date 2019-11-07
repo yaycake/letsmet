@@ -96,11 +96,7 @@ export const fetchGallery = (token, userId) => {
     return dispatch => {
         dispatch(startFetchGallery());
 
-        // const queryParams =  `?auth=${token}&galleryBy="userId"&equalTo"${userId}"`
-
         const queryParams =  `?auth=${token}`
-
-        // const queryParams = '?auth=' + token 
     
         console.log(`FetchGalleryAXN URL: https://letsmet-43e41.firebaseio.com/users/${userId}/gallery.json${queryParams}`)
 
@@ -109,7 +105,7 @@ export const fetchGallery = (token, userId) => {
 
             console.log(`inFetchGalleryActions`)
 
-            console.log(`inFetchGalleryActions: ${userId}`)
+            console.log(`inFetchGalleryActions: response ${JSON.stringify(response)}`)
 
             const fetchedGallery = [];
 

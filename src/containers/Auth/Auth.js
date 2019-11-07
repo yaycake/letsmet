@@ -3,7 +3,6 @@ import styles from './Auth.module.css';
 import { useDispatch, useSelector } from 'react-redux';
 
 import { Redirect } from 'react-router-dom';
-
 import Input from '../../components/UI/Input/Input';
 import Button from '../../components/UI/Button/Button';
 import { updateObject, checkValidity } from '../../shared/utility';
@@ -34,26 +33,26 @@ const Auth = ( props ) => {
             }, 
 
             email: {
-            elementType: 'input',
-            elementConfig: {
-                type: 'email',
-                placeholder: 'YourEmail@Domain.com'
+                elementType: 'input',
+                elementConfig: {
+                    type: 'email',
+                    placeholder: 'YourEmail@Domain.com'
             }, 
-            value: '', 
-            validation: {
-                required: true,
-                isEmail: true
-            }, 
-            valid: false, 
-            touched: false
+                value: '', 
+                validation: {
+                    required: true,
+                    isEmail: true
+                }, 
+                valid: false, 
+                touched: false
             }, 
 
             password: {
-            elementType: 'input',
-            elementConfig: {
-                type: 'password',
-                placeholder: 'Keep it secret'
-            }, 
+                elementType: 'input',
+                elementConfig: {
+                    type: 'password',
+                    placeholder: 'Keep it secret'
+                }, 
             value: '', 
             validation: {
                 required: true, 

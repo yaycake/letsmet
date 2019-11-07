@@ -10,7 +10,6 @@ export const initArtObjects = () => {
         localStorage.setItem('objectIdArray', response.data.objectIDs);
     })
     .catch(error => {
-        console.log('Problem in action/artwork')
         console.log(error)
     })
 }
@@ -68,7 +67,6 @@ export const setArt = (artwork) => dispatch => {
             }
         })
     }
-    
 }
 
 // if any APIfetch fails

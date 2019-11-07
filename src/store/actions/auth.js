@@ -36,8 +36,6 @@ export const checkAuthTimeout = (expirationTime) => {
     }
 }
 
-
-
 const startSaveUsername = () => {
     return {
         type: actionTypes.START_SAVE_USERNAME
@@ -59,18 +57,10 @@ const saveUsernameSuccess = ( username ) => {
 }
 
 export const saveUsername = ( username, token, userId ) => {
-
-    console.log(`in saveUsername action`)
-    console.log(`in saveUsername action: username: ${username}`)
-    console.log(`in saveUsername action: token: ${token}`)
-    console.log(`in saveUsername action: userId: ${userId}`)
-
-
     return dispatch =>{
         dispatch(startSaveUsername());
         axios.put(`https://letsmet-43e41.firebaseio.com/users/${userId}.json?auth=${token}`, {username: username})
         .then( response => {
-            console.log(`in Saveusername: response: ${JSON.stringify(response)}`)
             dispatch(saveUsernameSuccess({
                 ...username}))
         })

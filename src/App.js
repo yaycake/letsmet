@@ -1,4 +1,4 @@
-import React, {useCallback} from 'react';
+import React, {useCallback, useEffect} from 'react';
 import './App.css';
 import Layout from './hoc/Layout/Layout'
 import * as actions from './store/actions/index'
@@ -27,6 +27,14 @@ const App = props => {
     () => {
     dispatch(actions.initArtObjects())
   }, [dispatch])
+
+
+  const onFetchArt = useCallback(
+    () => {dispatch(actions.startFetchArt())}, [dispatch])
+
+  useEffect (() => {
+      onFetchArt();
+  }, [])
 
 
 
