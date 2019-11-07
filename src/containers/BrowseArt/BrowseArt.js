@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useCallback, useRef } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import Artwork from '../../components/Artwork/Artwork';
 import * as actions from '../../store/actions/index'
@@ -9,9 +9,7 @@ import ArtInfo from '../../components/Artwork/ArtInfo/ArtInfo';
 import LikeButton from '../../components/Artwork/LikeButton/LikeButton';
 import InfoButton from '../../components/Artwork/InfoButton/InfoButton'; 
 
-
 const BrowseArt = props => {
-
     //redux props
     const title = useSelector( state => state.artwork.artwork.title);
     const artistDisplayName = useSelector( state => state.artwork.artwork.artistDisplayName);
@@ -39,11 +37,11 @@ const BrowseArt = props => {
     const onFetchArt = useCallback(
         () => {dispatch(actions.startFetchArt())}, [dispatch])
     
-    useEffect (() => {
-        onFetchArt();
-    }, [onFetchArt])
+    // useEffect (() => {
+    //     onFetchArt();
+    // }, [])
 
-    const onSetGallery = useCallback((token, userId) => dispatch(actions.fetchGallery(token,userId)),[dispatch]);
+    const onSetGallery = useCallback((token, userId) => dispatch(actions.fetchGallery(token, userId)),[dispatch]);
 
     useEffect(() => {
         if (token){
@@ -54,12 +52,8 @@ const BrowseArt = props => {
     //set Bookmark settings
     const [isBookmarked, setBookmarked] = useState(null)
 
-     const removeGallery = (objectDataId) => {
-        console.log(`[browseArt RemoveGallery]`)
-        console.log(`[browseArt removeGallery] ${title}`)
-        console.log(`[browseArt removeGallery] dataId: ${JSON.stringify(dataId)}`)
-        
-        dispatch(actions.removeGallery(token, 
+    const removeGallery = (objectDataId) => {
+        dispatch(actions.removeGallery(token, userId, 
             {
                 title: title, 
                 artistDisplayName: artistDisplayName, 
@@ -72,14 +66,13 @@ const BrowseArt = props => {
         ))
         setBookmarked(false)
         onSetGallery(token, userId) 
-    }
+    };
 
     const addGallery = (objectDataId) => {
-        console.log(`in browseArt AddGallery`)
         if (!token) {
             props.history.push("/auth")
         } else {
-            dispatch(actions.addGallery(token, 
+            dispatch(actions.addGallery(token, userId, 
                 {   title: title, 
                     artistDisplayName: artistDisplayName,
                     medium: medium, 
@@ -93,25 +86,20 @@ const BrowseArt = props => {
     }
 
     const bookmarkCheck = useCallback(() => {
-        console.log(`in bookmarkCheck: title: ${ title }`)
         //returns truthy/falsey
         return userGallery.some((art) => art.objectId === curObjectId)
-    }, [curObjectId, userGallery, title])
+    }, [curObjectId, userGallery])
 
      useEffect(() => {
-        console.log(`in initBookmark`)
         if (bookmarkCheck(curObjectId) === true ){
-            console.log(`in initBookmark, bookmark set to true`)
             setBookmarked(true) 
         } else {
-            console.log(`in initBookmark, bookmark set to false`)
             setBookmarked(false)
         }
     }, [curObjectId])
 
     return (
         <div className = { styles.BrowseArt }>
-            <h1>{ isBookmarked ? "bookmarked" : "not bookmarked" }</h1>
             <Artwork 
                 image = {primaryImageSmall}
                 altText = {`Title: ${ title } by ${ artistDisplayName}. Medium: ${ medium }`} 

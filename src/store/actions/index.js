@@ -18,5 +18,8 @@ export {
 
 export {
     auth, 
-    logout
+    authSuccess, 
+    authFail,
+    logout, 
+    saveUsername
 } from './auth';

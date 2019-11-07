@@ -19,7 +19,6 @@ export const FETCH_GALLERY_SUCCESS = "FETCH_GALLERY_SUCCESS";
 
 export const START_FETCH_ART = 'START_FETCH_ART';
 export const SET_ART = 'SET_ART';
-
 export const FETCH_ART = 'FETCH_ART';
 export const FETCH_ART_FAIL = 'FETCH_ART_FAIL';
 
@@ -27,6 +26,12 @@ export const AUTH_START = 'AUTH_START';
 export const AUTH_SUCCESS = 'AUTH_SUCCESS';
 export const AUTH_FAIL = 'AUTH_FAIL'; 
 export const AUTH_LOGOUT = 'AUTH_LOGOUT';
+
+export const START_SAVE_USERNAME= 'START_SAVE_USERNAME';
+
+export const SAVE_USERNAME = 'SAVE_USERNAME'; 
+export const SAVE_USERNAME_SUCCESS = 'SAVE_USERNAME_SUCCESS';
+export const SAVE_USERNAME_FAIL = 'SAVE_USERNAME_FAIL';
 
 
 

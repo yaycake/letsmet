@@ -3,7 +3,6 @@ import styles from './Auth.module.css';
 import { useDispatch, useSelector } from 'react-redux';
 
 import { Redirect } from 'react-router-dom';
-
 import Input from '../../components/UI/Input/Input';
 import Button from '../../components/UI/Button/Button';
 import { updateObject, checkValidity } from '../../shared/utility';
@@ -14,29 +13,46 @@ import NavigationLink from '../../components/Navigation/NavigationLink/Navigatio
 const Auth = ( props ) => {
 
     const token = useSelector(state => state.auth.token)
+    // const userId = useSelector(state => state.auth.userId)
+    // const username = useSelector(state => state.auth.username)
 
     const [authForm, setAuthForm] = useState(
-        { 
+        {   
+            username: {
+                elementType: 'input',
+                elementConfig: {
+                    type: 'username',
+                    placeholder: 'Your Username'
+                }, 
+                value: '', 
+                validation: {
+                    required: false
+                }, 
+                valid: false, 
+                touched: false
+            }, 
+
             email: {
-            elementType: 'input',
-            elementConfig: {
-                type: 'email',
-                placeholder: 'YourEmail@Domain.com'
+                elementType: 'input',
+                elementConfig: {
+                    type: 'email',
+                    placeholder: 'YourEmail@Domain.com'
             }, 
-            value: '', 
-            validation: {
-                required: true,
-                isEmail: true
+                value: '', 
+                validation: {
+                    required: true,
+                    isEmail: true
+                }, 
+                valid: false, 
+                touched: false
             }, 
-            valid: false, 
-            touched: false
-            }, 
+
             password: {
-            elementType: 'input',
-            elementConfig: {
-                type: 'password',
-                placeholder: 'Keep it secret'
-            }, 
+                elementType: 'input',
+                elementConfig: {
+                    type: 'password',
+                    placeholder: 'Keep it secret'
+                }, 
             value: '', 
             validation: {
                 required: true, 
@@ -57,15 +73,19 @@ const Auth = ( props ) => {
 
     // Redux Store Methods
     const dispatch = useDispatch();
-    const onAuth = (email, password, isSignup) => {
-        dispatch(actions.auth(email, password, isSignup))
+
+    const onAuth = (username, email, password, isSignup) => {
+        dispatch(actions.auth(username, email, password, isSignup))
     };
+
+   
 
     const [isSignup, setIsSignup] = useState(true);
     
     const submitHandler = (event) => {
         event.preventDefault();
-        onAuth(authForm.email.value, authForm.password.value, isSignup)
+        onAuth(authForm.username.value, authForm.email.value, authForm.password.value, isSignup)
+        
     }
 
     const switchAuthHandler = () => {

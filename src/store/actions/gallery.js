@@ -24,59 +24,57 @@ export const addGalleryFailed = (error) => {
     }
 }
 
-export const addGallery = ( token, artwork ) => {
-    console.log(`IN GALLERY AXNS: ADD GALLERY`)
+export const addGallery = ( token, userId, artwork) => {
+    console.log(`https://letsmet-43e41.firebaseio.com/users/${userId}/gallery.json?auth=${token}`)
+    
     return dispatch => {
         startAddGallery();
-        axios.post(`https://letsmet-43e41.firebaseio.com/gallery.json?auth=${token}`, artwork)
+        axios.post(`https://letsmet-43e41.firebaseio.com/users/${userId}/gallery.json?auth=${token}`, artwork)
         .then(response => {
-            console.log(`addGallery response.data; ${JSON.stringify(response.data)}`)
             dispatch(addGallerySuccess({
                     dataId: response.data.name, 
                     ...artwork
                 }))
-            dispatch(fetchGallery(token))
+            dispatch(fetchGallery(token, userId))
         })
         .catch(error => {
-            console.log(`AddGalleryFailError: ${error}`)
+            console.log(`AddGalleryFailError: ${JSON.stringify(error)}`)
+
             dispatch(addGalleryFailed(error))
         })        
     }
-}
+};
 
-export const removeGallery = ( token, artwork) => {
-    console.log('IN GALLERY AXNS: REMOVE GALLERY')
-    console.log(`artwork.dataId: ${artwork.dataId}`)
-
-    console.log(`DELETE URL : https://letsmet-43e41.firebaseio.com/gallery/${artwork.dataId}.json?auth=${token}`)
+export const removeGallery = ( token, userId, artwork) => {
+    console.log(`removeGallery.js: dataId: ${artwork.dataId}`)
+    
     return dispatch => { 
         startRemoveGallery(); 
-        axios.delete(`https://letsmet-43e41.firebaseio.com/gallery/${artwork.dataId}.json?auth=${token}`)
+        axios.delete(`https://letsmet-43e41.firebaseio.com/users/${userId}/gallery/${artwork.dataId}.json?auth=${token}`)
         .then(response => {
-            console.log(`removeGall response: ${response.data}`)
             dispatch(removeGallerySuccess(artwork))
-            dispatch(fetchGallery(token))
+            dispatch(fetchGallery(token, userId))
         })
         .catch(err => {
             console.log(err)
             dispatch(removeGalleryFailed(err))
         })
     }
-}
+};
 
 export const startRemoveGallery = ( ) => {
     return {
         type: actionTypes.START_REMOVE_GALLERY, 
         loading: true
     }
-}
+};
 
 export const removeGalleryFailed = ( error ) => {
     return {
         type: actionTypes.REMOVE_GALLERY_FAILED, 
         error: error
     }
-}
+};
 
 export const removeGallerySuccess = ( artwork ) => {
     return {
@@ -84,21 +82,30 @@ export const removeGallerySuccess = ( artwork ) => {
         artwork: artwork,
         loading: false
     }
-}
+};
 
 
 export const startFetchGallery = () => {
     return {
         type: actionTypes.START_FETCH_GALLERY
     }
-}
+};
 
 export const fetchGallery = (token, userId) => {
+    console.log(`fetchGallery AXN: userId: ${userId}`)
     return dispatch => {
         dispatch(startFetchGallery());
-        const queryParams = '?auth=' + token + '&galleryBy="userId"&equalTo"' + userId + '"';
-        axios.get('https://letsmet-43e41.firebaseio.com/gallery.json' + queryParams )
+
+        const queryParams =  `?auth=${token}`
+    
+        console.log(`FetchGalleryAXN URL: https://letsmet-43e41.firebaseio.com/users/${userId}/gallery.json${queryParams}`)
+
+        axios.get(`https://letsmet-43e41.firebaseio.com/users/${userId}/gallery.json${queryParams}` )
         .then( response => {
+
+            console.log(`inFetchGalleryActions`)
+
+            console.log(`inFetchGalleryActions: response ${JSON.stringify(response)}`)
 
             const fetchedGallery = [];
 
@@ -114,30 +121,26 @@ export const fetchGallery = (token, userId) => {
                         objectId: art[1].objectId
                     })    
             )
-
             dispatch(fetchGallerySuccess(fetchedGallery))
-
         })
         .catch(err => {
-            console.log('Error Fetching Gallery:')
             console.log(`Error Fetching Gallery:${err}`)
             dispatch(fetchGalleryFail(err))
         })
     }
-}
+};
 
 
 export const fetchGallerySuccess = ( gallery ) => {
     return {
         type: actionTypes.FETCH_GALLERY_SUCCESS,
-        gallery: gallery, 
-        // lastArtwork: lastArtwork
+        gallery: gallery
     }
-}
+};
 
 export const fetchGalleryFail = (error) => {
     return {
         type: actionTypes.FETCH_GALLERY_FAIL, 
         error: error
     }
-}
+};

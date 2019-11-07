@@ -6,12 +6,9 @@ import unbookmarked from '../../UI/Icons/bookmark_outline.svg'
 
 const LikeButton = ( props ) => {
 
-    const remove = () => {
-        props.bookmarkRemove(props.objectDataId) }
+    const remove = () => { props.bookmarkRemove(props.objectDataId) };
 
-    const add = () => {
-        props.bookmarkAdd()
-    }
+    const add = () => { props.bookmarkAdd() };
 
     return (
         <div 

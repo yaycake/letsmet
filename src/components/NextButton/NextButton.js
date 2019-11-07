@@ -9,4 +9,4 @@ const NextButton = ( props ) => {
     )
 }
 
-export default NextButton;
+export default NextButton

@@ -22,7 +22,7 @@ const Gallery = (props) => {
     //Redux Actions
     const dispatch = useDispatch();
 
-    const onSetGallery =  useCallback((token, userId)  => dispatch(actions.fetchGallery(token,userId)),[dispatch])
+    const onSetGallery =  useCallback(()  => dispatch(actions.fetchGallery(token,userId)),[dispatch, token, userId])
 
     useEffect(() => {
         onSetGallery(token, userId)
@@ -40,18 +40,13 @@ const Gallery = (props) => {
         primaryImageSmall: lastArtwork.primaryImageSmall, 
         dataId: lastArtwork.dataId,
         index: userGallery.length - 1
-      
     })
 
 
     const resetArtwork = (newIndex) => {
-        onSetGallery(token, userId);
+        // onSetGallery(token, userId);
 
-        console.log(`in setLastArtwork`)
-        console.log(`Length of array? ${userGallery.length}`)
         const nextArtwork = {...userGallery[newIndex]}
-
-        console.log(`setLastArt: lastArtwork: ${nextArtwork.title}`)
 
         setCurArtwork({
             title: nextArtwork.title,
@@ -82,8 +77,6 @@ const Gallery = (props) => {
             dataId, 
             index
     ) => {
-        console.log(`In selectArtPreviewHandler`)
-
         setCurArtwork({
             title: title,
             artistDisplayName: artistDisplayName, 
@@ -97,18 +90,16 @@ const Gallery = (props) => {
     }   
 
     const addGallery = () => {
-        console.log(`Gallery component addGallery`)
     }
 
-    const removeGallery = () => {
-        console.log(`in RemoveGallery`)
+    const removeGallery = ( objectDataId ) => {
+        console.log(`Gallery.js: addGallery: ${objectDataId}`)
         setBookmarked({
             ...showBookmarked, 
             style: "outline"
         })
-        console.log(`curArtwork.curObjectId: ${curArtwork.objectId}`)
 
-        dispatch(actions.removeGallery(token, 
+        dispatch(actions.removeGallery(token, userId,
             {
                 title: curArtwork.title, 
                 artistDisplayName: curArtwork.artistDisplayName, 
@@ -120,6 +111,7 @@ const Gallery = (props) => {
             }
         ))
         resetArtwork(curArtwork.index -1)
+        // onSetGallery(token, userId)
     }
 
     const galleryStrip = (
@@ -171,9 +163,8 @@ const Gallery = (props) => {
                             bookmarkStatus = {true}
                             bookmarkRemove = {removeGallery}
                             bookmarkAdd = { addGallery }
-                          
+                            objectDataId = { curArtwork.dataId }
                         />
-                        
                     </div>
                 </div>               
             </div>
