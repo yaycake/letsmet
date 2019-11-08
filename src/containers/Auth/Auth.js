@@ -148,9 +148,8 @@ const Auth = ( props ) => {
         authRedirect = <Redirect to="/"/>
     }
 
-    return (
-        <div className = {styles.Auth}>
-            { authRedirect }
+    let authContent = (
+        <div>
             <div className = {styles.AuthTitle}>
                 <div className = {styles.authTitle1}>
                     {authTitle[0]}
@@ -160,39 +159,40 @@ const Auth = ( props ) => {
                 </div>
             </div>
             <form onSubmit = {submitHandler} className = { styles.AuthForm }>
-                
                 { error && errorMessage }
-
-                { loading ? <Spinner/> : form }
-
+                {form}
                 <div className = {styles.formControls}>
                     <div className={styles.btnSign1}>
                         <Button 
                             btnType = "success" >
                                 { isSignup ? 'Sign Up' : 'Sign In'}
                         </Button>
-                    </div>
-                    
+                    </div>  
                     <div className ={styles.or}>or</div>
-
                     <div className = {styles.btnSign2}>
                         <Button 
                             clicked = { switchAuthHandler }
-                            btnType = "success"
-                            >
+                            btnType = "success" >
                                 { isSignup ? 'Sign In' : 'Sign Up'}
                         </Button>
                     </div>
                 </div>
             </form>
-
-            
             <div className = { styles.goBack}>
                     <NavigationLink path="/">Go Back</NavigationLink>
             </div>
+        </div>
+    )
+  
+
+    return (
+    
+        <div className = {styles.Auth}>
+            { authRedirect }
+            {/* <Spinner></Spinner> */}
+            { loading ? <Spinner></Spinner> : authContent }
                 
-                
-            
+    
         </div>
     )
 };

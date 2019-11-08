@@ -9,7 +9,6 @@ import { useSelector, useDispatch } from 'react-redux';
 import Auth from './containers/Auth/Auth';
 
 import Logout from './containers/Auth/Logout/Logout'
-
 import Gallery from './containers/Gallery/Gallery'
 
 // const Artwork = React.lazy(()=> {
@@ -20,6 +19,7 @@ import Gallery from './containers/Gallery/Gallery'
 const App = props => {
 
   const isAuthenticated = useSelector(state => state.auth.token != null)
+
 
   const dispatch = useDispatch();
 
@@ -74,6 +74,7 @@ const App = props => {
   return (
     <Layout>
       <div className="App" onMouseMove = { eyeAnimate }>
+        
        { routes }
       </div>
     </Layout>

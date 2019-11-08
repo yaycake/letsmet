@@ -1,8 +1,43 @@
 .Spinner {
-    height: 100px; 
-    width: 100px; 
-    background-color: black;
-    color: white;
-    grid-column: 3/span 2;
-    grid-row: 3
+    width: 100%;
+    height: 100%;
+    background-color: white;
+    color: lightgray;
+    margin: 0 auto; 
+    
+}
+
+.innerDiv {
+    background-color: white;
+    /* animation: signInAnimation .5s ease-out infinite; */
+}
+
+.innerDiv > h1 {
+    font-size: 10rem;
+    text-transform: uppercase;
+    animation: textAnimation 1s linear infinite;
+    text-align: center; 
+    margin: 0 auto;
+}
+
+@keyframes textAnimation {
+    0% { text-shadow: 0 0 10px rgba(190, 190, 190,1); color: transparent }
+    20% { text-shadow: 0 0 30px rgba(190, 190, 190, 0.8); 
+        color: transparent }
+    60% { text-shadow: 0 0 40px rgba(190, 190, 190, 0.6); 
+        color: transparent}
+    80% { text-shadow: 0 0 50px rgba(190, 190, 190, 0.5); 
+        color: transparent }
+    100%{ text-shadow: 0 0 90px rgba(190, 190, 190, 0.3);
+        color: transparent }
+}
+
+@keyframes signInAnimation {
+    0%{ opacity: 0 }
+    10% { opacity: .3 }
+    30% { opacity: .6 }
+    40% { opacity: .9 }
+    60% { opacity: 1 }
+    80% { opacity: .3 }
+    100%{ opacity: 0 }
 }
