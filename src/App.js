@@ -28,14 +28,14 @@ const App = props => {
 
   useEffect(()=> {
     fetchArtObjects()
-  })
+  },[])
 
   const onFetchArt = 
     () => {dispatch(actions.fetchArt())}
 
   useEffect (() => {
       onFetchArt();
-  })
+  }, [])
 
   const eyeAnimate = (event) => {
     let ball = document.getElementById("LogoBall");

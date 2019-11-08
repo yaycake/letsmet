@@ -118,6 +118,7 @@ const Gallery = (props) => {
     const galleryStrip = (
         userGallery.map((art, index ) => 
             <PreviewTile
+                activeTile = { curArtwork.objectId === art.objectId ? true : false }
                 clicked = { () => selectArtPreviewHandler(       art.title,
                     art.artistDisplayName, 
                     art.medium,  
