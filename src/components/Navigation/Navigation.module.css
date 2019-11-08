@@ -37,7 +37,7 @@
 }
 
 .signOut {
-    opacity: .5;
+    /* opacity: .5; */
 }
 
 .AboutLink {
@@ -46,5 +46,5 @@
 }
 
 .AboutLink:hover{
-    color: orange; 
+    color: rgba(120,120,120,1); 
 }

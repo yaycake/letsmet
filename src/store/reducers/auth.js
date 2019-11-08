@@ -1,6 +1,7 @@
 import * as actionTypes from '../actions/actionTypes'; 
 import { updateObject } from '../../shared/utility'
 
+
 const initialState = {
     username: null,
     userId: null, 
@@ -57,6 +58,26 @@ const saveUsernameFail = (state, action) => {
     })
 }
 
+const startPullUserInfo = ( state, action ) => {
+    return updateObject(state, {
+
+    })
+}
+
+const pullUserInfoSuccess = ( state, action ) => {
+
+    console.log(`In pullUserInfoSuccess: ${JSON.stringify(action)}`)
+    return updateObject(state, {
+        username: action.username
+    })
+}
+
+const pullUserInfoFailed = ( state, action ) => {
+    return updateObject(state, {
+        error: action.error
+    })
+}
+
 const reducer = (state = initialState, action) => {
     switch(action.type) {
         case actionTypes.AUTH_START: 
@@ -67,11 +88,19 @@ const reducer = (state = initialState, action) => {
             return authFail(state, action)
         case actionTypes.AUTH_LOGOUT:
             return authLogout (state,action)
+
+        case actionTypes.START_PULL_USER_INFO:
+            return startPullUserInfo(state, action)
+        case actionTypes.PULL_USER_INFO_FAILED: 
+            return pullUserInfoFailed(state, action)
+        case actionTypes.PULL_USER_INFO_SUCCESS:
+            return pullUserInfoSuccess(state, action)
+        
         case actionTypes.START_SAVE_USERNAME: 
             return startSaveUsername(state, action)
         case actionTypes.SAVE_USERNAME_SUCCESS: 
             return saveUsernameSuccess(state, action)
-        case actionTypes.SAVE_USERNAME_FAIL: 
+        case actionTypes.SAVE_USERNAME_FAILED: 
             return saveUsernameFail(state,action)
         default: 
             return state

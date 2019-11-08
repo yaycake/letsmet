@@ -38,7 +38,6 @@ const initObjectsFailed = (state, action) => {
     })
 }
 
-
 const startFetchArt = ( state, action ) => {
     return updateObject( state, {
         error: null, 
