@@ -13,17 +13,16 @@
 }
 
 .innerDiv > h1 {
-    font-size: 10rem;
+    font-size: 9rem;
+    font-weight: bolder;
     text-transform: uppercase;
-    animation: textAnimation 1s linear infinite;
+    animation: textAnimation 1s linear forwards;
     text-align: center; 
     margin: 0 auto;
 }
 
 @keyframes textAnimation {
     0% { text-shadow: 0 0 10px rgba(190, 190, 190,1); color: transparent }
-    20% { text-shadow: 0 0 30px rgba(190, 190, 190, 0.8); 
-        color: transparent }
     60% { text-shadow: 0 0 40px rgba(190, 190, 190, 0.6); 
         color: transparent}
     80% { text-shadow: 0 0 50px rgba(190, 190, 190, 0.5); 

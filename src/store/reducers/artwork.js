@@ -20,7 +20,7 @@ const initialState = {
 
 const startInitObjects = (state, action) => {
     return updateObject( state, {
-        loading: true, 
+        loading: false, 
     })
 }
 

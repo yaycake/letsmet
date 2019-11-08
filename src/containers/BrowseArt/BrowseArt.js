@@ -9,6 +9,7 @@ import ArtInfo from '../../components/Artwork/ArtInfo/ArtInfo';
 import LikeButton from '../../components/Artwork/LikeButton/LikeButton';
 import InfoButton from '../../components/Artwork/InfoButton/InfoButton'; 
 import Error from '../../components/UI/Error/Error'
+import Spinner from '../../components/UI/Spinner/Spinner'
 
 const BrowseArt = props => {
     //redux props
@@ -22,6 +23,7 @@ const BrowseArt = props => {
     let dataId = useSelector(state => state.myGallery.dataId)
 
     const error = useSelector(state => state.artwork.error)
+    const loading = useSelector(state => state.artwork.loading)
 
     const userGallery = useSelector(state => state.myGallery.gallery);
     const token = useSelector(state => state.auth.token);
@@ -104,9 +106,8 @@ const BrowseArt = props => {
         errorMessage = <Error message={error.message}></Error>
     }
 
-    return (
-        <div className = { styles.BrowseArt }>
-
+    let browseArtContent = (
+        <div>
             { error && errorMessage }
 
             <Artwork 
@@ -136,6 +137,13 @@ const BrowseArt = props => {
                 />
             </div>
             <NextButton clicked = { onFetchArt } />
+        </div>
+    )
+
+    return (
+        <div className = { styles.BrowseArt }>
+
+            { loading ? <Spinner></Spinner> : browseArtContent }
         </div>
     )
 }

@@ -40,14 +40,11 @@ const App = props => {
   const eyeAnimate = (event) => {
     let ball = document.getElementById("LogoBall");
     let x = event.clientX * 50 / window.innerWidth + "%"
-    let y = event.clientY * 50 / window.innerHeight + "%"
+    let y = event.clientY * 60 / window.innerHeight + "%"
     ball.style.left = x; 
     ball.style.top = y;
     ball.style.transform = "translate("+x+", "+y+")"
 }
-
-  
-
 
   let routes = (
     <Switch>
