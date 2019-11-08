@@ -35,6 +35,7 @@ export const addGallery = ( token, userId, artwork) => {
                     dataId: response.data.name, 
                     ...artwork
                 }))
+                
             dispatch(fetchGallery(token, userId))
         })
         .catch(error => {
@@ -91,56 +92,57 @@ export const startFetchGallery = () => {
     }
 };
 
+export const fetchGalleryFailed = (error) => {
+    return {
+        type: actionTypes.FETCH_GALLERY_FAILED,
+        error: error
+    }
+}
+
 export const fetchGallery = (token, userId) => {
     console.log(`fetchGallery AXN: userId: ${userId}`)
     return dispatch => {
         dispatch(startFetchGallery());
 
-        const queryParams =  `?auth=${token}`
-    
-        console.log(`FetchGalleryAXN URL: https://letsmet-43e41.firebaseio.com/users/${userId}/gallery.json${queryParams}`)
-
-        axios.get(`https://letsmet-43e41.firebaseio.com/users/${userId}/gallery.json${queryParams}` )
+        // const queryParams =  ``
+        axios.get(`https://letsmet-43e41.firebaseio.com/users/${userId}/gallery.json?auth=${token}` )
         .then( response => {
-
-            console.log(`inFetchGalleryActions`)
-
-            console.log(`inFetchGalleryActions: response ${JSON.stringify(response)}`)
-
-            const fetchedGallery = [];
-
-            Object.entries(response.data).map(
-                art => 
-                    fetchedGallery.push({
-                        dataId: art[0],
-                        title: art[1].title, 
-                        artistDisplayName: art[1].artistDisplayName, 
-                        medium: art[1].medium, 
-                        primaryImage: art[1].primaryImage, 
-                        primaryImageSmall: art[1].primaryImageSmall,
-                        objectId: art[1].objectId
-                    })    
-            )
-            dispatch(fetchGallerySuccess(fetchedGallery))
+            dispatch(fetchGallerySuccess(response.data))
         })
-        .catch(err => {
-            console.log(`Error Fetching Gallery:${err}`)
-            dispatch(fetchGalleryFail(err))
+        .catch(error => {
+            console.log(`Error Fetching Gallery:${error}`)
+            dispatch(fetchGalleryFailed(error))
         })
     }
 };
 
 
-export const fetchGallerySuccess = ( gallery ) => {
+export const fetchGallerySuccess = ( fetchGalleryResponse ) => {
+    let fetchedGallery = [];
+    let emptyGallery = null
+
+    if (fetchGalleryResponse.length === 0 ) {
+        emptyGallery = true
+    } else {
+        emptyGallery = false
+
+        Object.entries(fetchGalleryResponse).map(
+            art => 
+                fetchedGallery.push({
+                    dataId: art[0],
+                    title: art[1].title, 
+                    artistDisplayName: art[1].artistDisplayName, 
+                    medium: art[1].medium, 
+                    primaryImage: art[1].primaryImage, 
+                    primaryImageSmall: art[1].primaryImageSmall,
+                    objectId: art[1].objectId
+                })    
+        )
+    }
+
     return {
         type: actionTypes.FETCH_GALLERY_SUCCESS,
-        gallery: gallery
-    }
-};
-
-export const fetchGalleryFail = (error) => {
-    return {
-        type: actionTypes.FETCH_GALLERY_FAIL, 
-        error: error
+        gallery: fetchedGallery, 
+        emptyGallery: emptyGallery
     }
 };

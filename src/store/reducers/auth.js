@@ -1,6 +1,5 @@
 import * as actionTypes from '../actions/actionTypes'; 
 import { updateObject } from '../../shared/utility'
-import { saveUsername } from '../actions';
 
 const initialState = {
     username: null,
@@ -31,7 +30,8 @@ const authFail = (state, action ) => {
 const authLogout = (state, action ) => {
     return updateObject( state, {
         token: null, 
-        userId: null
+        userId: null, 
+        username: null, 
     })
 }
 

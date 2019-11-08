@@ -8,21 +8,16 @@
     margin: 0 auto;
     border: .4rem solid lightgray;
     border-radius: 50%;
+    overflow: hidden;
+    position: relative;
 }
 
-.LogoCircle {
+.LogoBall {
     width: 20px;
     height: 20px;
-    border: .25rem solid white;
-    margin: auto;
+    background-color: black;
+    position: absolute;
     box-sizing: border-box;
-    border-radius: 50%
-}
-
-.InnerCircle {
-    width: 20px;
-    height: 20px; 
-    border-radius: 50%;
-    background-color:black;
-    margin: auto;
+    border-radius: 50%; 
+ 
 }

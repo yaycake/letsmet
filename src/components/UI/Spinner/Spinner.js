@@ -1,8 +1,13 @@
 import React from 'react';
 import styles from './Spinner.module.css';
 
-const spinner = ( props ) => (
-    <p className = { styles.Spinner }>This is a Spinner.... loading</p>
+const Spinner = ( props ) => (
+    <div className = { styles.Spinner }>
+        <div className = {styles.innerDiv}>
+            <h1> Lets Art </h1>
+        </div>
+    </div>
+    
 );
 
-export default spinner;
+export default Spinner;

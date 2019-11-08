@@ -8,6 +8,8 @@ import NextButton from '../../components/NextButton/NextButton';
 import ArtInfo from '../../components/Artwork/ArtInfo/ArtInfo'; 
 import LikeButton from '../../components/Artwork/LikeButton/LikeButton';
 import InfoButton from '../../components/Artwork/InfoButton/InfoButton'; 
+import Error from '../../components/UI/Error/Error'
+import Spinner from '../../components/UI/Spinner/Spinner'
 
 const BrowseArt = props => {
     //redux props
@@ -21,6 +23,7 @@ const BrowseArt = props => {
     let dataId = useSelector(state => state.myGallery.dataId)
 
     const error = useSelector(state => state.artwork.error)
+    const loading = useSelector(state => state.artwork.loading)
 
     const userGallery = useSelector(state => state.myGallery.gallery);
     const token = useSelector(state => state.auth.token);
@@ -34,12 +37,10 @@ const BrowseArt = props => {
 
     const dispatch = useDispatch();
 
-    const onFetchArt = useCallback(
-        () => {dispatch(actions.startFetchArt())}, [dispatch])
+    const onFetchArt =
+        () => {dispatch(actions.fetchArt())}
     
-    // useEffect (() => {
-    //     onFetchArt();
-    // }, [])
+    
 
     const onSetGallery = useCallback((token, userId) => dispatch(actions.fetchGallery(token, userId)),[dispatch]);
 
@@ -65,13 +66,10 @@ const BrowseArt = props => {
             }
         ))
         setBookmarked(false)
-        onSetGallery(token, userId) 
+        // onSetGallery(token, userId) 
     };
 
     const addGallery = (objectDataId) => {
-        if (!token) {
-            props.history.push("/auth")
-        } else {
             dispatch(actions.addGallery(token, userId, 
                 {   title: title, 
                     artistDisplayName: artistDisplayName,
@@ -82,7 +80,10 @@ const BrowseArt = props => {
                 }
             ))
             setBookmarked(true)  
-        }
+    }
+
+    const signInRedirect = () => {
+        props.history.push("/auth")
     }
 
     const bookmarkCheck = useCallback(() => {
@@ -96,10 +97,19 @@ const BrowseArt = props => {
         } else {
             setBookmarked(false)
         }
-    }, [curObjectId])
+    }, [bookmarkCheck, curObjectId])
 
-    return (
-        <div className = { styles.BrowseArt }>
+    // If there is an error 
+    let errorMessage = null;
+
+    if (error) {
+        errorMessage = <Error message={error.message}></Error>
+    }
+
+    let browseArtContent = (
+        <div>
+            { error && errorMessage }
+
             <Artwork 
                 image = {primaryImageSmall}
                 altText = {`Title: ${ title } by ${ artistDisplayName}. Medium: ${ medium }`} 
@@ -123,9 +133,17 @@ const BrowseArt = props => {
                     bookmarkRemove = { removeGallery }
                     bookmarkStatus= {isBookmarked}
                     objectDataId = { dataId }
+                    signIn = {signInRedirect}
                 />
             </div>
             <NextButton clicked = { onFetchArt } />
+        </div>
+    )
+
+    return (
+        <div className = { styles.BrowseArt }>
+
+            { loading ? <Spinner></Spinner> : browseArtContent }
         </div>
     )
 }

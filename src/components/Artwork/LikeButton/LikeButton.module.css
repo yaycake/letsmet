@@ -10,5 +10,17 @@
 .likeIcon {
     width: 100%; 
     height: 100%; 
+    
+}
 
+.justBookmarked {
+    animation: fade-in .5s ease-out forwards; 
+}
+
+@keyframes fade-in {
+    0% { opacity: 0 }
+    20% { opacity: .2 }
+    40% { opacity: .4 }
+    70% { opacity: .8 }
+    90% { opacity: 1 }
 }

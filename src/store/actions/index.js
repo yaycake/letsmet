@@ -1,8 +1,13 @@
 export {
+    startInitObjects, 
+    initArtObjects, 
+    initObjectsFailed,
+    initObjectsSuccess,
+
     startFetchArt, 
-    setArt,
-    fetchArtFail, 
-    initArtObjects
+    fetchArt,
+    fetchArtSuccess,
+    fetchArtFail
 
 } from './artwork';
 
@@ -10,9 +15,13 @@ export {
     addGallery, 
     addGalleryFailed, 
     addGallerySuccess,
+
     removeGallery,
+    removeGalleryFailed,
+    removeGallerySuccess,
+    
     fetchGallery,
-    fetchGalleryFail, 
+    fetchGalleryFailed, 
     fetchGallerySuccess
 } from './gallery';
 

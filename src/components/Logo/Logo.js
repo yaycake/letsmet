@@ -1,14 +1,15 @@
 import React from 'react'; 
 import styles from './Logo.module.css';
 
+const logo = ( props ) => {
 
-const logo = ( props ) => (
-    <div className = {styles.Logo}>
-        <div className = {styles.LogoCircle}>
-            <div className = {styles.InnerCircle}/>
+   return (
+        <div className = {styles.Logo}>
+            <div id = "LogoBall" className = {styles.LogoBall}>
+            {/* <div className = {styles.InnerCircle}/> */}
         </div>
-        
-    </div>
-);
+    
+    </div>)
+};
 
 export default logo;

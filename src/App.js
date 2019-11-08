@@ -9,7 +9,6 @@ import { useSelector, useDispatch } from 'react-redux';
 import Auth from './containers/Auth/Auth';
 
 import Logout from './containers/Auth/Logout/Logout'
-
 import Gallery from './containers/Gallery/Gallery'
 
 // const Artwork = React.lazy(()=> {
@@ -21,22 +20,31 @@ const App = props => {
 
   const isAuthenticated = useSelector(state => state.auth.token != null)
 
+
   const dispatch = useDispatch();
 
   const fetchArtObjects = useCallback(
-    () => {
-    dispatch(actions.initArtObjects())
-  }, [dispatch])
+    () => { dispatch(actions.initArtObjects())},[dispatch]) 
 
+  useEffect(()=> {
+    fetchArtObjects()
+  })
 
-  const onFetchArt = useCallback(
-    () => {dispatch(actions.startFetchArt())}, [dispatch])
+  const onFetchArt = 
+    () => {dispatch(actions.fetchArt())}
 
   useEffect (() => {
       onFetchArt();
-  }, [])
+  })
 
-
+  const eyeAnimate = (event) => {
+    let ball = document.getElementById("LogoBall");
+    let x = event.clientX * 50 / window.innerWidth + "%"
+    let y = event.clientY * 60 / window.innerHeight + "%"
+    ball.style.left = x; 
+    ball.style.top = y;
+    ball.style.transform = "translate("+x+", "+y+")"
+}
 
   let routes = (
     <Switch>
@@ -62,7 +70,8 @@ const App = props => {
 
   return (
     <Layout>
-      <div className="App">
+      <div className="App" onMouseMove = { eyeAnimate }>
+        
        { routes }
       </div>
     </Layout>

@@ -5,7 +5,8 @@ const initialState = {
     gallery: [], 
     error: null, 
     loading: false, 
-    dataId: null
+    dataId: null, 
+    emptyGallery: true
 }
 
 const startFetchGallery = ( state, action ) => {
@@ -62,7 +63,7 @@ const removeGalleryFailed = (state, action) => {
     })
 };
 
-const fetchGalleryFail = (state, action) => {
+const fetchGalleryFailed = (state, action) => {
     return updateObject( state, {
         error: action.error, 
         loading: false
@@ -85,9 +86,10 @@ const reducer = ( state = initialState, action ) => {
             return startFetchGallery(state,action)
         case actionTypes.FETCH_GALLERY_SUCCESS:
             return fetchGallerySuccess(state, action)
+    
+
         case actionTypes.START_ADD_GALLERY:
             return startAddGallery(state,action)
- 
         case actionTypes.ADD_GALLERY_SUCCESS: 
             return addGallerySuccess(state, action)
         case actionTypes.ADD_GALLERY_FAILED: 
@@ -99,8 +101,8 @@ const reducer = ( state = initialState, action ) => {
             return removeGalleryFailed(state, action)
         case actionTypes.REMOVE_GALLERY_SUCCESS:
             return removeGallerySuccess(state, action)
-        case actionTypes.FETCH_GALLERY_FAIL:
-            return fetchGalleryFail(state,action)
+        case actionTypes.FETCH_GALLERY_FAILED:
+            return fetchGalleryFailed(state,action)
         default: 
         return state
     }
