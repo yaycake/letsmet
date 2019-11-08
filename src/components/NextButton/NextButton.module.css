@@ -5,9 +5,11 @@
     font-size: 18px;
     font-weight: bolder;
     width: 200px;
+    transition: all 1s ease-out; 
 }
 
 .NextButton:hover {
-    color: orange;
-    cursor: pointer
+    color: rgba(211,211,211,1);
+    cursor: pointer;
+    transform: scale(1.2)
 }

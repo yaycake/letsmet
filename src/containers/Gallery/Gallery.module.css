@@ -32,7 +32,7 @@
     background-color: white;
 }
 .GalleryFrame::-webkit-scrollbar-thumb {
-  background-color: lightgray;
+  background-color: whitesmoke;
   /* outline: 1px solid slategrey; */
 }
 

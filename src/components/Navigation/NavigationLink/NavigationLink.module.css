@@ -4,7 +4,7 @@
 }
 
 .AboutLink:hover{
-    color: rgb(170, 136, 72); 
+    color: rgb(211, 211, 211); 
 }
 
 .NavLink {
@@ -13,5 +13,5 @@
 }
 
 .NavLink:hover {
-    color: orange;  
+    color: lightgray;  
 }

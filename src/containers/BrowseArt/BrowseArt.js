@@ -40,7 +40,6 @@ const BrowseArt = props => {
     const onFetchArt =
         () => {dispatch(actions.fetchArt())}
     
-    
 
     const onSetGallery = useCallback((token, userId) => dispatch(actions.fetchGallery(token, userId)),[dispatch]);
 
