@@ -98,7 +98,9 @@ export const auth = (username, email, password, isSignup ) => {
         .then( response => {
             console.log(`AUTH RESPONSE: ${response}`);
             dispatch(authSuccess(response.data.idToken, response.data.localId))
-            dispatch(saveUsername(username, response.data.idToken, response.data.localId))
+            if (isSignup){
+                dispatch(saveUsername(username, response.data.idToken, response.data.localId))
+            }
             dispatch(checkAuthTimeout(response.data.expiresIn))
         })
         .catch(error => {

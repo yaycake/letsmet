@@ -7,6 +7,7 @@ import Artwork from '../../components/Artwork/Artwork'
 import InfoButton from '../../components/Artwork/InfoButton/InfoButton';
 import ArtInfo from '../../components/Artwork/ArtInfo/ArtInfo'
 import LikeButton from '../../components/Artwork/LikeButton/LikeButton'
+import Error from '../../components/UI/Error/Error';
 
 
 const Gallery = (props) => {
@@ -133,6 +134,13 @@ const Gallery = (props) => {
             />)
     )
 
+    // If there is an error 
+    let errorMessage = null;
+
+    if (error) {
+        errorMessage = <Error message={error.message}></Error>
+    }
+
     return (
         <div>
             <div className = { styles.GalleryFrame }>
@@ -142,6 +150,9 @@ const Gallery = (props) => {
             </div>
 
             <div className = { styles.Gallery }>
+                
+                { error && errorMessage }
+
                 <Artwork 
                     image = {curArtwork.primaryImageSmall}
                     altText = {`Title: ${ curArtwork.title } by ${ curArtwork.artistDisplayName}.`} />  

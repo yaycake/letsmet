@@ -5,6 +5,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { Redirect } from 'react-router-dom';
 import Input from '../../components/UI/Input/Input';
 import Button from '../../components/UI/Button/Button';
+import Error from '../../components/UI/Error/Error';
 import { updateObject, checkValidity } from '../../shared/utility';
 import * as actions from '../../store/actions/index';
 import Spinner from '../../components/UI/Spinner/Spinner'
@@ -65,9 +66,7 @@ const Auth = ( props ) => {
     );
 
     // Redux Store Props
-
     const error = useSelector (state => state.auth.error);
-
     const loading =  useSelector( state=> state.auth.loading );
 
 
@@ -77,8 +76,6 @@ const Auth = ( props ) => {
     const onAuth = (username, email, password, isSignup) => {
         dispatch(actions.auth(username, email, password, isSignup))
     };
-
-   
 
     const [isSignup, setIsSignup] = useState(true);
     
@@ -136,15 +133,17 @@ const Auth = ( props ) => {
         ))
     )
 
+    // If there is an error 
     let errorMessage = null;
 
     if (error) {
-        errorMessage = error.message.split( '_').join(' ')
+        errorMessage = <Error message={error.message}></Error>
     }
 
     //Redirect if Authenticated
 
     let authRedirect = null;
+    
     if (token) {
         authRedirect = <Redirect to="/"/>
     }
@@ -161,7 +160,8 @@ const Auth = ( props ) => {
                 </div>
             </div>
             <form onSubmit = {submitHandler} className = { styles.AuthForm }>
-                { error ? <p className = {styles.errorMessage}>{errorMessage}! Try Again</p> : null }
+                
+                { error && errorMessage }
 
                 { loading ? <Spinner/> : form }
 

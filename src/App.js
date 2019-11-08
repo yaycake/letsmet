@@ -24,17 +24,18 @@ const App = props => {
   const dispatch = useDispatch();
 
   const fetchArtObjects = useCallback(
-    () => {
-    dispatch(actions.initArtObjects())
-  }, [dispatch])
+    () => { dispatch(actions.initArtObjects())},[dispatch]) 
 
+  useEffect(()=> {
+    fetchArtObjects()
+  })
 
-  const onFetchArt = useCallback(
-    () => {dispatch(actions.startFetchArt())}, [dispatch])
+  const onFetchArt = 
+    () => {dispatch(actions.fetchArt())}
 
   useEffect (() => {
       onFetchArt();
-  }, [])
+  })
 
   const eyeAnimate = (event) => {
     let ball = document.getElementById("LogoBall");

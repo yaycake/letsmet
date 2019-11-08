@@ -8,9 +8,10 @@
 
 .GalleryFrame { 
     position: absolute;
-    height: 60%;
+    height: 70%;
     width: 100px;
-    left: 1rem;
+    bottom: -5rem;
+    left: 2.5rem;
     overflow: auto;
 }
 
