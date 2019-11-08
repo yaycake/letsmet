@@ -9,6 +9,7 @@ const Navigation = props => {
 
     const isAuthenticated = useSelector(state => state.auth.token != null)
 
+    const username = useSelector(state => state.auth.username)
 
     let userOptions = (
         <div className = {styles.mainNavLinks}>
@@ -58,9 +59,17 @@ const Navigation = props => {
         )
     }
 
+   
+
+    let title = "LETS MET"
+
+    if (isAuthenticated){
+        title = `${ username } -GGENHEIM`
+    }
+
     return (
         <div className = {styles.Navigation}>
-            <PageTitle pageTitle = "LETS MET"></PageTitle>
+            <PageTitle pageTitle = {title}></PageTitle>
             <Logo></Logo>
             {userOptions}   
         </div>

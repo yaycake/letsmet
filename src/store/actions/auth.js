@@ -36,20 +36,53 @@ export const checkAuthTimeout = (expirationTime) => {
     }
 }
 
-const startSaveUsername = () => {
+export const startPullUserInfo = () => {
+    return {
+        type: actionTypes.START_PULL_USER_INFO
+    }
+}
+
+export const pullUserInfoSuccess = ( username ) => {
+    return {
+        type: actionTypes.PULL_USER_INFO_SUCCESS,
+        username: username
+    }
+}
+export const pullUserInfoFailed = ( error ) => {
+    return {
+        type: actionTypes.PULL_USER_INFO_FAILED, 
+        error: error
+    }
+}
+
+const pullUserInfo = ( token, userId ) => {
+    return dispatch => {
+
+        dispatch(startPullUserInfo());
+
+        axios.get(`https://letsmet-43e41.firebaseio.com/users/${userId}/username.json?auth=${token}`)
+        .then( response => {
+            dispatch(pullUserInfoSuccess(response.data))
+        }).catch(error => {
+            dispatch(pullUserInfoFailed(error))
+        })
+    }
+}
+
+export const startSaveUsername = () => {
     return {
         type: actionTypes.START_SAVE_USERNAME
     }
 }
 
-const saveUsernameFail = (error) => {
+export const saveUsernameFailed = (error) => {
     return {
-        type: actionTypes.SAVE_USERNAME_FAIL, 
+        type: actionTypes.SAVE_USERNAME_FAILED, 
         error: error
     }
 }
 
-const saveUsernameSuccess = ( username ) => {
+export const saveUsernameSuccess = ( username ) => {
     return {
         type: actionTypes.SAVE_USERNAME_SUCCESS, 
         username: username
@@ -59,14 +92,14 @@ const saveUsernameSuccess = ( username ) => {
 export const saveUsername = ( username, token, userId ) => {
     return dispatch =>{
         dispatch(startSaveUsername());
-        axios.put(`https://letsmet-43e41.firebaseio.com/users/${userId}.json?auth=${token}`, {username: username})
+        axios.patch(`https://letsmet-43e41.firebaseio.com/users/${userId}.json?auth=${token}`, {username: username})
         .then( response => {
             dispatch(saveUsernameSuccess({
                 ...username}))
         })
         .catch(error => {
             console.log(`saveUsernameFail: ${error}`)
-            dispatch(saveUsernameFail(error))
+            dispatch(saveUsernameFailed(error))
         })
     }
 }
@@ -100,6 +133,9 @@ export const auth = (username, email, password, isSignup ) => {
             dispatch(authSuccess(response.data.idToken, response.data.localId))
             if (isSignup){
                 dispatch(saveUsername(username, response.data.idToken, response.data.localId))
+                
+            } else {
+                dispatch(pullUserInfo(response.data.idToken, response.data.localId))
             }
             dispatch(checkAuthTimeout(response.data.expiresIn))
         })

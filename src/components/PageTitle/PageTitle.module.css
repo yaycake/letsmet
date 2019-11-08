@@ -8,6 +8,7 @@
     font-weight: bolder; 
     cursor: pointer;
     color: black; 
+    text-transform: uppercase
 }
 
 .PageTitle:hover {
@@ -18,6 +19,12 @@
     position: fixed; 
     top: 5rem; 
     transform: rotate(-90deg)
+}
+
+.signedInTitle1 {
+    position: fixed; 
+    top: 8rem;
+    transform: rotate(-90deg);
 }
 
 .title2 {

@@ -37,8 +37,11 @@ const BrowseArt = props => {
 
     const dispatch = useDispatch();
 
-    const onFetchArt =
-        () => {dispatch(actions.fetchArt())}
+    const onFetchArt = () => {dispatch(actions.fetchArt())}
+
+    useEffect(()=> {
+        onFetchArt()
+    },[])
     
 
     const onSetGallery = useCallback((token, userId) => dispatch(actions.fetchGallery(token, userId)),[dispatch]);
