@@ -97,16 +97,9 @@ export const fetchGallery = (token, userId) => {
         dispatch(startFetchGallery());
 
         const queryParams =  `?auth=${token}`
-    
-        console.log(`FetchGalleryAXN URL: https://letsmet-43e41.firebaseio.com/users/${userId}/gallery.json${queryParams}`)
 
         axios.get(`https://letsmet-43e41.firebaseio.com/users/${userId}/gallery.json${queryParams}` )
         .then( response => {
-
-            console.log(`inFetchGalleryActions`)
-
-            console.log(`inFetchGalleryActions: response ${JSON.stringify(response)}`)
-
             const fetchedGallery = [];
 
             Object.entries(response.data).map(
