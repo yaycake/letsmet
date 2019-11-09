@@ -16,11 +16,18 @@ import { composeWithDevTools } from 'redux-devtools-extension';
 
 const composeEnhancers = composeWithDevTools({trace: true})
 
-const rootReducer = combineReducers({
+const appReducer = combineReducers({
     artwork: artworkReducer, 
     auth: authReducer, 
     myGallery: galleryReducer,
 })
+
+const rootReducer = (state,action) =>{
+    if (action.type === 'AUTH_LOGOUT') {
+        state = undefined
+    }
+    return appReducer(state,action)
+}
 
 const store = createStore(rootReducer, composeEnhancers(applyMiddleware(thunk)))
 
