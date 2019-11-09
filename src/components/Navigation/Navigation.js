@@ -41,12 +41,6 @@ const Navigation = props => {
                         >ABOUT
                     </NavigationLink>
                 </div>
-                
-                <div className={styles.rotateLink}> 
-                    <NavigationLink path ="/gallery">
-                        Gallery
-                    </NavigationLink>
-                </div>
 
                 <div className={[styles.rotateLink, styles.signOut].join(' ')}> 
                     <NavigationLink path = "/logout">
