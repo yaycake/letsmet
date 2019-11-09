@@ -28,7 +28,7 @@ const App = props => {
 
   useEffect(()=> {
     fetchArtObjects()
-  },[])
+  },[fetchArtObjects])
 
   const onFetchArt = 
     () => {dispatch(actions.fetchArt())}
