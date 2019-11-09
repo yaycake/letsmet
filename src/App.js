@@ -58,7 +58,6 @@ const App = props => {
   if (isAuthenticated) {
     routes = (
       <Switch>
-        <Route path="/gallery" exact component = { Gallery }/>
         <Route path="/about" component = { About }/>
         <Route path="/auth" component = { Auth }/>
         <Route path="/logout" exact component = { Logout }/>
