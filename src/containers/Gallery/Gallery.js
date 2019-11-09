@@ -47,11 +47,15 @@ const Gallery = (props) => {
     const resetArtwork = (newIndex) => {
         // onSetGallery(token, userId);
 
-        const nextArtwork = {...userGallery[newIndex]}
+        let nextArtwork = {...userGallery[newIndex]}
+
+        if (newIndex < 0){
+            nextArtwork = { ...userGallery[1]}
+        }
 
         setCurArtwork({
             title: nextArtwork.title,
-            artistDisplayName: lastArtwork.artistDisplayName,
+            artistDisplayName: nextArtwork.artistDisplayName,
             medium: nextArtwork.medium,  
             objectId: nextArtwork.objectId,  
             primaryImage: nextArtwork.primaryImage,  
@@ -144,6 +148,7 @@ const Gallery = (props) => {
 
     return (
         <div>
+
             <div className = { styles.GalleryFrame }>
                 <div className = {styles.GalleryStrip}>
                     {galleryStrip}

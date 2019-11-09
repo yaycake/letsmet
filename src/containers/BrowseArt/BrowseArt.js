@@ -39,9 +39,9 @@ const BrowseArt = props => {
 
     const onFetchArt = () => {dispatch(actions.fetchArt())}
 
-    useEffect(()=> {
-        onFetchArt()
-    },[])
+    // useEffect(()=> {
+    //     onFetchArt()
+    // },[])
     
 
     const onSetGallery = useCallback((token, userId) => dispatch(actions.fetchGallery(token, userId)),[dispatch]);
@@ -100,23 +100,43 @@ const BrowseArt = props => {
             index: null
         })
     }
-   
 
     //set Bookmark settings
     const [isBookmarked, setBookmarked] = useState(null)
 
+    const resetArtwork = (newIndex) => {
+        // onSetGallery(token, userId);
+
+        let nextArtwork = {...userGallery[newIndex]}
+        if (newIndex < 0){
+            nextArtwork = { ...userGallery[1]}
+        }
+        setCurArtwork({
+            title: nextArtwork.title,
+            artistDisplayName: nextArtwork.artistDisplayName,
+            medium: nextArtwork.medium,  
+            objectId: nextArtwork.objectId,  
+            primaryImage: nextArtwork.primaryImage,  
+            primaryImageSmall: nextArtwork.primaryImageSmall,
+            dataId: nextArtwork.dataId
+        })
+    }
+
     const removeGallery = (objectDataId) => {
+        console.log(`in removeGallery`)
         dispatch(actions.removeGallery(token, userId, 
-            {   title: title, 
-                artistDisplayName: artistDisplayName, 
-                medium: medium, 
-                objectId: curObjectId, 
-                primaryImage: primaryImage, 
-                primaryImageSmall: primaryImageSmall, 
-                dataId: dataId
+            {   title: curArtwork.title, 
+                artistDisplayName: curArtwork.artistDisplayName, 
+                medium: curArtwork.medium, 
+                objectId: curArtwork.objectId, 
+                primaryImage: curArtwork.primaryImage, 
+                primaryImageSmall: curArtwork.primaryImageSmall, 
+                dataId: curArtwork.dataId
             }
         ))
+
         setBookmarked(false)
+        resetArtwork(curArtwork.index -1)
         // onSetGallery(token, userId) 
     };
 
@@ -138,9 +158,10 @@ const BrowseArt = props => {
     }
 
     const bookmarkCheck = useCallback(() => {
+        console.log(`in bookmarkCheck`)
         //returns truthy/falsey
-        return userGallery.some((art) => art.objectId === curObjectId)
-    }, [curObjectId, userGallery])
+        return userGallery.some((art) => art.objectId === curArtwork.objectId)
+    }, [curArtwork.objectId, userGallery])
 
      useEffect(() => {
         if (bookmarkCheck(curObjectId) === true ){
@@ -197,8 +218,7 @@ const BrowseArt = props => {
                                 art.primaryImage,  
                                 art.primaryImageSmall,
                                 art.dataId, 
-                                index) 
-                    }
+                                index)}
                     key = { art.objectId }
                     altText = { art.title }
                     image = {art.primaryImageSmall}
@@ -212,9 +232,7 @@ const BrowseArt = props => {
     let browseArtContent = (
         <div>
             { error && errorMessage }
-            
-                    { token && galleryStrip}
-
+            { token && galleryStrip}
             <Artwork 
                 image = {curArtwork.primaryImageSmall}
                 altText = {`Title: ${ curArtwork.title } by ${ curArtwork.artistDisplayName}. Medium: ${ curArtwork.medium }`} 
@@ -244,8 +262,6 @@ const BrowseArt = props => {
             <NextButton clicked = { browseArtHandler } />
         </div>
     )
-
-
 
     return (
         <div className = { styles.BrowseArt }>

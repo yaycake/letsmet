@@ -33,9 +33,9 @@ const App = props => {
   const onFetchArt = 
     () => {dispatch(actions.fetchArt())}
 
-  // useEffect (() => {
-  //     onFetchArt();
-  // }, [])
+  useEffect (() => {
+      onFetchArt();
+  }, [])
 
   const eyeAnimate = (event) => {
     let ball = document.getElementById("LogoBall");
