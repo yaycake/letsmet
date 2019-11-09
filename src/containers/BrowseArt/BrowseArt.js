@@ -37,12 +37,7 @@ const BrowseArt = props => {
 
     const dispatch = useDispatch();
 
-    const onFetchArt = () => {dispatch(actions.fetchArt())}
-
-    // useEffect(()=> {
-    //     onFetchArt()
-    // },[])
-    
+    const onFetchArt = () => {dispatch(actions.fetchArt())}  
 
     const onSetGallery = useCallback((token, userId) => dispatch(actions.fetchGallery(token, userId)),[dispatch]);
 
@@ -51,7 +46,6 @@ const BrowseArt = props => {
             onSetGallery(token, userId);
         }
     }, [onSetGallery, token, userId, dataId])
-
 
     const [curArtwork, setCurArtwork] = useState({
         title: title,
@@ -84,10 +78,8 @@ const BrowseArt = props => {
         dataId
     ])
 
-
-
     const browseArtHandler = () => {
-        console.log(`in browseARtHandler `)
+        console.log(`in browseArtHandler `)
         onFetchArt();
         setCurArtwork({
             title: title,
@@ -206,19 +198,19 @@ const BrowseArt = props => {
     const galleryStrip = (
         <div className = { styles.GalleryFrame }>
             <div className = {styles.GalleryStrip}>
-            {userGallery.map((art, index ) => 
+            { userGallery.map((art, index ) => 
                 <PreviewTile
                     activeTile = { curArtwork.objectId === art.objectId ? true : false }
                     clicked = { () => 
-                        selectArtPreviewHandler(     
-                                art.title,
-                                art.artistDisplayName, 
-                                art.medium,  
-                                art.objectId,  
-                                art.primaryImage,  
-                                art.primaryImageSmall,
-                                art.dataId, 
-                                index)}
+                    selectArtPreviewHandler(     
+                        art.title,
+                        art.artistDisplayName, 
+                        art.medium,  
+                        art.objectId,  
+                        art.primaryImage,  
+                        art.primaryImageSmall,
+                        art.dataId, 
+                        index)}
                     key = { art.objectId }
                     altText = { art.title }
                     image = {art.primaryImageSmall}
