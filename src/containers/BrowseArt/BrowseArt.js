@@ -11,6 +11,7 @@ import InfoButton from '../../components/Artwork/InfoButton/InfoButton';
 import Error from '../../components/UI/Error/Error'
 import Spinner from '../../components/UI/Spinner/Spinner'
 import PreviewTile from '../../components/PreviewTile/PreviewTile';
+import Gallery from '../Gallery/Gallery'
 
 const BrowseArt = props => {
 
@@ -195,36 +196,49 @@ const BrowseArt = props => {
         errorMessage = <Error message={error.message}></Error>
     }
 
-    const galleryStrip = (
-        <div className = { styles.GalleryFrame }>
-            <div className = {styles.GalleryStrip}>
-            { userGallery.map((art, index ) => 
-                <PreviewTile
-                    activeTile = { curArtwork.objectId === art.objectId ? true : false }
-                    clicked = { () => 
-                    selectArtPreviewHandler(     
-                        art.title,
-                        art.artistDisplayName, 
-                        art.medium,  
-                        art.objectId,  
-                        art.primaryImage,  
-                        art.primaryImageSmall,
-                        art.dataId, 
-                        index)}
-                    key = { art.objectId }
-                    altText = { art.title }
-                    image = {art.primaryImageSmall}
-                    id = { art.objectId }
-                />)}
-            </div>
-        </div>
-    )
+   
+
+    // const galleryStrip = (
+    //     <div className = { styles.GalleryFrame }>
+    //         <div className = {styles.GalleryStrip}>
+    //         { userGallery.map((art, index ) => 
+    //             <PreviewTile
+    //                 activeTile = { curArtwork.objectId === art.objectId ? true : false }
+    //                 clicked = { () => 
+    //                 selectArtPreviewHandler(     
+    //                     art.title,
+    //                     art.artistDisplayName, 
+    //                     art.medium,  
+    //                     art.objectId,  
+    //                     art.primaryImage,  
+    //                     art.primaryImageSmall,
+    //                     art.dataId, 
+    //                     index)}
+    //                 key = { art.objectId }
+    //                 altText = { art.title }
+    //                 image = {art.primaryImageSmall}
+    //                 id = { art.objectId }
+    //             />)}
+    //         </div>
+    //     </div>
+    // )
+
+    // const galleryStrip = (
+    //     <Gallery
+    //         clickedArt = { selectArtPreviewHandler }
+    //         curArtworkObjectId = {curArtwork.objectId}
+    //     />
+    // )
 
 
     let browseArtContent = (
         <div>
             { error && errorMessage }
-            { token && galleryStrip}
+            { token && 
+                <Gallery 
+                    clickedArt = { selectArtPreviewHandler }
+                    curArtworkObjectId = {curArtwork.objectId}
+            />}
             <Artwork 
                 image = {curArtwork.primaryImageSmall}
                 altText = {`Title: ${ curArtwork.title } by ${ curArtwork.artistDisplayName}. Medium: ${ curArtwork.medium }`} 
