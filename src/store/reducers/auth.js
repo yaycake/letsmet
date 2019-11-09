@@ -60,7 +60,7 @@ const saveUsernameFail = (state, action) => {
 
 const startPullUserInfo = ( state, action ) => {
     return updateObject(state, {
-
+       loading: true
     })
 }
 
@@ -68,7 +68,9 @@ const pullUserInfoSuccess = ( state, action ) => {
 
     console.log(`In pullUserInfoSuccess: ${JSON.stringify(action)}`)
     return updateObject(state, {
-        username: action.username
+        username: action.username,
+        error: null, 
+        loading: false
     })
 }
 
