@@ -96,6 +96,7 @@ export const saveUsername = ( username, token, userId ) => {
         .then( response => {
             dispatch(saveUsernameSuccess({
                 ...username}))
+            dispatch(pullUserInfo(token, userId))
         })
         .catch(error => {
             console.log(`saveUsernameFail: ${error}`)
@@ -133,7 +134,6 @@ export const auth = (username, email, password, isSignup ) => {
             dispatch(authSuccess(response.data.idToken, response.data.localId))
             if (isSignup){
                 dispatch(saveUsername(username, response.data.idToken, response.data.localId))
-                
             } else {
                 dispatch(pullUserInfo(response.data.idToken, response.data.localId))
             }
