@@ -9,7 +9,6 @@ import { useSelector, useDispatch } from 'react-redux';
 import Auth from './containers/Auth/Auth';
 
 import Logout from './containers/Auth/Logout/Logout'
-import Gallery from './containers/Gallery/Gallery'
 
 // const Artwork = React.lazy(()=> {
 //   return import('./components/Artwork/Artwork')
@@ -19,7 +18,6 @@ import Gallery from './containers/Gallery/Gallery'
 const App = props => {
 
   const isAuthenticated = useSelector(state => state.auth.token != null)
-
 
   const dispatch = useDispatch();
 

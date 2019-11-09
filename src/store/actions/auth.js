@@ -129,7 +129,7 @@ export const auth = (username, email, password, isSignup ) => {
 
         axios.post(apiCall, authData)
         .then( response => {
-            console.log(`AUTH RESPONSE: ${response}`);
+            console.log(`AUTH RESPONSE: ${JSON.stringify(response)}`);
             dispatch(authSuccess(response.data.idToken, response.data.localId))
             if (isSignup){
                 dispatch(saveUsername(username, response.data.idToken, response.data.localId))
