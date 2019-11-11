@@ -9,7 +9,11 @@ export {
     fetchArtSuccess,
     fetchArtFail, 
 
-    setPreviousArtwork
+    setPreviousArtwork, 
+    startFetchPreviousArt, 
+    fetchPreviousArt, 
+    // fetchPreviousArtSuccess,
+    fetchPreviousArtFailed
 
 } from './artwork';
 

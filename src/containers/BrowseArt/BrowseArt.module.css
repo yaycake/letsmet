@@ -61,5 +61,19 @@
   }
 
 
+  .nextButtonWrapper {
+      width: 450px; 
+      margin: 0 auto; 
+      position: relative; 
+      height: 50px;
+  }
 
+  .backButton {
+    position: absolute;
+    left: 0;
+  }
   
+  .forwardButton {
+    position: absolute;
+    right: 0
+  }

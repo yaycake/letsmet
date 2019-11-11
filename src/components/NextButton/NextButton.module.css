@@ -1,10 +1,6 @@
 .NextButton {
-    position: absolute;
-    right: 14rem;
-    bottom: -1rem;
     font-size: 18px;
     font-weight: bolder;
-    width: 200px;
     transition: all 1s ease-out; 
 }
 

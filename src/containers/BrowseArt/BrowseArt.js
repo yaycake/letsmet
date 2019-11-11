@@ -28,6 +28,8 @@ const BrowseArt = props => {
         const error = useSelector(state => state.artwork.error)
         const loading = useSelector(state => state.artwork.loading)
 
+        const previousArtwork = useSelector(state => state.artwork.previousObjectId)
+
         const userGallery = useSelector(state => state.myGallery.gallery);
         const token = useSelector(state => state.auth.token);
         const userId = useSelector( state => state.auth.userId);
@@ -47,6 +49,10 @@ const BrowseArt = props => {
 
     const setPreviousArt = (objectId) => {
         dispatch(actions.setPreviousArtwork(objectId))
+    }
+
+    const fetchPreviousArt = () => {
+        dispatch(actions.fetchPreviousArt(previousArtwork))
     }
 
 
@@ -257,6 +263,24 @@ const BrowseArt = props => {
         </div>
     )
 
+    let nextButtons = (
+
+        <div className = {styles.nextButtonWrapper}>
+            <div className = {styles.backButton}>
+            {previousArtwork && <NextButton
+                clicked = { fetchPreviousArt }
+            >  Back</NextButton> }
+            </div>
+
+            <div className = {styles.forwardButton}>
+                <NextButton
+                    clicked = { browseArtHandler }
+                >  Next</NextButton>
+            </div>
+            
+        </div>
+
+    )
 
 
     let browseArtContent = (
@@ -270,10 +294,12 @@ const BrowseArt = props => {
     
             { showFullArt ? fullArt : artworkContent }
 
-            {showFullArt ? null : <NextButton clicked = { browseArtHandler } /> }
+            {showFullArt ? null : nextButtons }
             
         </div>
     )
+
+  
 
     return (
         <div className = { styles.BrowseArt }>

@@ -73,6 +73,35 @@ const setPreviousArtwork = (state, action) =>{
     })
 }
 
+const startFetchPreviousArt = (state, action) => {
+    return updateObject (state, {
+        loading: true, 
+        error: null
+    })
+}
+
+const fetchPreviousArtSuccess = (state, action) => {
+    return updateObject (state, {
+        error: null, 
+        loading: false,
+        artwork: {
+            title: action.artwork.title, 
+            artistDisplayName: action.artwork.artistDisplayName,
+            medium: action.artwork.medium, 
+            objectId: action.artwork.objectId,
+            primaryImage: action.artwork.primaryImage, 
+            primaryImageSmall: action.artwork.primaryImageSmall
+        },
+    })
+}
+
+const fetchPreviousArtFailed = (state, action) => {
+    return updateObject (state, {
+        loading: false, 
+        error: action.error
+    })
+}
+
 const reducer = (state = initialState, action) => {
     switch(action.type) {
         case actionTypes.START_INIT_OBJECTS: 
@@ -83,6 +112,12 @@ const reducer = (state = initialState, action) => {
             return initObjectsFailed(state, action)
         case actionTypes.SET_PREVIOUS_ARTWORK:
             return setPreviousArtwork(state, action)
+        case actionTypes.START_FETCH_PREVIOUS_ART:
+            return startFetchPreviousArt(state, action)
+        case actionTypes.FETCH_PREVIOUS_ART_SUCCESS:
+            return fetchPreviousArtSuccess(state, action)
+        case actionTypes.FETCH_PREVIOUS_ART_FAILED:
+                return fetchPreviousArtFailed(state, action)
 
         case actionTypes.START_FETCH_ART: 
             return startFetchArt(state, action)
