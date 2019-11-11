@@ -70,6 +70,55 @@ export const fetchArt = () => {
     }
 }
 
+export const setPreviousArtwork = (objectId) => {
+    return {
+        type: actionTypes.SET_PREVIOUS_ARTWORK, 
+        previousObjectId: objectId 
+    }
+}
+
+export const fetchPreviousArt = (objectId) => {
+    console.log(`in fetchPreviousArt`)
+    return dispatch => {
+        dispatch(startFetchPreviousArt());
+        axios.get(`/objects/${objectId}`)
+        .then(response => {
+            dispatch(fetchArtSuccess(response.data))
+        }).catch(error => {
+            console.log(error)
+            dispatch(fetchPreviousArtFailed)
+        })
+    }
+}
+
+export const startFetchPreviousArt = () => {
+    return {
+        type: actionTypes.START_FETCH_PREVIOUS_ART
+    }
+}
+
+// export const fetchPreviousArtSuccess = () => {
+//     return {
+//         type: actionTypes.FETCH_PREVIOUS_ART_SUCCESS, 
+//         artwork: {
+//             title: artwork.title, 
+//             artistDisplayName: artwork.artistDisplayName, 
+//             medium: artwork.medium, 
+//             objectId: artwork.objectID, 
+//             primaryImage: artwork.primaryImage, 
+//             primaryImageSmall: artwork.primaryImageSmall
+//         }
+//     }
+// }
+
+export const fetchPreviousArtFailed= ( error ) => {
+    return {
+        type: actionTypes.FETCH_PREVIOUS_ART_FAILED, 
+        error: error
+    }
+}
+
+
 // const set art state, artwork is an art object
 
 export const fetchArtSuccess = (artwork) => {
