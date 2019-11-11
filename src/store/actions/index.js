@@ -7,7 +7,9 @@ export {
     startFetchArt, 
     fetchArt,
     fetchArtSuccess,
-    fetchArtFail
+    fetchArtFail, 
+
+    setPreviousArtwork
 
 } from './artwork';
 

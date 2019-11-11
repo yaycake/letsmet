@@ -70,6 +70,13 @@ export const fetchArt = () => {
     }
 }
 
+export const setPreviousArtwork = (objectId) => {
+    return {
+        type: actionTypes.SET_PREVIOUS_ARTWORK, 
+        previousObjectId: objectId 
+    }
+}
+
 // const set art state, artwork is an art object
 
 export const fetchArtSuccess = (artwork) => {

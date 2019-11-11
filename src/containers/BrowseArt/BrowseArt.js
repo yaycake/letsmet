@@ -45,6 +45,11 @@ const BrowseArt = props => {
 
     const onFetchArt = () => {dispatch(actions.fetchArt())}  
 
+    const setPreviousArt = (objectId) => {
+        dispatch(actions.setPreviousArtwork(objectId))
+    }
+
+
     const onSetGallery = useCallback((token, userId) => dispatch(actions.fetchGallery(token, userId)),[dispatch]);
 
     useEffect(() => {
@@ -86,6 +91,7 @@ const BrowseArt = props => {
 
     const browseArtHandler = () => {
         console.log(`in browseArtHandler `)
+        setPreviousArt(curArtwork.objectId)
         onFetchArt();
         setCurArtwork({
             title: title,
