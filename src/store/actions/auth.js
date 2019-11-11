@@ -140,8 +140,7 @@ export const auth = (username, email, password, isSignup ) => {
             dispatch(checkAuthTimeout(response.data.expiresIn))
         })
         .catch(error => {
-            console.log(`POST ERROR:`)
-            console.log(error);
+            console.log(`POST ERROR: ${JSON.stringify(error)}`)
             dispatch(authFail(error))
         })
     }

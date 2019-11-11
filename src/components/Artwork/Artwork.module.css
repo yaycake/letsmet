@@ -1,13 +1,6 @@
 .Artwork {
-    /* width: 60%;
-    margin: 0 auto; 
-    position: relative; */
+ 
     display: flex;
-
-    grid-column: 3/span 3;
-    grid-row: 1/span 4;
-    margin-left: -3rem;
-    margin-right: -3rem;
 }
 
 .primaryImage {

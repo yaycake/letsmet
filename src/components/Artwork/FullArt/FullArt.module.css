@@ -1,0 +1,11 @@
+.FullArt {
+    width: 100vw;
+    height: 100vh;
+}
+
+.FullArtImage {
+    margin: auto; 
+    width: 600px;
+    height: auto; 
+    border:1px solid blue;
+}
