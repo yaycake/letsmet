@@ -26,7 +26,6 @@
     }
 }
 
-
 .primaryImage {
     /* border: 1px solid blue;  */
     height: 450px; 
@@ -38,8 +37,6 @@
     opacity: 0;
     animation: fadeInArt 3s ease-out forwards; 
 }
-
-
 
 .ArtControls {
     margin-top: 1rem;
@@ -63,32 +60,5 @@
   }
 
 
-.GalleryFrame { 
-    position: absolute;
-    height: 70%;
-    width: 100px;
-    bottom: -5rem;
-    left: 2.5rem;
-    overflow: auto;
-}
 
-.GalleryStrip {
-    /* border: 1px solid purple; */
-    display: flex;
-    flex-direction: column-reverse; 
-    justify-content: space-between; 
-    align-items: center; 
-    overflow:scroll
-}
-
-.GalleryFrame::-webkit-scrollbar {
-    width: .25rem;
-    height: 2rem;
-}
-.GalleryFrame::-webkit-scrollbar-track {
-    background-color: white;
-}
-.GalleryFrame::-webkit-scrollbar-thumb {
-  background-color: whitesmoke;
-  /* outline: 1px solid slategrey; */
-}
+  

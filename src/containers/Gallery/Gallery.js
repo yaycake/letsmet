@@ -24,13 +24,12 @@ const Gallery = (props) => {
         onSetGallery(token, userId)
     }, [onSetGallery, token, userId])
 
-    
-
     const galleryTiles = (
         userGallery.map((art, index ) => 
             <PreviewTile
                 activeTile = { props.curArtworkObjectId === art.objectId ? true : false }
-                clicked = { () => props.clickedArt(       art.title,
+                clicked = { () => props.clickedArt(
+                    art.title,
                     art.artistDisplayName, 
                     art.medium,  
                     art.objectId,  

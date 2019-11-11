@@ -9,6 +9,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import Auth from './containers/Auth/Auth';
 
 import Logout from './containers/Auth/Logout/Logout'
+import FullArt from './components/Artwork/FullArt/FullArt'
 
 // const Artwork = React.lazy(()=> {
 //   return import('./components/Artwork/Artwork')
@@ -49,6 +50,7 @@ const App = props => {
        <Route path="/about" component = { About }/>
         <Route path="/auth" component = { Auth }/>
         <Route path="/" exact component = { BrowseArt }/>
+        <Route path="/" exact component = { FullArt }/>
         <Redirect to="/" />
     </Switch>
   )
@@ -60,6 +62,7 @@ const App = props => {
         <Route path="/auth" component = { Auth }/>
         <Route path="/logout" exact component = { Logout }/>
         <Route path="/" exact component = { BrowseArt }/>
+        <Route path="/view" exact component = { FullArt }/>
         <Redirect to="/" />
       </Switch>
     )
