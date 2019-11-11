@@ -12,8 +12,9 @@ import Error from '../../components/UI/Error/Error'
 import Spinner from '../../components/UI/Spinner/Spinner'
 import PreviewTile from '../../components/PreviewTile/PreviewTile';
 import Gallery from '../Gallery/Gallery'
-import { Route, Redirect } from 'react-router-dom'
 import FullArt from '../../components/Artwork/FullArt/FullArt'
+import ViewIcon from '../../components/UI/Icons/view.png';
+
 
 const BrowseArt = props => {
 
@@ -198,7 +199,6 @@ const BrowseArt = props => {
     }
 
     const viewFullArtHandler= () => {
-        console.log(`ArtworkClicked!!!`)
         setShowFullArt(!showFullArt)
     }
 
@@ -206,38 +206,26 @@ const BrowseArt = props => {
         <FullArt 
             objectId = { curArtwork.objectId}
             title = {curArtwork.title}
-            image = {curArtwork.primaryImageSmall}
+            image = {curArtwork.primaryImage}
             click = { viewFullArtHandler }
         />
     )
 
-    const artworkComponent = (
-        <div onClick = { () => viewFullArtHandler()} >
-            <Artwork 
-                objectId = { curArtwork.objectId}
-                title = {curArtwork.title}
-                image = {curArtwork.primaryImageSmall}
-                altText = {`Title: ${ curArtwork.title } by ${ curArtwork.artistDisplayName}. Medium: ${ curArtwork.medium }`} 
-            /> 
-        </div>
-    )
-
-    let browseArtContent = (
-        <div>
-            { error && errorMessage }
-            { token && 
-            <Gallery 
-                clickedArt = { selectArtPreviewHandler }
-                curArtworkObjectId = {curArtwork.objectId}
-            />}
-    
-         
-            { showFullArt ? fullArt : artworkComponent }
+    const artworkContent = (
+        <div >
+            <div onClick = { () => viewFullArtHandler()}>
+                <Artwork 
+                    objectId = { curArtwork.objectId}
+                    title = {curArtwork.title}
+                    image = {curArtwork.primaryImageSmall}
+                    altText = {`Title: ${ curArtwork.title } by ${ curArtwork.artistDisplayName}. Medium: ${ curArtwork.medium }`} 
+                /> 
+            </div>
            
-
             <div className = {styles.ArtControls}>
 
                 <div className = {styles.infoBox}>
+
                     <InfoButton
                         showinfo = {showArtInfo}
                         infoClicked = { showInfoToggle }
@@ -258,9 +246,25 @@ const BrowseArt = props => {
                     objectDataId = { dataId }
                     signIn = {signInRedirect}
                 />
-                
+
             </div>
-            <NextButton clicked = { browseArtHandler } />
+        </div>
+    )
+
+
+
+    let browseArtContent = (
+        <div>
+            { error && errorMessage }
+            { token && 
+            <Gallery 
+                clickedArt = { selectArtPreviewHandler }
+                curArtworkObjectId = {curArtwork.objectId}
+            />}
+    
+            { showFullArt ? fullArt : artworkContent }
+
+            {showFullArt ? null : <NextButton clicked = { browseArtHandler } /> }
             
         </div>
     )

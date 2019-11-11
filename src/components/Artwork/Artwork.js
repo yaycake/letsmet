@@ -3,6 +3,7 @@ import styles from './Artwork.module.css';
 import { Route, Redirect } from 'react-router-dom';
 import FullArt from './FullArt/FullArt'
 
+
 const Artwork = ( props ) => {
 
     return (
@@ -14,7 +15,8 @@ const Artwork = ( props ) => {
                 }}
                 alt = {props.altText}
                 >  
-            </div>    
+            </div>
+            {/* <img altText = "Close Full View" src={} />     */}
   
         </div>   
     )

@@ -1,6 +1,6 @@
 .Artwork {
- 
     display: flex;
+    cursor: pointer;
 }
 
 .primaryImage {
@@ -11,25 +11,6 @@
     background-size: cover;
     border-radius: 2px; 
     margin: 0 auto;
-}
-
-.imageCover {
-    /* border:1px solid blue;  */
-    z-index: 5;
-    position: absolute; 
-    top: 0; 
-    left: 0; 
-    width: 100%;
-    height: 100%;
-    border:2px solid purple;
-    background-color: red; 
-    opacity: 1;
-    transition: opacity 800ms ease-out ;
-    /* animation-name: fadeWhiteOut;
-    animation-duration: 5s; 
-    animation-delay: 2s; 
-    animation-fill-mode: forwards;
-    animation-iteration-count: 1;  */
 }
 
 
