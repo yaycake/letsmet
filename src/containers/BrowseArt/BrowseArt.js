@@ -12,6 +12,9 @@ import Error from '../../components/UI/Error/Error'
 import Spinner from '../../components/UI/Spinner/Spinner'
 import PreviewTile from '../../components/PreviewTile/PreviewTile';
 import Gallery from '../Gallery/Gallery'
+import FullArt from '../../components/Artwork/FullArt/FullArt'
+import ViewIcon from '../../components/UI/Icons/view.png';
+
 
 const BrowseArt = props => {
 
@@ -31,6 +34,8 @@ const BrowseArt = props => {
         let dataId = useSelector(state => state.myGallery.dataId)
 
     const [showArtInfo, setShowArtInfo] = useState(false);
+
+    const [showFullArt, setShowFullArt] = useState(false);
 
     const showInfoToggle = () => {
         setShowArtInfo(!showArtInfo)
@@ -193,22 +198,34 @@ const BrowseArt = props => {
         errorMessage = <Error message={error.message}></Error>
     }
 
+    const viewFullArtHandler= () => {
+        setShowFullArt(!showFullArt)
+    }
 
-    let browseArtContent = (
-        <div>
-            { error && errorMessage }
-            { token && 
-                <Gallery 
-                    clickedArt = { selectArtPreviewHandler }
-                    curArtworkObjectId = {curArtwork.objectId}
-            />}
-            <Artwork 
-                image = {curArtwork.primaryImageSmall}
-                altText = {`Title: ${ curArtwork.title } by ${ curArtwork.artistDisplayName}. Medium: ${ curArtwork.medium }`} 
-            /> 
+    const fullArt = (
+        <FullArt 
+            objectId = { curArtwork.objectId}
+            title = {curArtwork.title}
+            image = {curArtwork.primaryImage}
+            click = { viewFullArtHandler }
+        />
+    )
+
+    const artworkContent = (
+        <div >
+            <div onClick = { () => viewFullArtHandler()}>
+                <Artwork 
+                    objectId = { curArtwork.objectId}
+                    title = {curArtwork.title}
+                    image = {curArtwork.primaryImageSmall}
+                    altText = {`Title: ${ curArtwork.title } by ${ curArtwork.artistDisplayName}. Medium: ${ curArtwork.medium }`} 
+                /> 
+            </div>
+           
             <div className = {styles.ArtControls}>
 
                 <div className = {styles.infoBox}>
+
                     <InfoButton
                         showinfo = {showArtInfo}
                         infoClicked = { showInfoToggle }
@@ -229,9 +246,25 @@ const BrowseArt = props => {
                     objectDataId = { dataId }
                     signIn = {signInRedirect}
                 />
-                
+
             </div>
-            <NextButton clicked = { browseArtHandler } />
+        </div>
+    )
+
+
+
+    let browseArtContent = (
+        <div>
+            { error && errorMessage }
+            { token && 
+            <Gallery 
+                clickedArt = { selectArtPreviewHandler }
+                curArtworkObjectId = {curArtwork.objectId}
+            />}
+    
+            { showFullArt ? fullArt : artworkContent }
+
+            {showFullArt ? null : <NextButton clicked = { browseArtHandler } /> }
             
         </div>
     )

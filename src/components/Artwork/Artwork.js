@@ -1,29 +1,23 @@
 import React from  'react';
 import styles from './Artwork.module.css';
-import { NavLink } from 'react-router-dom'
+import { Route, Redirect } from 'react-router-dom';
+import FullArt from './FullArt/FullArt'
+
 
 const Artwork = ( props ) => {
+
     return (
         <div className ={styles.Artwork}>
-            <NavLink 
-                to={{
-                    pathname: "/view",
-                    altText: props.altText,
-                    fullArtProps: {
-                        title: props.title, 
-                        imageUrl: props.image
-                    }
+            <div 
+                className = { styles.primaryImage}
+                style = {{
+                        backgroundImage: `url(${props.image})` 
                 }}
-                exact>
-                <div 
-                    className = { styles.primaryImage}
-                    style = {{
-                            backgroundImage: `url(${props.image})` 
-                    }}
-                    alt = {props.altText}
-                    >  
-                </div>    
-            </NavLink>
+                alt = {props.altText}
+                >  
+            </div>
+            {/* <img altText = "Close Full View" src={} />     */}
+  
         </div>   
     )
 };

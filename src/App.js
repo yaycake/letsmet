@@ -20,6 +20,7 @@ const App = props => {
 
   const isAuthenticated = useSelector(state => state.auth.token != null)
 
+
   const dispatch = useDispatch();
 
   const fetchArtObjects = useCallback(
@@ -50,7 +51,7 @@ const App = props => {
        <Route path="/about" component = { About }/>
         <Route path="/auth" component = { Auth }/>
         <Route path="/" exact component = { BrowseArt }/>
-        <Route path="/" exact component = { FullArt }/>
+        <Route path="/view" exact component = { FullArt }/>
         <Redirect to="/" />
     </Switch>
   )

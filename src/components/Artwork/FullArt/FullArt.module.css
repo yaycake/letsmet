@@ -1,11 +1,44 @@
 .FullArt {
-    width: 100vw;
-    height: 100vh;
+ 
+    margin: auto; 
+    cursor: pointer;
+    box-sizing: content-box;
+
+    position: absolute;
+
+    background-color: rgba(255,255,255,.9);
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+}
+
+.FullArtImageWrap{
+    margin:5rem;
+    position: relative;
 }
 
 .FullArtImage {
-    margin: auto; 
-    width: 600px;
+    margin: auto;
     height: auto; 
-    border:1px solid blue;
+}
+
+.FullArtImage:hover .CloseViewIcon {
+    visibility: visible
+    
+}
+
+.CloseViewIcon {
+    width: 30px;
+    position: absolute; 
+    top: 2rem;
+    right: 2rem;
+    visibility: none
+}
+
+.viewIconWrap {
+    width: 450px; 
+    margin: 0 auto;
+    position: absolute; 
+
 }
