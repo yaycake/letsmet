@@ -55,6 +55,28 @@ const BrowseArt = props => {
         dispatch(actions.fetchPreviousArt(previousArtwork))
     }
 
+    const [autoSurf, setAutoSurf] =useState(false)
+
+    const autoFetch = () => {
+        setTimeout(
+            onFetchArt, 8000
+        )
+    }
+
+    const stopAutoFetch = () => {
+        clearInterval(autoFetch)
+    }
+
+    const autoSurfHandler = () => {
+        if (autoSurf) {
+            autoFetch()
+            setAutoSurf(true)
+        } else {
+            setAutoSurf(false)
+            stopAutoFetch()
+            
+        }
+    }
 
     const onSetGallery = useCallback((token, userId) => dispatch(actions.fetchGallery(token, userId)),[dispatch]);
 
@@ -62,7 +84,7 @@ const BrowseArt = props => {
         if (token){
             onSetGallery(token, userId);
         }
-    }, [onSetGallery, token, userId, dataId])
+    }, [onSetGallery, token, userId, dataId]);
 
     const [curArtwork, setCurArtwork] = useState({
         title: title,
@@ -73,7 +95,7 @@ const BrowseArt = props => {
         primaryImageSmall: primaryImageSmall, 
         dataId: dataId,
         index: null
-    })
+    });
 
     useEffect(()=> {
         setCurArtwork({
@@ -115,8 +137,6 @@ const BrowseArt = props => {
     const [isBookmarked, setBookmarked] = useState(null)
 
     const resetArtwork = (newIndex) => {
-        // onSetGallery(token, userId);
-
         let nextArtwork = {...userGallery[newIndex]}
         if (newIndex < 0){
             nextArtwork = { ...userGallery[1]}
@@ -144,7 +164,6 @@ const BrowseArt = props => {
                 dataId: curArtwork.dataId
             }
         ))
-
         setBookmarked(false)
         resetArtwork(curArtwork.index -1)
         // onSetGallery(token, userId) 
@@ -171,7 +190,7 @@ const BrowseArt = props => {
         console.log(`in bookmarkCheck`)
         //returns truthy/falsey
         return userGallery.some((art) => art.objectId === curArtwork.objectId)
-    }, [curArtwork.objectId, userGallery])
+    }, [curArtwork.objectId, userGallery]);
 
      useEffect(() => {
         if (bookmarkCheck(curObjectId) === true ){
@@ -179,10 +198,10 @@ const BrowseArt = props => {
         } else {
             setBookmarked(false)
         }
-    }, [bookmarkCheck, curObjectId])
+    }, [bookmarkCheck, curObjectId]);
 
 
-    const selectArtPreviewHandler = (  
+    const selectArtPreviewHandler = ( 
         title,
         artistDisplayName, 
         medium,  
@@ -264,7 +283,6 @@ const BrowseArt = props => {
     )
 
     let nextButtons = (
-
         <div className = {styles.nextButtonWrapper}>
             <div className = {styles.backButton}>
             {previousArtwork && <NextButton
@@ -279,7 +297,6 @@ const BrowseArt = props => {
             </div>
             
         </div>
-
     )
 
 
@@ -304,6 +321,8 @@ const BrowseArt = props => {
     return (
         <div className = { styles.BrowseArt }>
             { loading ? <Spinner></Spinner> : browseArtContent }
+
+            <h1 onClick={autoSurfHandler}>AUTOSURF</h1>
         </div>
     )
 }
