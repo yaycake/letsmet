@@ -1,0 +1,71 @@
+/* Shown when autosurf is off */
+.AutoSurfOff {
+   width: 100px;
+   display: flex;
+   flex-direction: row; 
+   margin-top: 5rem;
+}
+.autoStartIcon {
+    border-top: 10px solid transparent;
+    border-bottom: 10px solid transparent;
+    border-left: 15px solid black;
+    margin-right: 1rem;
+}
+
+/* shown when auto surfing */
+.AutoSurfOn {
+    margin-top: 5rem;
+    display: flex;
+    flex-direction: row;
+    height: 100%;
+    width: 100%;
+    position: relative;
+}
+
+.AutoSurfOn:before {
+    content: '';
+    display: block;
+    position: absolute;
+    top: 0; right: 0; bottom: 0; left: 0;
+    background: linear-gradient(124deg, #ff2400, #e81d1d, #e8b71d, #e3e81d, #1de840, #1ddde8, #2b1de8, #dd00f3, #dd00f3);
+    /* color: #000; */
+    background: #fff;
+    mix-blend-mode: multiply;
+}
+
+
+.autoStopIcon {
+    height: 20px;
+    width: 20px; 
+    background-color: black; 
+    margin-right: 1rem;
+}
+
+.autoStopCover {
+    position: absolute; 
+    width: 100px;
+    z-index: 9;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+
+    mix-blend-mode: screen;
+
+    background-clip: text;
+
+    background: linear-gradient(124deg, #ff2400, #e81d1d, #e8b71d, #e3e81d, #1de840, #1ddde8, #2b1de8, #dd00f3, #dd00f3);
+
+    -webkit-animation: rainbow 10s ease infinite;
+
+    -o-animation: rainbow 5s ease infinite;
+    animation: rainbow 5s ease infinite;
+    background-size: 1800% 1800%;
+}
+
+
+@keyframes rainbow { 
+    0%{background-position:0% 82%}
+    50%{background-position:100% 19%}
+    100%{background-position:0% 82%}
+}

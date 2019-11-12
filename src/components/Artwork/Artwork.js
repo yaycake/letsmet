@@ -7,7 +7,7 @@ import FullArt from './FullArt/FullArt'
 const Artwork = ( props ) => {
 
     return (
-        <div className ={styles.Artwork}>
+        <div onClick = {props.clicked } className ={styles.Artwork}>
             <div 
                 className = { styles.primaryImage}
                 style = {{

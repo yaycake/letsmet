@@ -1,4 +1,5 @@
-import React, { useState, useEffect, useCallback } from 'react';
+import React, { useState, useEffect, useCallback} from 'react';
+import useInterval from 'react-useinterval'
 import { useDispatch, useSelector } from 'react-redux';
 import Artwork from '../../components/Artwork/Artwork';
 import * as actions from '../../store/actions/index'
@@ -13,8 +14,8 @@ import Spinner from '../../components/UI/Spinner/Spinner'
 import PreviewTile from '../../components/PreviewTile/PreviewTile';
 import Gallery from '../Gallery/Gallery'
 import FullArt from '../../components/Artwork/FullArt/FullArt'
-import ViewIcon from '../../components/UI/Icons/view.png';
 
+import AutoSurf from '../../components/UI/AutoSurf/AutoSurf'
 
 const BrowseArt = props => {
 
@@ -55,28 +56,19 @@ const BrowseArt = props => {
         dispatch(actions.fetchPreviousArt(previousArtwork))
     }
 
-    const [autoSurf, setAutoSurf] =useState(false)
+    const [autoSurfOn, setAutoSurfOn] =useState(false)
 
-    const autoFetch = () => {
-        setTimeout(
-            onFetchArt, 8000
-        )
-    }
+   
 
-    const stopAutoFetch = () => {
-        clearInterval(autoFetch)
-    }
+    useInterval(() => {
+        onFetchArt();
+      }, autoSurfOn ? 4000 : null)
 
     const autoSurfHandler = () => {
-        if (autoSurf) {
-            autoFetch()
-            setAutoSurf(true)
-        } else {
-            setAutoSurf(false)
-            stopAutoFetch()
-            
-        }
+        console.log(`In Auto Surf Handler`)
+        setAutoSurfOn(!autoSurfOn)
     }
+    
 
     const onSetGallery = useCallback((token, userId) => dispatch(actions.fetchGallery(token, userId)),[dispatch]);
 
@@ -242,15 +234,41 @@ const BrowseArt = props => {
         />
     )
 
+    let nextButtons = (
+        <div className = {styles.nextButtonWrapper}>
+            
+            {previousArtwork && 
+                <div 
+                    onClick = { fetchPreviousArt }
+                    className = {styles.backButton}>
+                    <NextButton></NextButton>
+                </div>
+            }
+            <div className = {styles.forwardButton}
+                onClick = { browseArtHandler } >
+                <NextButton></NextButton>
+            </div>
+        </div>
+    )
+
     const artworkContent = (
         <div >
-            <div onClick = { () => viewFullArtHandler()}>
+            <div 
+                style = {{
+                    position: "relative"
+                }}
+                >
                 <Artwork 
+                    clicked = { () => viewFullArtHandler()}
                     objectId = { curArtwork.objectId}
                     title = {curArtwork.title}
                     image = {curArtwork.primaryImageSmall}
                     altText = {`Title: ${ curArtwork.title } by ${ curArtwork.artistDisplayName}. Medium: ${ curArtwork.medium }`} 
                 /> 
+
+                {showFullArt ? null : nextButtons }
+
+
             </div>
            
             <div className = {styles.ArtControls}>
@@ -282,24 +300,6 @@ const BrowseArt = props => {
         </div>
     )
 
-    let nextButtons = (
-        <div className = {styles.nextButtonWrapper}>
-            <div className = {styles.backButton}>
-            {previousArtwork && <NextButton
-                clicked = { fetchPreviousArt }
-            >  Back</NextButton> }
-            </div>
-
-            <div className = {styles.forwardButton}>
-                <NextButton
-                    clicked = { browseArtHandler }
-                >  Next</NextButton>
-            </div>
-            
-        </div>
-    )
-
-
     let browseArtContent = (
         <div>
             { error && errorMessage }
@@ -308,21 +308,25 @@ const BrowseArt = props => {
                 clickedArt = { selectArtPreviewHandler }
                 curArtworkObjectId = {curArtwork.objectId}
             />}
-    
             { showFullArt ? fullArt : artworkContent }
 
-            {showFullArt ? null : nextButtons }
-            
+            <div className = {styles.autoSurf}>
+
+                <AutoSurf
+                    clicked = { autoSurfHandler }
+                    autoSurfOn = {autoSurfOn ? true : false}
+                />
+                
+            </div> 
+
+
         </div>
     )
 
-  
 
     return (
         <div className = { styles.BrowseArt }>
             { loading ? <Spinner></Spinner> : browseArtContent }
-
-            <h1 onClick={autoSurfHandler}>AUTOSURF</h1>
         </div>
     )
 }
