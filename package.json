@@ -35,6 +35,7 @@
     ]
   },
   "devDependencies": {
+    "react-useinterval": "^1.0.1",
     "redux-devtools": "^3.5.0",
     "redux-devtools-extension": "^2.13.8",
     "reselect": "^4.0.0"

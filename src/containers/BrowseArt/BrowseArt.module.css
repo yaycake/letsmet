@@ -60,20 +60,20 @@
       text-align: left; 
   }
 
-
   .nextButtonWrapper {
       width: 450px; 
       margin: 0 auto; 
       position: relative; 
-      height: 50px;
   }
 
   .backButton {
     position: absolute;
-    left: 0;
+    top: -10rem;
+    left: 0rem;
   }
   
   .forwardButton {
     position: absolute;
-    right: 0
+    top: -10rem;
+    right: -5rem;
   }
