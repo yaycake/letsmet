@@ -14,9 +14,8 @@ import Spinner from '../../components/UI/Spinner/Spinner'
 import PreviewTile from '../../components/PreviewTile/PreviewTile';
 import Gallery from '../Gallery/Gallery'
 import FullArt from '../../components/Artwork/FullArt/FullArt'
-import ViewIcon from '../../components/UI/Icons/view.png';
-import { relative } from 'path';
 
+import AutoSurf from '../../components/UI/AutoSurf/AutoSurf'
 
 const BrowseArt = props => {
 
@@ -235,21 +234,20 @@ const BrowseArt = props => {
         />
     )
 
-
     let nextButtons = (
         <div className = {styles.nextButtonWrapper}>
-            <div className = {styles.backButton}>
-            {previousArtwork && <NextButton
-                clicked = { fetchPreviousArt }
-            >  Back</NextButton> }
-            </div>
-
-            <div className = {styles.forwardButton}>
-                <NextButton
-                    clicked = { browseArtHandler }
-                >  Next </NextButton>
-            </div>
             
+            {previousArtwork && 
+                <div 
+                    onClick = { fetchPreviousArt }
+                    className = {styles.backButton}>
+                    <NextButton></NextButton>
+                </div>
+            }
+            <div className = {styles.forwardButton}
+                onClick = { browseArtHandler } >
+                <NextButton></NextButton>
+            </div>
         </div>
     )
 
@@ -302,8 +300,6 @@ const BrowseArt = props => {
         </div>
     )
 
-
-
     let browseArtContent = (
         <div>
             { error && errorMessage }
@@ -312,31 +308,25 @@ const BrowseArt = props => {
                 clickedArt = { selectArtPreviewHandler }
                 curArtworkObjectId = {curArtwork.objectId}
             />}
-    
             { showFullArt ? fullArt : artworkContent }
 
-            
-            
+            <div className = {styles.autoSurf}>
+
+                <AutoSurf
+                    clicked = { autoSurfHandler }
+                    autoSurfOn = {autoSurfOn ? true : false}
+                />
+                
+            </div> 
+
+
         </div>
     )
 
-  
 
     return (
         <div className = { styles.BrowseArt }>
             { loading ? <Spinner></Spinner> : browseArtContent }
-
-                <button onClick={ 
-                    autoSurfHandler }>
-                { !autoSurfOn ? "SURF" : "STOP"}
-                </button> 
-                
-             
-           
-            
-
-           
-            
         </div>
     )
 }
