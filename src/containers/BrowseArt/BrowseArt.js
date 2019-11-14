@@ -14,8 +14,9 @@ import Spinner from '../../components/UI/Spinner/Spinner'
 import PreviewTile from '../../components/PreviewTile/PreviewTile';
 import Gallery from '../Gallery/Gallery'
 import FullArt from '../../components/Artwork/FullArt/FullArt'
-
 import AutoSurf from '../../components/UI/AutoSurf/AutoSurf'
+
+// import {keyPressHandler} from '../../shared/utility'
 
 const BrowseArt = props => {
 
@@ -59,6 +60,11 @@ const BrowseArt = props => {
     const [autoSurfOn, setAutoSurfOn] =useState(false)
 
    
+    const keyPressHandler = (event, callback) => {
+        if (event.key === "Enter") {
+            callback()
+        }
+    }
 
     useInterval(() => {
         onFetchArt();
@@ -236,18 +242,16 @@ const BrowseArt = props => {
 
     let nextButtons = (
         <div className = {styles.nextButtonWrapper}>
-            
             {previousArtwork && 
-                <div 
-                    onClick = { fetchPreviousArt }
-                    className = {styles.backButton}>
-                    <NextButton></NextButton>
-                </div>
+                    <NextButton
+                        nextstyle = "back"
+                        clicked = {fetchPreviousArt}
+                    > </NextButton>
             }
-            <div className = {styles.forwardButton}
-                onClick = { browseArtHandler } >
-                <NextButton></NextButton>
-            </div>
+            <NextButton
+                nextstyle = "forward"
+                clicked = {browseArtHandler}
+            ></NextButton>
         </div>
     )
 
@@ -260,6 +264,7 @@ const BrowseArt = props => {
                 >
                 <Artwork 
                     clicked = { () => viewFullArtHandler()}
+                    artistDisplayName = { curArtwork.artistDisplayName}
                     objectId = { curArtwork.objectId}
                     title = {curArtwork.title}
                     image = {curArtwork.primaryImageSmall}

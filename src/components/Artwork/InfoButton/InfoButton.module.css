@@ -11,7 +11,7 @@
 }
 
 .InfoButton:focus {
-    outline: none; 
+    /* outline: none;  */
 }
 
 .ActiveInfo {

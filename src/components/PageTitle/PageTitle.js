@@ -15,7 +15,7 @@ const PageTitle = ( props ) => {
         title1Style = styles.signedInTitle1
     }
    return (
-    <NavLink className={ styles.PageTitle } to="/">
+    <NavLink tabindex="0" className={ styles.PageTitle } to="/">
         <div>
             <div style = {{position: "relative"}}>
                 <div className={ title1Style }>{ title[0] }</div>

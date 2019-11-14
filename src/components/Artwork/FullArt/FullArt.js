@@ -9,6 +9,7 @@ const FullArt = (props) => {
         <div 
             className = {styles.FullArt} 
             onClick={ props.click}
+            tabindex="0"
         >
             <div className = {styles.FullArtImageWrap}>
 

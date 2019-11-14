@@ -2,6 +2,7 @@
     font-size: 18px;
     font-weight: bolder;
     transition: all 1s ease-out; 
+    background-color: transparent;
 }
 
 .NextButton:hover {
@@ -9,3 +10,34 @@
     cursor: pointer;
     transform: scale(1.2)
 }
+.backButton {
+    position: absolute;
+    top: -15rem;
+    left: -3rem;
+
+    border-top: 20px solid transparent;
+    border-bottom: 20px solid transparent;
+    border-right: 15px solid black;
+
+    width: 0; 
+    height: 0; 
+
+    cursor: pointer; 
+    border-left-color: transparent;
+  }
+  
+  .forwardButton {
+    position: absolute;
+    top: -15rem;
+    right: -3rem;
+
+    width: 0; 
+    height: 0; 
+    border-top: 20px solid transparent;
+    border-bottom: 20px solid transparent;
+    border-left: 15px solid black;
+
+    padding: 0;
+    border-right-color: transparent;
+    cursor: pointer
+  }

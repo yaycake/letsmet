@@ -37,6 +37,13 @@ const App = props => {
       onFetchArt();
   }, [])
 
+  document.onkeydown = function(e) {
+    if(e.keyCode === 13) { // The Enter/Return key
+      document.activeElement.onclick(e);
+    }
+  };
+
+
   const eyeAnimate = (event) => {
     let ball = document.getElementById("LogoBall");
     let x = event.clientX * 50 / window.innerWidth + "%"

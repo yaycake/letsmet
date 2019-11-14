@@ -171,6 +171,7 @@ const Auth = ( props ) => {
                     <div className ={styles.or}>or</div>
                     <div className = {styles.btnSign2}>
                         <Button 
+                            type= { isSignup ? 'Sign In' : 'Sign Up'}
                             clicked = { switchAuthHandler }
                             btnType = "success" >
                                 { isSignup ? 'Sign In' : 'Sign Up'}
@@ -179,7 +180,9 @@ const Auth = ( props ) => {
                 </div>
             </form>
             <div className = { styles.goBack}>
-                    <NavigationLink path="/">Go Back</NavigationLink>
+                    <NavigationLink 
+                        type = "Click To Go Back Home"
+                        path="/">Go Back</NavigationLink>
             </div>
         </div>
     )

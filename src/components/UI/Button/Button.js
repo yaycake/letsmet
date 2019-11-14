@@ -13,9 +13,13 @@ const button = ( props ) => {
     }
 
     return (
-        <button className= { buttonStyles.join(' ') }
-        onClick = { props.clicked }>
-            { props.children }
+        <button 
+            aria-label={`Click to ${props.children}`}
+            tabindex="0"
+            type = {props.type}
+            className= { buttonStyles.join(' ') }
+            onClick = { props.clicked }>
+                { props.children }
         </button>
 
     )
