@@ -10,6 +10,10 @@
     cursor: pointer;
     transform: scale(1.2)
 }
+
+.NextButton:focus {
+  outline: dotted gray 3px; 
+}
 .backButton {
     position: absolute;
     top: -15rem;

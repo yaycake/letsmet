@@ -301,6 +301,13 @@ const BrowseArt = props => {
                     signIn = {signInRedirect}
                 />
 
+                <div className = {styles.autoSurf}>
+                    <AutoSurf
+                        clicked = { autoSurfHandler }
+                        autoSurfOn = {autoSurfOn ? true : false}
+                    />
+                </div> 
+
             </div>
         </div>
     )
@@ -315,14 +322,7 @@ const BrowseArt = props => {
             />}
             { showFullArt ? fullArt : artworkContent }
 
-            <div className = {styles.autoSurf}>
 
-                <AutoSurf
-                    clicked = { autoSurfHandler }
-                    autoSurfOn = {autoSurfOn ? true : false}
-                />
-                
-            </div> 
 
 
         </div>
@@ -332,6 +332,9 @@ const BrowseArt = props => {
     return (
         <div className = { styles.BrowseArt }>
             { loading ? <Spinner></Spinner> : browseArtContent }
+
+            
+
         </div>
     )
 }

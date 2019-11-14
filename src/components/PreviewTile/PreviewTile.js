@@ -1,5 +1,6 @@
 import React from 'react';
 import styles from './PreviewTile.module.css';
+import { keyPressHandler } from '../../shared/utility'
 
 const previewTile = ( props ) => {
 
@@ -11,7 +12,10 @@ const previewTile = ( props ) => {
 
     return (
         <div className = {styles.TileWrap}>
-             <div className = { tileClasses }
+            <div 
+                className = { tileClasses }
+                tabIndex = "0"
+                onKeyPress = { (e) => keyPressHandler(e, props.clicked) } 
                 onClick = { props.clicked }
                 style = {{
                     backgroundImage: `url(${props.image})`,

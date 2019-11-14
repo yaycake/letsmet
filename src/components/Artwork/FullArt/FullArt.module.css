@@ -7,14 +7,14 @@
     position: absolute;
 
     background-color: rgba(255,255,255,.9);
-    top: 0;
-    bottom: 0;
+
     left: 0;
     right: 0;
 }
 
 .FullArtImageWrap{
-    margin:5rem;
+    max-width: 700px;
+    margin: 0 auto;
     position: relative;
 }
 

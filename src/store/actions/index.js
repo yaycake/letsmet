@@ -1,9 +1,4 @@
 export {
-    startInitObjects, 
-    initArtObjects, 
-    initObjectsFailed,
-    initObjectsSuccess,
-
     startFetchArt, 
     fetchArt,
     fetchArtSuccess,
@@ -14,8 +9,14 @@ export {
     fetchPreviousArt, 
     // fetchPreviousArtSuccess,
     fetchPreviousArtFailed
-
 } from './artwork';
+
+export {
+    startInitObjects, 
+    initArtObjects, 
+    initObjectsFailed,
+    initObjectsSuccess,
+} from './artObjects';
 
 export {
     addGallery, 

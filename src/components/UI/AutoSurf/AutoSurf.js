@@ -1,13 +1,14 @@
 import React from 'react'; 
 import styles from './AutoSurf.module.css'
-
+import { keyPressHandler } from '../../../shared/utility'
 
 
 const AutoSurf = ( props ) => {
 
     let autoSurfButton = (
         <div className={styles.AutoSurfOff}
-            tabindex="0"
+            tabIndex="0"
+            onKeyPress = { (e) => keyPressHandler(e, props.clicked) } 
             onClick = {props.clicked}>
                 <div className = {styles.autoStartIcon}></div> 
             SURF
@@ -18,7 +19,7 @@ const AutoSurf = ( props ) => {
         autoSurfButton = (
         <div 
             className={styles.AutoSurfOn}
-            tabindex="0"
+            tabIndex="0"
             onClick = {props.clicked}
             data-text="STOP"
             

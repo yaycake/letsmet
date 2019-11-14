@@ -1,5 +1,6 @@
 import React from 'react';
 import styles from './InfoButton.module.css';
+import { keyPressHandler } from '../../../shared/utility'
 
 const infoButton = ( props ) =>  {
 
@@ -12,7 +13,8 @@ const infoButton = ( props ) =>  {
     return (
         <button 
             aria-label = "Click To View Art Info"
-            tabindex="0" 
+            tabIndex="0" 
+            onKeyPress = { (e) => keyPressHandler(e, props.infoClicked) } 
             onClick={props.infoClicked} className={ classes.join(' ') }> 
                 i
         </button>
