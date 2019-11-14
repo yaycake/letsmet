@@ -37,6 +37,7 @@ const Input = ( props ) => {
         case ('input'): 
         inputElement = 
             <input
+                name = {props.label}
                 onChange = { props.changed }
                 className = { inputStyles.join(' ') }
                 { ...props.elementConfig }

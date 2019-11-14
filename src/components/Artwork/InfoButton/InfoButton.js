@@ -10,8 +10,11 @@ const infoButton = ( props ) =>  {
     };
 
     return (
-        <button onClick={props.infoClicked} className={ classes.join(' ') }> 
-            i
+        <button 
+            aria-label = "Click To View Art Info"
+            tabindex="0" 
+            onClick={props.infoClicked} className={ classes.join(' ') }> 
+                i
         </button>
     )
 };

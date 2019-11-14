@@ -6,12 +6,12 @@ import styles from './Layout.module.css';
 
 const Layout = props => {
     return (
-        <div className = {styles.Layout}>
+        <main className = {styles.Layout}>
             <Navigation> </Navigation>
             <div className= { styles.App }>
                 { props.children }
             </div>
-        </div>
+        </main>
     )
 }
 

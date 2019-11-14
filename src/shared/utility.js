@@ -25,3 +25,10 @@ export const checkValidity = (value, rules) => {
     return isValid;
     
 }
+
+
+export const keyPressHandler = (event, func) => {
+    if (event.key === 13) {
+        func()
+    }
+}

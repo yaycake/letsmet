@@ -13,6 +13,7 @@
     bottom: -5rem;
     left: 2.5rem;
     overflow: auto;
+    z-index: 21;
 }
 
 .GalleryStrip {

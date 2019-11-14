@@ -12,7 +12,7 @@ const Navigation = props => {
     const username = useSelector(state => state.auth.username)
 
     let userOptions = (
-        <div className = {styles.mainNavLinks}>
+        <nav className = {styles.mainNavLinks}>
             <div className={styles.rotateLink}> 
                 <NavigationLink 
                     path = "/about"
@@ -27,14 +27,17 @@ const Navigation = props => {
             </div>
             
             
-        </div>
+        </nav>
     )
 
     if (isAuthenticated) {
         userOptions = (
 
-            <div className = {styles.mainNavLinks}>
-                <div className={styles.rotateLink}> 
+            <nav className = {styles.mainNavLinks}>
+                <div 
+                    aria-label="Click To View About"
+                    alt = "Click To View About"
+                    className={styles.rotateLink}> 
                     <NavigationLink 
                         path = "/about"
                         className = {styles.AboutLink}
@@ -42,13 +45,16 @@ const Navigation = props => {
                     </NavigationLink>
                 </div>
 
-                <div className={[styles.rotateLink, styles.signOut].join(' ')}> 
+                <div 
+                    aria-label="Click To Sign Out" 
+                    alt = "Click to Sign Out"
+                    className={[styles.rotateLink, styles.signOut].join(' ')}> 
                     <NavigationLink path = "/logout">
                         Sign Out
                     </NavigationLink>
                 </div>
                 
-            </div>
+            </nav>
             
         )
     }

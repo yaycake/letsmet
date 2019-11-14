@@ -2,12 +2,26 @@ import React from 'react'
 import styles from './NextButton.module.css'
 
 const NextButton = ( props ) => {
+
+    let nextButtonStyles = [styles.NextButton]
+
+    if (props.nextstyle ==="back"){
+        nextButtonStyles.push(styles.backButton)
+    } else if (props.nextstyle === "forward") {
+        nextButtonStyles.push(styles.forwardButton)
+    }
+
     return (
-        <div className={styles.NextButton} 
-            // onClick = {props.clicked}
+        <button 
+            className={nextButtonStyles.join(' ')} 
+            onClick = {props.clicked}
+            tabindex="0"
+
+            aria-label = { props.nextstyle === "back" ? "Click To View Previous Artwork" : "Click For Next Artwork" }
+
             >
             {props.children}
-        </div>
+        </button>
     )
 }
 

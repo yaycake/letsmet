@@ -7,7 +7,9 @@ import FullArt from './FullArt/FullArt'
 const Artwork = ( props ) => {
 
     return (
-        <div onClick = {props.clicked } className ={styles.Artwork}>
+        <div 
+            name = {`${props.title} by ${props.artistDisplayName}`}
+            onClick = {props.clicked } className ={styles.Artwork}>
             <div 
                 className = { styles.primaryImage}
                 style = {{
@@ -16,7 +18,6 @@ const Artwork = ( props ) => {
                 alt = {props.altText}
                 >  
             </div>
-            {/* <img altText = "Close Full View" src={} />     */}
   
         </div>   
     )

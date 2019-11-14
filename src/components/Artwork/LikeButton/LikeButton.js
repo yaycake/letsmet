@@ -37,10 +37,15 @@ const LikeButton = ( props ) => {
     }
 
     return (
-        <div 
+        <button 
+            aria-label= "View Art Info"
+            tabindex="0"
             onClick = { buttonClick } 
             className={styles.LikeButton} >
             <img  
+                arial-label = { props.bookmarkStatus ? 
+                    "Click To Remove From gallery" : 
+                    "Click To Add To Gallery" }
                 alt = { props.bookmarkStatus ? 
                     "Remove From gallery" : 
                     "Add To Gallery" } 
@@ -48,7 +53,7 @@ const LikeButton = ( props ) => {
                     unbookmarked } 
                 className={ styleClassNames } />
 
-        </div>)
+        </button>)
 };
 
 export default LikeButton; 

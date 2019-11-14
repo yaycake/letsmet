@@ -7,6 +7,7 @@ const AutoSurf = ( props ) => {
 
     let autoSurfButton = (
         <div className={styles.AutoSurfOff}
+            tabindex="0"
             onClick = {props.clicked}>
                 <div className = {styles.autoStartIcon}></div> 
             SURF
@@ -17,6 +18,7 @@ const AutoSurf = ( props ) => {
         autoSurfButton = (
         <div 
             className={styles.AutoSurfOn}
+            tabindex="0"
             onClick = {props.clicked}
             data-text="STOP"
             
