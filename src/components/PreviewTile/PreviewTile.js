@@ -11,12 +11,13 @@ const previewTile = ( props ) => {
     }
 
     return (
-        <div className = {styles.TileWrap}>
+        <div 
+            tabIndex = {props.index}
+            onKeyPress = { (e) => keyPressHandler(e, props.clicked) } 
+            onClick = { props.clicked }
+            className = {styles.TileWrap}>
             <div 
                 className = { tileClasses }
-                tabIndex = "0"
-                onKeyPress = { (e) => keyPressHandler(e, props.clicked) } 
-                onClick = { props.clicked }
                 style = {{
                     backgroundImage: `url(${props.image})`,
                     backgroundSize: 'cover', 

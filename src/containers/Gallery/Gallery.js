@@ -38,6 +38,7 @@ const Gallery = (props) => {
                     art.dataId, 
                     index
                 ) }
+                index = {(userGallery.length-1) - index }
                 key = { art.objectId }
                 altText = { art.title }
                 image = {art.primaryImageSmall}
