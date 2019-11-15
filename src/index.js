@@ -9,6 +9,7 @@ import thunk from 'redux-thunk';
 import artworkReducer from './store/reducers/artwork'; 
 import authReducer from './store/reducers/auth';
 import galleryReducer from './store/reducers/gallery';
+import artObjectsReducer from './store/reducers/artObjects';
 import App from './App';
 import * as serviceWorker from './serviceWorker';
 import { composeWithDevTools } from 'redux-devtools-extension';
@@ -17,6 +18,7 @@ import { composeWithDevTools } from 'redux-devtools-extension';
 const composeEnhancers = composeWithDevTools({trace: true})
 
 const appReducer = combineReducers({
+    // artObjects: artObjectsReducer,
     artwork: artworkReducer, 
     auth: authReducer, 
     myGallery: galleryReducer,

@@ -19,25 +19,6 @@ const initialState = {
 };
 
 
-const startInitObjects = (state, action) => {
-    return updateObject( state, {
-        loading: false, 
-    })
-}
-
-const initObjectsSuccess = (state, action) => {
-    return updateObject( state, {
-        error: null,
-        loading: false
-    })
-}
-
-const initObjectsFailed = (state, action) => {
-    return updateObject( state, {
-        error: action.error,
-        loading: false
-    })
-}
 
 const startFetchArt = ( state, action ) => {
     return updateObject( state, {
@@ -104,12 +85,7 @@ const fetchPreviousArtFailed = (state, action) => {
 
 const reducer = (state = initialState, action) => {
     switch(action.type) {
-        case actionTypes.START_INIT_OBJECTS: 
-            return startInitObjects(state, action)
-        case actionTypes.INIT_OBJECTS_SUCCESS:
-            return initObjectsSuccess(state, action)
-        case actionTypes.INIT_OBJECTS_FAILED:
-            return initObjectsFailed(state, action)
+       
         case actionTypes.SET_PREVIOUS_ARTWORK:
             return setPreviousArtwork(state, action)
         case actionTypes.START_FETCH_PREVIOUS_ART:

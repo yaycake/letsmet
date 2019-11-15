@@ -1,9 +1,12 @@
 import React from 'react'; 
 import styles from './ArtInfo.module.css';
+import {keyPressHandler} from '../../../shared/utility'
 
 const artInfo = (props ) => {
     return (
-        <div onClick={ props.clicked } className={styles.ArtInfo}
+        <div 
+            onKeyPress = { (e) => keyPressHandler(e, props.clicked) } 
+            onClick={ props.clicked } className={styles.ArtInfo}
             style = {{
                 opacity: props.showInfo ? 1 : 0
             }}

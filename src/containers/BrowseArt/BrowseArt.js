@@ -135,6 +135,7 @@ const BrowseArt = props => {
     const [isBookmarked, setBookmarked] = useState(null)
 
     const resetArtwork = (newIndex) => {
+        console.log(`inResetARTWORK!!!!`)
         let nextArtwork = {...userGallery[newIndex]}
         if (newIndex < 0){
             nextArtwork = { ...userGallery[1]}
@@ -301,6 +302,13 @@ const BrowseArt = props => {
                     signIn = {signInRedirect}
                 />
 
+                <div className = {styles.autoSurf}>
+                    <AutoSurf
+                        clicked = { autoSurfHandler }
+                        autoSurfOn = {autoSurfOn ? true : false}
+                    />
+                </div> 
+
             </div>
         </div>
     )
@@ -314,16 +322,6 @@ const BrowseArt = props => {
                 curArtworkObjectId = {curArtwork.objectId}
             />}
             { showFullArt ? fullArt : artworkContent }
-
-            <div className = {styles.autoSurf}>
-
-                <AutoSurf
-                    clicked = { autoSurfHandler }
-                    autoSurfOn = {autoSurfOn ? true : false}
-                />
-                
-            </div> 
-
 
         </div>
     )

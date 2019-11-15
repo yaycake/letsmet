@@ -1,9 +1,11 @@
 /* Shown when autosurf is off */
 .AutoSurfOff {
-   width: 100px;
+   width: 100%;
    display: flex;
    flex-direction: row; 
    margin-top: 5rem;
+   justify-content: flex-end;
+   padding-right: .5rem
 }
 .autoStartIcon {
     border-top: 10px solid transparent;
@@ -17,9 +19,14 @@
     margin-top: 5rem;
     display: flex;
     flex-direction: row;
-    height: 100%;
+    height: 50px;
     width: 100%;
     position: relative;
+    justify-content: flex-end;
+}
+
+.AutoSurfOn:focus, .AutoSurfOff:focus {
+    outline: thin dotted;
 }
 
 .AutoSurfOn:before {
@@ -27,7 +34,7 @@
     display: block;
     position: absolute;
     top: 0; right: 0; bottom: 0; left: 0;
-    background: linear-gradient(124deg, #ff2400, #e81d1d, #e8b71d, #e3e81d, #1de840, #1ddde8, #2b1de8, #dd00f3, #dd00f3);
+    /* background: linear-gradient(124deg, #ff2400, #e81d1d, #e8b71d, #e3e81d, #1de840, #1ddde8, #2b1de8, #dd00f3, #dd00f3); */
     /* color: #000; */
     background: #fff;
     mix-blend-mode: multiply;
@@ -43,21 +50,20 @@
 
 .autoStopCover {
     position: absolute; 
-    width: 100px;
+    width: 100%;
     z-index: 9;
     top: 0;
     bottom: 0;
     left: 0;
     right: 0;
 
+    border-top: 3px solid white;
+    border-bottom: 3px solid white;
+
     mix-blend-mode: screen;
-
     background-clip: text;
-
     background: linear-gradient(124deg, #ff2400, #e81d1d, #e8b71d, #e3e81d, #1de840, #1ddde8, #2b1de8, #dd00f3, #dd00f3);
-
     -webkit-animation: rainbow 10s ease infinite;
-
     -o-animation: rainbow 5s ease infinite;
     animation: rainbow 5s ease infinite;
     background-size: 1800% 1800%;

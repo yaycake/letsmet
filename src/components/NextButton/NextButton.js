@@ -1,5 +1,7 @@
 import React from 'react'
 import styles from './NextButton.module.css'
+import {keyPressHandler} from '../../shared/utility'
+
 
 const NextButton = ( props ) => {
 
@@ -14,8 +16,9 @@ const NextButton = ( props ) => {
     return (
         <button 
             className={nextButtonStyles.join(' ')} 
+            onKeyPress = { (e) => keyPressHandler(e, props.clicked) } 
             onClick = {props.clicked}
-            tabindex="0"
+            tabIndex="0"
 
             aria-label = { props.nextstyle === "back" ? "Click To View Previous Artwork" : "Click For Next Artwork" }
 

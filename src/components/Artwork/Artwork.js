@@ -1,14 +1,14 @@
 import React from  'react';
 import styles from './Artwork.module.css';
-import { Route, Redirect } from 'react-router-dom';
-import FullArt from './FullArt/FullArt'
-
+import { keyPressHandler } from '../../shared/utility'
 
 const Artwork = ( props ) => {
 
     return (
         <div 
+            tabIndex="0"
             name = {`${props.title} by ${props.artistDisplayName}`}
+            onKeyPress = { (e) => keyPressHandler(e, props.clicked) } 
             onClick = {props.clicked } className ={styles.Artwork}>
             <div 
                 className = { styles.primaryImage}

@@ -4,6 +4,8 @@ import styles from './LikeButton.module.css';
 import bookmarked from '../../UI/Icons/bookmark_solid.svg'
 import unbookmarked from '../../UI/Icons/bookmark_outline.svg'
 
+import { keyPressHandler} from '../../../shared/utility'
+
 const LikeButton = ( props ) => {
     const token = useSelector(state => state.auth.token)
 
@@ -39,7 +41,9 @@ const LikeButton = ( props ) => {
     return (
         <button 
             aria-label= "View Art Info"
-            tabindex="0"
+            tabIndex="0"
+            onKeyPress = { (e) => keyPressHandler(e, buttonClick) } 
+            
             onClick = { buttonClick } 
             className={styles.LikeButton} >
             <img  

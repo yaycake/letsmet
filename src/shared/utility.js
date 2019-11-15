@@ -27,8 +27,8 @@ export const checkValidity = (value, rules) => {
 }
 
 
-export const keyPressHandler = (event, func) => {
-    if (event.key === 13) {
-        func()
+export const keyPressHandler = (event, callback) => {
+    if (event.key === 'Enter') {
+        callback()
     }
 }

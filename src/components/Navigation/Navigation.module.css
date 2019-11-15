@@ -49,3 +49,20 @@
 .AboutLink:hover{
     color: rgba(120,120,120,1); 
 }
+
+@media (min-width: 480px){
+
+
+    .MainNavLinks {
+        right: -5rem;
+    }
+    .MainNavLinks > div {
+        right: -5rem;
+    }
+
+  
+
+    .MainNavLinks > .rotateLink {
+        height: auto;
+    }
+}

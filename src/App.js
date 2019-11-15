@@ -20,7 +20,6 @@ const App = props => {
 
   const isAuthenticated = useSelector(state => state.auth.token != null)
 
-
   const dispatch = useDispatch();
 
   const fetchArtObjects = useCallback(
@@ -37,12 +36,11 @@ const App = props => {
       onFetchArt();
   }, [])
 
-  document.onkeydown = function(e) {
-    if(e.keyCode === 13) { // The Enter/Return key
-      document.activeElement.onclick(e);
-    }
-  };
-
+  // document.onkeydown = function(e) {
+  //   if(e.keyCode === 13) { // The Enter/Return key
+  //     document.activeElement.click(e);
+  //   }
+  // };
 
   const eyeAnimate = (event) => {
     let ball = document.getElementById("LogoBall");

@@ -27,6 +27,7 @@ const Gallery = (props) => {
     const galleryTiles = (
         userGallery.map((art, index ) => 
             <PreviewTile
+           
                 activeTile = { props.curArtworkObjectId === art.objectId ? true : false }
                 clicked = { () => props.clickedArt(
                     art.title,
@@ -38,6 +39,8 @@ const Gallery = (props) => {
                     art.dataId, 
                     index
                 ) }
+                // index = {((userGallery.length-1) - index) +1 }
+                // index={index}
                 key = { art.objectId }
                 altText = { art.title }
                 image = {art.primaryImageSmall}
@@ -45,11 +48,17 @@ const Gallery = (props) => {
             />)
     )
 
+   
+
     return (
-        <div className = { styles.GalleryFrame }>
-            <div className = {styles.GalleryStrip}>
+        <div 
+            // tabIndex="0"
+            id = "galleryFrame"
+            aria-label = "Your Gallery"
+            className = { styles.GalleryFrame }>
+            <ul className = {styles.GalleryStrip}>
                 { galleryTiles }
-            </div>
+            </ul>
         </div>
     )
 }

@@ -1,5 +1,6 @@
 import React from 'react'
 import styles from './Button.module.css'
+import { keyPressHandler} from '../../../shared/utility'
 
 const button = ( props ) => {
 
@@ -15,9 +16,10 @@ const button = ( props ) => {
     return (
         <button 
             aria-label={`Click to ${props.children}`}
-            tabindex="0"
+            tabIndex="0"
             type = {props.type}
             className= { buttonStyles.join(' ') }
+            onKeyPress = { (e) => keyPressHandler(e, props.clicked) } 
             onClick = { props.clicked }>
                 { props.children }
         </button>
