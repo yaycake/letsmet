@@ -135,6 +135,7 @@ const BrowseArt = props => {
     const [isBookmarked, setBookmarked] = useState(null)
 
     const resetArtwork = (newIndex) => {
+        console.log(`inResetARTWORK!!!!`)
         let nextArtwork = {...userGallery[newIndex]}
         if (newIndex < 0){
             nextArtwork = { ...userGallery[1]}
@@ -322,9 +323,6 @@ const BrowseArt = props => {
             />}
             { showFullArt ? fullArt : artworkContent }
 
-
-
-
         </div>
     )
 
@@ -332,9 +330,6 @@ const BrowseArt = props => {
     return (
         <div className = { styles.BrowseArt }>
             { loading ? <Spinner></Spinner> : browseArtContent }
-
-            
-
         </div>
     )
 }

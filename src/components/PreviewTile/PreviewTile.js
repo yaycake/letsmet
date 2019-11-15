@@ -11,11 +11,12 @@ const previewTile = ( props ) => {
     }
 
     return (
-        <div 
-            tabIndex = {props.index}
+        <li className = {styles.TileWrap}
+            // tabIndex = {props.index}
+            tabIndex = "0"
             onKeyPress = { (e) => keyPressHandler(e, props.clicked) } 
             onClick = { props.clicked }
-            className = {styles.TileWrap}>
+            >
             <div 
                 className = { tileClasses }
                 style = {{
@@ -23,7 +24,7 @@ const previewTile = ( props ) => {
                     backgroundSize: 'cover', 
                     backgroundPosition:'center'
                 }} > </div>
-        </div>
+        </li>
     )
 }
 
