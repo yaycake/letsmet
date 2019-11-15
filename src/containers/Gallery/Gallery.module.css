@@ -47,7 +47,7 @@
     }
 
     .GalleryStrip {
-        flex-direction: row;
-        scroll-snap-align: start;
+        flex-direction: row-reverse;
+        direction: rtl;
     }
 }
