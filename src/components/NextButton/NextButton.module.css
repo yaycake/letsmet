@@ -45,3 +45,16 @@
     border-right-color: transparent;
     cursor: pointer
   }
+
+  @media (max-width: 480px){ 
+    .forwardButton {
+        top: 5rem;
+        right: 2rem; 
+    }
+
+    .backButton {
+        top: 5rem; 
+        left: 2rem;
+    }
+
+  }

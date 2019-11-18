@@ -21,3 +21,9 @@
     border-radius: 50%; 
  
 }
+@media (max-width: 480px){
+
+    .Logo {
+        display: none;
+    }
+}

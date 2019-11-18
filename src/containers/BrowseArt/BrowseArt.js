@@ -278,9 +278,7 @@ const BrowseArt = props => {
             </div>
            
             <div className = {styles.ArtControls}>
-
                 <div className = {styles.infoBox}>
-
                     <InfoButton
                         showinfo = {showArtInfo}
                         infoClicked = { showInfoToggle }
@@ -293,7 +291,6 @@ const BrowseArt = props => {
                         showInfo = {showArtInfo}
                     />
                 </div>
-
                 <LikeButton
                     bookmarkAdd = { addGallery }
                     bookmarkRemove = { removeGallery }
@@ -301,15 +298,13 @@ const BrowseArt = props => {
                     objectDataId = { dataId }
                     signIn = {signInRedirect}
                 />
-
-                <div className = {styles.autoSurf}>
-                    <AutoSurf
-                        clicked = { autoSurfHandler }
-                        autoSurfOn = {autoSurfOn ? true : false}
-                    />
-                </div> 
-
             </div>
+            <div className = {styles.autoSurf}>
+                <AutoSurf
+                    clicked = { autoSurfHandler }
+                    autoSurfOn = {autoSurfOn ? true : false}
+                />
+            </div> 
         </div>
     )
 

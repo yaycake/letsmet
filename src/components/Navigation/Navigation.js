@@ -3,7 +3,8 @@ import styles from './Navigation.module.css';
 import NavigationLink from './NavigationLink/NavigationLink'; 
 import Logo from '../Logo/Logo'; 
 import PageTitle from '../PageTitle/PageTitle';
-import {useSelector} from 'react-redux'
+import {useSelector} from 'react-redux';
+import MenuToggle from '../MobileMenu/MenuToggle/MenuToggle'
 
 const Navigation = props => {
 
@@ -13,6 +14,8 @@ const Navigation = props => {
 
     let userOptions = (
         <nav className = {styles.mainNavLinks}>
+            
+
             <div className={styles.rotateLink}> 
                 <NavigationLink 
                     path = "/about"
@@ -25,6 +28,10 @@ const Navigation = props => {
                     Curate
                 </NavigationLink>
             </div>
+
+            <MenuToggle 
+                clicked = { props.menuToggleClicked }
+            ></MenuToggle>
             
             
         </nav>
@@ -34,6 +41,9 @@ const Navigation = props => {
         userOptions = (
 
             <nav className = {styles.mainNavLinks}>
+                <MenuToggle 
+                    clicked = { props.menuToggleClicked }
+                ></MenuToggle>
                 <div 
                     aria-label="Click To View About"
                     alt = "Click To View About"

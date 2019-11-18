@@ -1,0 +1,23 @@
+.MenuToggle {
+    width: 40px;
+    height: 25px;
+    display: flex;
+    flex-flow: column;
+    justify-content: space-between;
+    align-items: center;
+    /* padding: 10px 0; */
+    box-sizing: border-box;
+    cursor: pointer;
+}
+
+.MenuToggle div {
+    width: 90%;
+    height: 2px;
+    background-color:black;
+}
+
+@media (min-width: 480px) {
+    .MenuToggle {
+        display: none;
+    }
+}

@@ -39,7 +39,7 @@
   /* outline: 1px solid slategrey; */
 }
 
-@media (min-width: 480px){
+@media (max-width: 480px){
 
     .GalleryFrame {
         height: 150px; 

@@ -48,7 +48,6 @@ const Gallery = (props) => {
             />)
     )
 
-   
 
     return (
         <div 

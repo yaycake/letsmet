@@ -75,3 +75,12 @@
     50%{background-position:100% 19%}
     100%{background-position:0% 82%}
 }
+
+@media (max-width: 480px){ 
+    .AutoSurfOff {
+        justify-content: center;
+        margin-top: 2rem;
+    }
+
+  }
+

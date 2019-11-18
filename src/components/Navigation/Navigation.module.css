@@ -50,19 +50,27 @@
     color: rgba(120,120,120,1); 
 }
 
-@media (min-width: 480px){
+@media (max-width: 480px){
 
-
-    .MainNavLinks {
-        right: -5rem;
-    }
-    .MainNavLinks > div {
-        right: -5rem;
+    .Navigation {
+        height: 4rem;
     }
 
-  
-
-    .MainNavLinks > .rotateLink {
+    .mainNavLinks {
+        width: 100%; 
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        
+    }
+    .mainNavLinks > div {
+        margin-right: 0;
+    }
+    .rotateLink {
         height: auto;
+        transform: rotate(0deg);
+        padding:0 1rem;
+        margin-right: 0;
     }
+
 }
