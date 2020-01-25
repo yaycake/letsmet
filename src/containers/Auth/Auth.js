@@ -137,6 +137,7 @@ const Auth = ( props ) => {
     let errorMessage = null;
 
     if (error) {
+        console.log("auth / errorMessage: " + error)
         errorMessage = <Error message={error.message}></Error>
     }
 

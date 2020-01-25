@@ -1,7 +1,7 @@
 .NextButton {
     font-size: 18px;
     font-weight: bolder;
-    transition: all 1s ease-out; 
+    transition: color 1s ease-out; 
     background-color: transparent;
 }
 
@@ -12,7 +12,7 @@
 }
 
 .NextButton:focus {
-  outline: dotted gray 3px; 
+  /* outline: dotted gray 3px;  */
 }
 .backButton {
     position: absolute;

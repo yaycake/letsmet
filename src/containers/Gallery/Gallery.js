@@ -8,6 +8,7 @@ import PreviewTile from '../../components/PreviewTile/PreviewTile';
 const Gallery = (props) => {
     //Redux Props
     const userGallery = useSelector(state => state.myGallery.gallery)
+    
     const token = useSelector( state => state.auth.token)
     
     const error = useSelector(state => state.myGallery.error)

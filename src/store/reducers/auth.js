@@ -25,7 +25,9 @@ const authSuccess = (state, action ) => {
 }
 
 const authFail = (state, action ) => {
-    return updateObject ( state, { error: action.error, loading: false })
+    console.log("auth Reducer: authFail: action.error.response.data.error.message")
+    console.log(action.error.response.data.error.message)
+    return updateObject ( state, { error: action.error.response.data.error, loading: false })
 }
 
 const authLogout = (state, action ) => {

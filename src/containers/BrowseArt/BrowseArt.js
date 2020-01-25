@@ -41,6 +41,7 @@ const BrowseArt = props => {
 
     const [showFullArt, setShowFullArt] = useState(false);
 
+
     const showInfoToggle = () => {
         setShowArtInfo(!showArtInfo)
     }
