@@ -107,7 +107,7 @@
     font-size: 18px; 
     font-weight: bolder;
     display: flex;
-    justify-content: flex-end;
+    /* justify-content: flex-end; */
   }
 
   @media (max-width: 480px){ 
@@ -116,4 +116,18 @@
         height: 80vh;
     }
 
+    .autoSurf {
+        /* justify-content: left; */
+    }
+
+  }
+
+  @media(max-width: 480px) {
+      .autoSurf {
+        justify-content: flex-end
+      }
+
+      .ArtControls {
+        width: 85%;
+      }
   }

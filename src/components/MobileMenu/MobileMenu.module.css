@@ -3,7 +3,7 @@
     height: calc(100vh - 5rem); 
     z-index: 20; 
     position: absolute;
-    top: 5rem;
+    top: 4rem;
     right: 0;
     text-align: right;
     flex-direction: row;
@@ -20,7 +20,6 @@
 }
 
 .backdrop {
-
  
 }
 
@@ -37,7 +36,6 @@
     display: flex;
     flex-direction: column; 
 }
-
 
 .NavLinks {
     margin-top: 2rem;

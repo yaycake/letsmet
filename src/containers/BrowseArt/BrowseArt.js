@@ -59,7 +59,6 @@ const BrowseArt = props => {
     }
 
     const [autoSurfOn, setAutoSurfOn] =useState(false)
-
    
     const keyPressHandler = (event, callback) => {
         if (event.key === "Enter") {

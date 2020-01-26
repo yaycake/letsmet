@@ -79,6 +79,7 @@
 @media (max-width: 480px){ 
     .AutoSurfOff {
         justify-content: center;
+        margin-left: 2rem;
         margin-top: 2rem;
     }
 
