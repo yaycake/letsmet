@@ -4,3 +4,6 @@
     grid-template-rows: 1fr;  */
 }
 
+.blur {
+    filter: blur(2px);
+}

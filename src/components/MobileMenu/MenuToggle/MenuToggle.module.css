@@ -8,6 +8,7 @@
     /* padding: 10px 0; */
     box-sizing: border-box;
     cursor: pointer;
+    margin-right: 2rem;
 }
 
 .MenuToggle div {
@@ -19,5 +20,11 @@
 @media (min-width: 480px) {
     .MenuToggle {
         display: none;
+    }
+}
+
+@media (max-width: 480px) {
+    .MenuToggle {
+       
     }
 }

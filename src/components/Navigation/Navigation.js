@@ -14,7 +14,6 @@ const Navigation = props => {
 
     let userOptions = (
         <nav className = {styles.mainNavLinks}>
-            
 
             <div className={styles.rotateLink}> 
                 <NavigationLink 
@@ -25,7 +24,7 @@ const Navigation = props => {
             </div>
             <div className={styles.rotateLink}> 
                 <NavigationLink path = "/auth">
-                    Curate
+                    CURATE
                 </NavigationLink>
             </div>
 
@@ -60,7 +59,7 @@ const Navigation = props => {
                     alt = "Click to Sign Out"
                     className={[styles.rotateLink, styles.signOut].join(' ')}> 
                     <NavigationLink path = "/logout">
-                        Sign Out
+                        SIGN OUT
                     </NavigationLink>
                 </div>
                 
@@ -68,8 +67,6 @@ const Navigation = props => {
             
         )
     }
-
-   
 
     let title = "LETS MET"
 

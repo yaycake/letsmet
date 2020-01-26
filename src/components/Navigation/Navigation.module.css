@@ -15,11 +15,11 @@
     text-decoration: none; 
     text-transform: uppercase;
     z-index: 12;
+    padding-right: 2rem;
 }
 
 .mainNavLinks > div {
     margin-right: 3rem;
-
 }
 
 .rotateLink {
@@ -55,11 +55,10 @@
     .Navigation {
         height: 4rem;
     }
-
     .mainNavLinks {
         width: 100%; 
         display: flex;
-        flex-direction: row;
+        flex-direction: row-reverse;
         justify-content: space-between;
         
     }
@@ -67,10 +66,11 @@
         margin-right: 0;
     }
     .rotateLink {
-        height: auto;
+        display: none;
+        /* height: auto;
         transform: rotate(0deg);
         padding:0 1rem;
-        margin-right: 0;
+        margin-right: 0; */
     }
 
 }
