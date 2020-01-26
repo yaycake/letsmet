@@ -56,7 +56,9 @@ const Gallery = (props) => {
             id = "galleryFrame"
             aria-label = "Your Gallery"
             className = { styles.GalleryFrame }>
-            <ul className = {styles.GalleryStrip}>
+            <ul 
+                id = "galleryStrip"
+                className = {styles.GalleryStrip}>
                 { galleryTiles }
             </ul>
         </div>

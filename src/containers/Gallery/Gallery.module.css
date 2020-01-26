@@ -12,7 +12,7 @@
     width: 100px;
     bottom: -5rem;
     left: 2.5rem;
-    overflow: auto;
+    overflow-x: scroll;
     z-index: 21;
 }
 
@@ -47,7 +47,7 @@
     }
 
     .GalleryStrip {
-        flex-direction: row-reverse;
+        flex-direction: row;
         direction: rtl;
     }
 }

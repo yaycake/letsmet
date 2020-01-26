@@ -151,8 +151,23 @@ const BrowseArt = props => {
         })
     }
 
+    const slideGalleryLeft = () => {
+        console.log("SLIDE GALLERY LEFT")
+
+        const bookmark = document.getElementById('bookmark');
+
+        bookmark.onclick = function () {
+            document.getElementById('galleryStrip').scrollTo({
+                top: 0,
+                left: 0, 
+                behavior: 'smooth'
+            })
+        }
+    }
+
     const removeGallery = (objectDataId) => {
         console.log(`in removeGallery`)
+        slideGalleryLeft();
         dispatch(actions.removeGallery(token, userId, 
             {   title: curArtwork.title, 
                 artistDisplayName: curArtwork.artistDisplayName, 
@@ -169,6 +184,7 @@ const BrowseArt = props => {
     };
 
     const addGallery = (objectDataId) => {
+            slideGalleryLeft();
             dispatch(actions.addGallery(token, userId, 
                 {   title: title, 
                     artistDisplayName: artistDisplayName,
@@ -199,7 +215,6 @@ const BrowseArt = props => {
         }
     }, [bookmarkCheck, curObjectId]);
 
-
     const selectArtPreviewHandler = ( 
         title,
         artistDisplayName, 
@@ -220,7 +235,7 @@ const BrowseArt = props => {
             dataId: dataId, 
             index: index
         })
-    }   
+    }
 
     // If there is an error 
     let errorMessage = null;
@@ -296,7 +311,7 @@ const BrowseArt = props => {
                     bookmarkRemove = { removeGallery }
                     bookmarkStatus= {isBookmarked}
                     objectDataId = { dataId }
-                    signIn = {signInRedirect}
+                    signIn = { signInRedirect }
                 />
             </div>
             <div className = {styles.autoSurf}>
