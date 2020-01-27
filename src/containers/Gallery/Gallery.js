@@ -11,8 +11,8 @@ const Gallery = (props) => {
     
     const token = useSelector( state => state.auth.token)
     
-    const error = useSelector(state => state.myGallery.error)
-    const loading = useSelector(state => state.myGallery.loading)
+    // const error = useSelector(state => state.myGallery.error)
+    // const loading = useSelector(state => state.myGallery.loading)
   
     const userId = useSelector( state => state.auth.userId)
 
@@ -40,8 +40,6 @@ const Gallery = (props) => {
                     art.dataId, 
                     index
                 ) }
-                // index = {((userGallery.length-1) - index) +1 }
-                // index={index}
                 key = { art.objectId }
                 altText = { art.title }
                 image = {art.primaryImageSmall}

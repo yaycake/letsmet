@@ -7,16 +7,7 @@ import { Route, Switch, Redirect } from 'react-router-dom'
 import BrowseArt from './containers/BrowseArt/BrowseArt';
 
 import { useSelector, useDispatch } from 'react-redux';
-// import About from './components/About/About'
-// import Auth from './containers/Auth/Auth';
 
-// import Logout from './containers/Auth/Logout/Logout'
-// import FullArt from './components/Artwork/FullArt/FullArt'
-
-
-const Auth = React.lazy(()=> {
-  return import('./containers/Auth/Auth')
-})
 
 const About = React.lazy(() => {
   return import ('./components/About/About')
@@ -29,6 +20,17 @@ const FullArt = React.lazy( () => {
   return import ('./components/Artwork/FullArt/FullArt')
 })
 
+const Logout = React.lazy(()=> {
+  return import ('./containers/Auth/Logout/Logout')
+})
+
+const Auth = React.lazy (()=> {
+  return import ('./containers/Auth/Auth')
+})
+
+const FullArt = React.lazy(()=> {
+  return import('./components/Artwork/FullArt/FullArt')
+})
 
 const App = props => {
 
@@ -50,13 +52,6 @@ const App = props => {
       onFetchArt();
   }, [])
 
-  // document.onkeydown = function(e) {
-  //   if(e.keyCode === 13) { // The Enter/Return key
-  //     document.activeElement.click(e);
-  //   }
-  // };
-
-
 
   const eyeAnimate = (event) => {
     let ball = document.getElementById("LogoBall");
@@ -69,10 +64,12 @@ const App = props => {
 
   let routes = (
     <Switch>
+
        <Route path="/about" component = { (props) => <About {...props}/> }/>
         <Route path="/auth" component = { (props) => <Auth {...props}/> }/>
         <Route path="/" exact component = { BrowseArt }/>
         <Route path="/view" exact component = { (props) => <FullArt {...props}/> }/>
+
         <Redirect to="/" />
     </Switch>
   )
@@ -80,6 +77,7 @@ const App = props => {
   if (isAuthenticated) {
     routes = (
       <Switch>
+
         <Route path="/about" component = { (props) => <About {...props}/> }/>
         <Route path="/auth" component = { (props) => <Auth {...props}/> }/>
         <Route path="/logout" exact component = { (props) => <Logout {...props}/> }/>
@@ -93,9 +91,13 @@ const App = props => {
   return (
     <Layout>
       <div className="App" onMouseMove = { eyeAnimate }>
+
       <Suspense fallback = { <p> Loading ... </p>} >
         { routes }
       </Suspense>
+
+       { routes }
+
       </div>
     </Layout>
   );

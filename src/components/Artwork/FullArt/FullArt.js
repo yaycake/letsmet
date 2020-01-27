@@ -1,16 +1,8 @@
-import React, {useState} from 'react'; 
+import React from 'react'; 
 import styles from './FullArt.module.css';
 import { keyPressHandler } from '../../../shared/utility'
 
 const FullArt = (props) => {
-
-    // const [hovered, setHovered] = useState(false)
-
-    // const keyPressHandler = (event) => {
-    //     if (event.key === 'Enter') {
-    //         props.click()
-    //       }
-    // }
 
     return (
         <div 
