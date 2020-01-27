@@ -5,7 +5,6 @@ import artObjects from '../../artObjects.json'
 // API call to get all the object codes & store them in local storage
 
 
-
 export const getRandomObj = ( ) => {
     let artArray = artObjects["artObjects"]
     const objectId = artArray[[Math.floor(Math.random()*artArray.length)]];
