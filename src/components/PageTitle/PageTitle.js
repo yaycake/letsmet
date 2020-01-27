@@ -21,7 +21,6 @@ const PageTitle = ( props ) => {
             </div>
         </div>
     </NavLink>
-   
    )
 };
 

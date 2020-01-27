@@ -4,19 +4,18 @@ import { useDispatch, useSelector } from 'react-redux';
 import Artwork from '../../components/Artwork/Artwork';
 import * as actions from '../../store/actions/index'
 import styles from './BrowseArt.module.css';
-// import ArtControls from '../ArtControls/ArtControls';
+
 import NextButton from '../../components/NextButton/NextButton';
 import ArtInfo from '../../components/Artwork/ArtInfo/ArtInfo'; 
 import LikeButton from '../../components/Artwork/LikeButton/LikeButton';
 import InfoButton from '../../components/Artwork/InfoButton/InfoButton'; 
 import Error from '../../components/UI/Error/Error'
 import Spinner from '../../components/UI/Spinner/Spinner'
-import PreviewTile from '../../components/PreviewTile/PreviewTile';
+
 import Gallery from '../Gallery/Gallery'
 import FullArt from '../../components/Artwork/FullArt/FullArt'
 import AutoSurf from '../../components/UI/AutoSurf/AutoSurf'
 
-// import {keyPressHandler} from '../../shared/utility'
 
 const BrowseArt = props => {
 
@@ -60,11 +59,11 @@ const BrowseArt = props => {
 
     const [autoSurfOn, setAutoSurfOn] =useState(false)
    
-    const keyPressHandler = (event, callback) => {
-        if (event.key === "Enter") {
-            callback()
-        }
-    }
+    // const keyPressHandler = (event, callback) => {
+    //     if (event.key === "Enter") {
+    //         callback()
+    //     }
+    // }
 
     useInterval(() => {
         onFetchArt();
@@ -75,7 +74,6 @@ const BrowseArt = props => {
         setAutoSurfOn(!autoSurfOn)
     }
     
-
     const onSetGallery = useCallback((token, userId) => dispatch(actions.fetchGallery(token, userId)),[dispatch]);
 
     useEffect(() => {
@@ -152,8 +150,6 @@ const BrowseArt = props => {
     }
 
     const slideGalleryLeft = () => {
-        console.log("SLIDE GALLERY LEFT")
-
         const bookmark = document.getElementById('bookmark');
 
         bookmark.onclick = function () {
@@ -202,8 +198,6 @@ const BrowseArt = props => {
     }
 
     const bookmarkCheck = useCallback(() => {
-        console.log(`in bookmarkCheck`)
-        //returns truthy/falsey
         return userGallery.some((art) => art.objectId === curArtwork.objectId)
     }, [curArtwork.objectId, userGallery]);
 
