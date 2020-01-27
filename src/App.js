@@ -89,8 +89,6 @@ const App = props => {
         { routes }
       </Suspense>
 
-       { routes }
-
       </div>
     </Layout>
   );
