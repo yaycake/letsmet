@@ -1,68 +1,46 @@
+**#LETS MET**
+
+** Surf the Metropolitan Museum of Art database. Curate your own gallery as you collect your favorite pieces. **
+
+![Image](https://github.com/yaycake/letsmet/blob/master/screenshots/desktop_1.jpg?raw=true)
+
+UX, UI Design By Grace Yang. Code by Grace Yang. Powered by [MetMuseum.github.io](http://www.metmuseum.github.io). 
+
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
-## Available Scripts
+**CURRENT STATUS**
+I. Performance optimization-- adding caching for better surf-ability and better loading experience. 
 
-In the project directory, you can run:
+II. Deployment of app to Google Firebase
 
-### `npm start`
+**CURRENT FEATURES**
 
-Runs the app in the development mode.<br />
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+*Desktop*
 
-The page will reload if you make edits.<br />
-You will also see any lint errors in the console.
+![Image](https://github.com/yaycake/letsmet/blob/master/screenshots/desktop_2.jpg?raw=true)
 
-### `npm test`
+***
 
-Launches the test runner in the interactive watch mode.<br />
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+*Mobile*
 
-### `npm run build`
+![Image](https://github.com/yaycake/letsmet/blob/master/screenshots/mobile_1.jpg?raw=true)
 
-Builds the app for production to the `build` folder.<br />
-It correctly bundles React in production mode and optimizes the build for the best performance.
+![Image](https://github.com/yaycake/letsmet/blob/master/screenshots/mobile_2.jpg?raw=true)
 
-The build is minified and the filenames include the hashes.<br />
-Your app is ready to be deployed!
+*Preview*
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+![Image](https://github.com/yaycake/letsmet/blob/master/screenshots/preview_1.jpg?raw=true)
 
-### `npm run eject`
+*AutoSurf*
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+![Image](https://github.com/yaycake/letsmet/blob/master/screenshots/autosurf.jpg?raw=true)
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+*Curate*
 
-Instead, it will copy all the configuration files and the transitive dependencies (Webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+![Image](https://github.com/yaycake/letsmet/blob/master/screenshots/signin.jpg?raw=true)
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+![Image](https://github.com/yaycake/letsmet/blob/master/screenshots/gallery_1.jpg?raw=true)
 
-## Learn More
+![Image](https://github.com/yaycake/letsmet/blob/master/screenshots/gallery_2.jpg?raw=true)
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/code-splitting
-
-### Analyzing the Bundle Size
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size
-
-### Making a Progressive Web App
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app
-
-### Advanced Configuration
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/advanced-configuration
-
-### Deployment
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/deployment
-
-### `npm run build` fails to minify
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify
+![Image](https://github.com/yaycake/letsmet/blob/master/screenshots/gallery_3.jpg?raw=true)
