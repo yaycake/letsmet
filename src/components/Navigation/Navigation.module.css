@@ -50,7 +50,7 @@
     color: rgba(120,120,120,1); 
 }
 
-@media (max-width: 480px){
+@media (max-width: 850px){
 
     .Navigation {
         height: 3rem;
@@ -60,7 +60,7 @@
         display: flex;
         flex-direction: row-reverse;
         justify-content: space-between;
-        
+        margin-right: 2rem;
     }
     .mainNavLinks > div {
         margin-right: 0;

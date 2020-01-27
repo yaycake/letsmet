@@ -8,7 +8,6 @@ const MobileMenu = (props) => {
 
     let attachedClasses = [styles.MobileMenu, styles.Close];
 
-    console.log("Mobile Menu is: visible" + props.open)
     if (props.open){
         attachedClasses = [styles.MobileMenu, styles.Open]
     } 

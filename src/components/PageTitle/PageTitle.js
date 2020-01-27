@@ -7,8 +7,6 @@ const PageTitle = ( props ) => {
     const token = useSelector(state => state.auth.token)
     const title = props.pageTitle.split(" ");
 
-    console.log(`Title in Pagetitle: ${title}`)
-
     let title1Style = styles.title1;
 
     if (token) {

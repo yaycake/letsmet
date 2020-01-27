@@ -21,7 +21,7 @@
     border-radius: 50%; 
  
 }
-@media (max-width: 480px){
+@media (max-width: 850px){
 
     .Logo {
         display: none;
