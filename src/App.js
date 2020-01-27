@@ -8,7 +8,7 @@ import BrowseArt from './containers/BrowseArt/BrowseArt';
 
 import { useSelector, useDispatch } from 'react-redux';
 
-import { BrowserRouter } from 'react-router-dom'
+// import { BrowserRouter } from 'react-router-dom'
 
 
 const About = React.lazy(() => {
@@ -87,9 +87,9 @@ const App = props => {
       <div className="App" onMouseMove = { eyeAnimate }>
 
       <Suspense fallback = { <p> Loading ... </p>} >
-        <BrowserRouter>
+        {/* <BrowserRouter> */}
           { routes }
-        </BrowserRouter>
+        {/* </BrowserRouter> */}
       </Suspense>
 
       </div>
