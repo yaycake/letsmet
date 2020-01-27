@@ -60,10 +60,10 @@ const App = props => {
   let routes = (
     <Switch>
 
-       <Route path="/about" component = { (props) => <About {...props}/> }/>
-        <Route path="/auth" component = { (props) => <Auth {...props}/> }/>
+       <Route path="/about" render = { (props) => <About {...props}/> }/>
+        <Route path="/auth" render = { (props) => <Auth {...props}/> }/>
         <Route path="/" exact component = { BrowseArt }/>
-        <Route path="/view" exact component = { (props) => <FullArt {...props}/> }/>
+        <Route path="/view" exact render = { (props) => <FullArt {...props}/> }/>
 
         <Redirect to="/" />
     </Switch>
@@ -72,12 +72,11 @@ const App = props => {
   if (isAuthenticated) {
     routes = (
       <Switch>
-
-        <Route path="/about" component = { (props) => <About {...props}/> }/>
-        <Route path="/auth" component = { (props) => <Auth {...props}/> }/>
-        <Route path="/logout" exact component = { (props) => <Logout {...props}/> }/>
+        <Route path="/about" render = { (props) => <About {...props}/> }/>
+        <Route path="/auth" render = { (props) => <Auth {...props}/> }/>
+        <Route path="/logout" exact render = { (props) => <Logout {...props}/> }/>
         <Route path="/" exact component = { BrowseArt }/>
-        <Route path="/view" exact component = { (props) => <FullArt {...props}/> }/>
+        <Route path="/view" exact render = { (props) => <FullArt {...props}/> }/>
         <Redirect to="/" />
       </Switch>
     )
