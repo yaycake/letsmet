@@ -20,17 +20,10 @@ const FullArt = React.lazy( () => {
   return import ('./components/Artwork/FullArt/FullArt')
 })
 
-const Logout = React.lazy(()=> {
-  return import ('./containers/Auth/Logout/Logout')
-})
-
 const Auth = React.lazy (()=> {
   return import ('./containers/Auth/Auth')
 })
 
-const FullArt = React.lazy(()=> {
-  return import('./components/Artwork/FullArt/FullArt')
-})
 
 const App = props => {
 
