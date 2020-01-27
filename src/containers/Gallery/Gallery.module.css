@@ -22,7 +22,7 @@
     flex-direction: column-reverse; 
     justify-content: space-between; 
     align-items: center; 
-    overflow-x:scroll;
+    overflow-y:scroll;
     z-index: 3;
     list-style: none; 
 }
@@ -36,7 +36,6 @@
 }
 .GalleryFrame::-webkit-scrollbar-thumb {
   background-color: whitesmoke;
-  /* outline: 1px solid slategrey; */
 }
 
 @media (max-width: 480px){
@@ -49,5 +48,6 @@
     .GalleryStrip {
         flex-direction: row;
         direction: rtl;
+        overflow-x:scroll;
     }
 }
