@@ -15,11 +15,11 @@
     text-decoration: none; 
     text-transform: uppercase;
     z-index: 12;
+   
 }
 
 .mainNavLinks > div {
     margin-right: 3rem;
-
 }
 
 .rotateLink {
@@ -50,19 +50,27 @@
     color: rgba(120,120,120,1); 
 }
 
-@media (min-width: 480px){
+@media (max-width: 480px){
 
-
-    .MainNavLinks {
-        right: -5rem;
+    .Navigation {
+        height: 3rem;
     }
-    .MainNavLinks > div {
-        right: -5rem;
+    .mainNavLinks {
+        width: 100%; 
+        display: flex;
+        flex-direction: row-reverse;
+        justify-content: space-between;
+        
+    }
+    .mainNavLinks > div {
+        margin-right: 0;
+    }
+    .rotateLink {
+        display: none;
+        /* height: auto;
+        transform: rotate(0deg);
+        padding:0 1rem;
+        margin-right: 0; */
     }
 
-  
-
-    .MainNavLinks > .rotateLink {
-        height: auto;
-    }
 }

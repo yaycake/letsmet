@@ -33,7 +33,7 @@
     left: 5rem;
 }
 
-@media (min-width: 480px){
+@media (max-width: 480px){
 
     .PageTitle {
         display: none;

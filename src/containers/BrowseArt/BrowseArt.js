@@ -41,6 +41,7 @@ const BrowseArt = props => {
 
     const [showFullArt, setShowFullArt] = useState(false);
 
+
     const showInfoToggle = () => {
         setShowArtInfo(!showArtInfo)
     }
@@ -58,7 +59,6 @@ const BrowseArt = props => {
     }
 
     const [autoSurfOn, setAutoSurfOn] =useState(false)
-
    
     const keyPressHandler = (event, callback) => {
         if (event.key === "Enter") {
@@ -151,8 +151,23 @@ const BrowseArt = props => {
         })
     }
 
+    const slideGalleryLeft = () => {
+        console.log("SLIDE GALLERY LEFT")
+
+        const bookmark = document.getElementById('bookmark');
+
+        bookmark.onclick = function () {
+            document.getElementById('galleryStrip').scrollTo({
+                top: 0,
+                left: 0, 
+                behavior: 'smooth'
+            })
+        }
+    }
+
     const removeGallery = (objectDataId) => {
         console.log(`in removeGallery`)
+        slideGalleryLeft();
         dispatch(actions.removeGallery(token, userId, 
             {   title: curArtwork.title, 
                 artistDisplayName: curArtwork.artistDisplayName, 
@@ -169,6 +184,7 @@ const BrowseArt = props => {
     };
 
     const addGallery = (objectDataId) => {
+            slideGalleryLeft();
             dispatch(actions.addGallery(token, userId, 
                 {   title: title, 
                     artistDisplayName: artistDisplayName,
@@ -199,7 +215,6 @@ const BrowseArt = props => {
         }
     }, [bookmarkCheck, curObjectId]);
 
-
     const selectArtPreviewHandler = ( 
         title,
         artistDisplayName, 
@@ -220,7 +235,7 @@ const BrowseArt = props => {
             dataId: dataId, 
             index: index
         })
-    }   
+    }
 
     // If there is an error 
     let errorMessage = null;
@@ -278,9 +293,7 @@ const BrowseArt = props => {
             </div>
            
             <div className = {styles.ArtControls}>
-
                 <div className = {styles.infoBox}>
-
                     <InfoButton
                         showinfo = {showArtInfo}
                         infoClicked = { showInfoToggle }
@@ -293,23 +306,20 @@ const BrowseArt = props => {
                         showInfo = {showArtInfo}
                     />
                 </div>
-
                 <LikeButton
                     bookmarkAdd = { addGallery }
                     bookmarkRemove = { removeGallery }
                     bookmarkStatus= {isBookmarked}
                     objectDataId = { dataId }
-                    signIn = {signInRedirect}
+                    signIn = { signInRedirect }
                 />
-
-                <div className = {styles.autoSurf}>
-                    <AutoSurf
-                        clicked = { autoSurfHandler }
-                        autoSurfOn = {autoSurfOn ? true : false}
-                    />
-                </div> 
-
             </div>
+            <div className = {styles.autoSurf}>
+                <AutoSurf
+                    clicked = { autoSurfHandler }
+                    autoSurfOn = {autoSurfOn ? true : false}
+                />
+            </div> 
         </div>
     )
 

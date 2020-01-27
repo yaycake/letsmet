@@ -40,6 +40,7 @@ const LikeButton = ( props ) => {
 
     return (
         <button 
+            id = "bookmark"
             aria-label= "View Art Info"
             tabIndex="0"
             onKeyPress = { (e) => keyPressHandler(e, buttonClick) } 

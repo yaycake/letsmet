@@ -125,3 +125,26 @@
     grid-row: 7;
     transform: rotate(-90deg);
 }
+
+@media (max-width: 480px){
+    .About {
+        width: 70vw;
+        display: grid;
+        grid-template-columns: auto;
+        grid-template-rows: auto;
+    }
+    .LeftStrip { 
+        display: none;
+    }
+
+    .RightStrip {
+        display: none;
+    }
+
+    .thegraceyang{
+        grid-column: 3/span 2; 
+        /* grid-row: 8;  */
+        letter-spacing: 4.5px; 
+    }
+   
+ }

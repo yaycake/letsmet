@@ -8,6 +8,7 @@ import PreviewTile from '../../components/PreviewTile/PreviewTile';
 const Gallery = (props) => {
     //Redux Props
     const userGallery = useSelector(state => state.myGallery.gallery)
+    
     const token = useSelector( state => state.auth.token)
     
     const error = useSelector(state => state.myGallery.error)
@@ -48,7 +49,6 @@ const Gallery = (props) => {
             />)
     )
 
-   
 
     return (
         <div 
@@ -56,7 +56,9 @@ const Gallery = (props) => {
             id = "galleryFrame"
             aria-label = "Your Gallery"
             className = { styles.GalleryFrame }>
-            <ul className = {styles.GalleryStrip}>
+            <ul 
+                id = "galleryStrip"
+                className = {styles.GalleryStrip}>
                 { galleryTiles }
             </ul>
         </div>

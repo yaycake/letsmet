@@ -1,20 +1,32 @@
 .Artwork {
     display: flex;
     cursor: pointer;
+    width: 100%;
 
-    width: 450px;
     margin: 0 auto;
 }
 
 .primaryImage {
-    height: 450px; 
-    width: 450px;
+    /* height: 450px;  */
+    padding-top: 100%;
+    width: 100%;
     background-position: center; 
     background-size: cover;
     border-radius: 2px; 
     margin: 0 auto;
 }
 
+
+@media (max-width: 480px){
+    .Artwork{
+  
+    }
+    .primaryImage{
+        width: 100%;
+        padding-top: 100%;
+        height: auto;
+    }
+}
 
 @keyframes fadeWhiteOut {
 
